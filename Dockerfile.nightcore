@@ -3,12 +3,12 @@ RUN apt update && apt upgrade -y && \
     apt install -y build-essential cmake wget
 
 WORKDIR /nightcore
-COPY . .
+COPY /proj/zyuxuanssf-PG0/nightcore-benchmarks/nightcore .
 RUN ./build_deps.sh && make -j $(nproc)
 
 FROM ubuntu:bionic as release
 
-COPY . /src/nightcore
+COPY /proj/zyuxuanssf-PG0/nightcore-benchmarks/nightcore /src/nightcore
 
 COPY --from=builder /nightcore/bin/release/gateway         /nightcore/gateway
 COPY --from=builder /nightcore/bin/release/engine          /nightcore/engine
