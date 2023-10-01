@@ -1,14 +1,13 @@
 FROM ubuntu:bionic as builder
 RUN apt update && apt upgrade -y && \
-    apt install -y build-essential cmake wget
+    apt install -y build-essential cmake wget git
 
+COPY . .
+RUN git clone --recurse-submodules https://github.com/ut-osa/nightcore.git
 WORKDIR /nightcore
-COPY /proj/zyuxuanssf-PG0/nightcore-benchmarks/nightcore .
 RUN ./build_deps.sh && make -j $(nproc)
 
 FROM ubuntu:bionic as release
-
-COPY /proj/zyuxuanssf-PG0/nightcore-benchmarks/nightcore /src/nightcore
 
 COPY --from=builder /nightcore/bin/release/gateway         /nightcore/gateway
 COPY --from=builder /nightcore/bin/release/engine          /nightcore/engine

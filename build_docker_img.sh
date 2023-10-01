@@ -1,11 +1,8 @@
 #!/bin/bash
 
-ROOT_DIR=`realpath $(dirname $0)/..`
+ROOT_DIR=/proj/zyuxuanssf-PG0/nightcore-test
 
 docker build -t zyuxuan/nightcore:for-test \
        -f Dockerfile.nightcore \
-       $ROOT_DIR/nightcore
-
-docker push zyuxuan/nightcore:for-test
-
+       $ROOT_DIR
 
