@@ -1,7 +1,26 @@
 {
-    "machines": {
-        "nightcore-worker1": { "type": "c5.xlarge", "role": "worker", "ip": "128.110.96.54", "dns":"zyuxuan@apt054.apt.emulab.net", "labels": ["engine_node=true"] },
-        "nightcore-worker2": { "type": "c5.xlarge", "role": "worker", "ip": "128.110.96.60", "dns":"zyuxuan@apt060.apt.emulab.net", "labels": ["engine_node=true"] },
-        "nightcore-manager": { "type": "c5.xlarge", "role": "manager", "ip": "128.110.96.40", "dns":"zyuxuan@apt040.apt.emulab.net"}
+    "nightcore-manager": {
+        "dns": "zyuxuan@apt040.apt.emulab.net",
+        "ip": "128.110.96.40",
+        "role": "manager",
+        "type": "c5.xlarge"
+    },
+    "nightcore-worker1": {
+        "dns": "zyuxuan@apt054.apt.emulab.net",
+        "ip": "128.110.96.54",
+        "labels": [
+            "engine_node=true"
+        ],
+        "role": "worker",
+        "type": "c5.xlarge"
+    },
+    "nightcore-worker2": {
+        "dns": "zyuxuan@apt060.apt.emulab.net",
+        "ip": "128.110.96.60",
+        "labels": [
+            "engine_node=true"
+        ],
+        "role": "worker",
+        "type": "c5.xlarge"
     }
 }
