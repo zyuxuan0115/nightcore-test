@@ -5,4 +5,5 @@ in `~/.ssh/authorized_keys`, add `id_ed25519.pub` from other machines
 in `/etc/hosts` add `127.0.0.1 nightcore-manager`
 
 ### upgrade docker
-This [page](https://askubuntu.com/questions/472412/how-do-i-upgrade-docker)'s second option
+- This [page](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package)
+- docker version should be higher than 19.02

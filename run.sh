@@ -1,50 +1,51 @@
 #!/bin/bash
-ROOT_DIR=$(pwd)
-
+ROOT_DIR=/users/zyuxuan
+BASE_DIR=$(pwd)
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=mixed_api.lua
 
-HELPER_SCRIPT=$ROOT_DIR/helper
+HELPER_SCRIPT=$BASE_DIR/helper
 
 python3 $HELPER_SCRIPT start-machines
 
-MANAGER_HOST=`python3 $HELPER_SCRIPT get-docker-manager-host --base-dir=$ROOT_DIR`
-#CLIENT_HOST=`python3 $HELPER_SCRIPT get-client-host --base-dir=$ROOT_DIR`
-ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$ROOT_DIR --service=nightcore-gateway`
-ALL_HOSTS=`python3 $HELPER_SCRIPT get-all-server-hosts --base-dir=$ROOT_DIR`
+MANAGER_HOST=`python3 $HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
+#CLIENT_HOST=`python3 $HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
+ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
+ALL_HOSTS=`python3 $HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
 
 echo $MANAGER_HOST
 echo $ENTRY_HOST
+echo $ALL_HOSTS
 
-ALL_ENGINE_NODES="nightcore-worker1 nightcore-worker2 nightcore-hs-manager"
+ALL_ENGINE_NODES="nightcore-worker1 nightcore-worker2 nightcore-manager"
 
-python3 $HELPER_SCRIPT generate-docker-compose --base-dir=$ROOT_DIR
-scp -q $ROOT_DIR/docker-compose.yml           $MANAGER_HOST:~
-scp -q $ROOT_DIR/docker-compose-placement.yml $MANAGER_HOST:~
-scp -q $ROOT_DIR/common.env                   $MANAGER_HOST:~
+python3 $HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
+scp -q $BASE_DIR/docker-compose.yml           $MANAGER_HOST:$ROOT_DIR
+scp -q $BASE_DIR/docker-compose-placement.yml $MANAGER_HOST:$ROOT_DIR
+scp -q $BASE_DIR/common.env                   $MANAGER_HOST:$ROOT_DIR
 
-: <<'END'
-
-ssh -q $MANAGER_HOST -- docker stack rm hipstershop
+ssh -q $MANAGER_HOST -- sudo docker stack rm test2func
 sleep 20
 
 for host in $ALL_HOSTS; do
-    scp -q $BASE_DIR/nightcore_config.json  $host:/tmp/nightcore_config.json
+    scp -q $BASE_DIR/func_config.json  $host:/tmp/nightcore_config.json
 done
 
 for name in $ALL_ENGINE_NODES; do
-    HOST=`$HELPER_SCRIPT get-host --base-dir=$BASE_DIR --machine-name=$name`
-    scp -qr $SRC_DIR/data $HOST:~
-    ssh -q $HOST -- sudo rm -rf /mnt/inmem/nightcore
-    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore
-    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore/output /mnt/inmem/nightcore/ipc
-    ssh -q $HOST -- sudo cp -r ~/data /tmp
-    ssh -q $HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
+    HOST=`python3 $HELPER_SCRIPT get-host --base-dir=$BASE_DIR --machine-name=$name`
+#    scp -qr $SRC_DIR/data $HOST:~
+#    ssh -q $HOST -- sudo rm -rf /mnt/inmem/nightcore
+#    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore
+#    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore/output /mnt/inmem/nightcore/ipc
+#    ssh -q $HOST -- sudo cp -r ~/data /tmp
+#    ssh -q $HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
 done
 
 ssh -q $MANAGER_HOST -- sudo docker stack deploy \
-    -c ~/docker-compose.yml -c ~/docker-compose-placement.yml hipstershop
+    -c $ROOT_DIR/docker-compose.yml -c $ROOT_DIR/docker-compose-placement.yml test2func
 sleep 60
+
+: <<'END'
 
 for name in $ALL_ENGINE_NODES; do
     HOST=`$HELPER_SCRIPT get-host --base-dir=$BASE_DIR --machine-name=$name`

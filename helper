@@ -92,7 +92,7 @@ def stop_machines_main(base_dir):
 def generate_docker_compose_main(base_dir):
     with open(os.path.join(base_dir, 'config.json')) as fin:
         config = json.load(fin)
-    docker_compose = { 'version': '3.7', 'services': {} }
+    docker_compose = { 'version': '3.8', 'services': {} }
     for name, service_config in config['services'].items():
         docker_compose['services'][name] = { 'deploy': {} }
         service_docker_compose = docker_compose['services'][name]
