@@ -6,22 +6,22 @@
 
 ROOT_DIR=$(pwd)
 
-docker build -t zyuxuan0115/nightcore:test \
+sudo docker build -t zyuxuan0115/nightcore:test \
        -f Dockerfile.nightcore \
        .
 
-docker push zyuxuan0115/nightcore:test
+sudo docker push zyuxuan0115/nightcore:test
 
-docker build -t zyuxuan0115/nightcore:test-foo \
+sudo docker build -t zyuxuan0115/nightcore:test-foo \
        -f Dockerfile.foo \
        .
 
-docker push zyuxuan0115/nightcore:test-foo
+sudo docker push zyuxuan0115/nightcore:test-foo
 
-docker build -t zyuxuan0115/nightcore:test-bar \
+sudo docker build -t zyuxuan0115/nightcore:test-bar \
        -f Dockerfile.bar \
        .
 
-docker push zyuxuan0115/nightcore:test-bar
+sudo docker push zyuxuan0115/nightcore:test-bar
 
 
