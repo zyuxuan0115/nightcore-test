@@ -1,25 +1,25 @@
 #!/bin/bash
-ROOT_DIR=$(pwd)
+BASE_DIR=`realpath $(dirname $0)`
+ROOT_DIR=`$(pwd)`
 
+EXP_DIR=$BASE_DIR/results/$1
+QPS=$2
+
+SRC_DIR=$ROOT_DIR/workloads/HipsterShop
+HELPER_SCRIPT=$ROOT_DIR/scripts/exp_helper
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=mixed_api.lua
 
-HELPER_SCRIPT=$ROOT_DIR/helper
+python3 helper start-machines
 
-python3 $HELPER_SCRIPT start-machines
+MANAGER_HOST=`$HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
+CLIENT_HOST=`$HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
+ENTRY_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
+MONGO_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=hipstershop-mongodb`
+ALL_HOSTS=`$HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
 
-MANAGER_HOST=`python3 $HELPER_SCRIPT get-docker-manager-host --base-dir=$ROOT_DIR`
-CLIENT_HOST=`python3 $HELPER_SCRIPT get-client-host --base-dir=$ROOT_DIR`
-ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$ROOT_DIR --service=nightcore-gateway`
-ALL_HOSTS=`python3 $HELPER_SCRIPT get-all-server-hosts --base-dir=$ROOT_DIR`
+ALL_ENGINE_NODES="nightcore-hs-middle1 nightcore-hs-middle2 nightcore-hs-middle3 nightcore-hs-middle4"
 
-echo $MANAGER_HOST
-echo `$CLIENT_HOST`
-echo `$ENTRY_HOST`
-
-ALL_ENGINE_NODES="nightcore-worker1 nightcore-worker2 nightcore-hs-manager"
-
-: <<'END'
 $HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
 scp -q $BASE_DIR/docker-compose.yml           $MANAGER_HOST:~
 scp -q $BASE_DIR/docker-compose-placement.yml $MANAGER_HOST:~
@@ -78,4 +78,3 @@ for name in $ALL_ENGINE_NODES; do
     mkdir $EXP_DIR/logs/func_worker_$name
     rsync -arq $HOST:/mnt/inmem/nightcore/output/* $EXP_DIR/logs/func_worker_$name
 done
-END
