@@ -1,0 +1,70 @@
+version: "3.8"
+services:
+  nightcore-engine:
+    image: zyuxuan0115/nightcore:test
+    entrypoint:
+      - /nightcore/engine
+      - --gateway_addr=nightcore-gateway
+      - --root_path_for_ipc=/tmp/nightcore/ipc
+      - --func_config_file=/tmp/nightcore/func_config.json
+      - --num_io_workers=1
+      - --gateway_conn_per_worker=32
+      - --disable_monitor
+      - --instant_rps_p_norm=0.8
+    depends_on:
+      - nightcore-gateway
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+      - /sys/fs/cgroup:/tmp/root_cgroupfs
+    environment:
+      - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
+
+  nightcore-gateway:
+    image: zyuxuan0115/nightcore:test
+    entrypoint:
+      - /nightcore/gateway
+      - --listen_addr=0.0.0.0
+      - --http_port=8080
+      - --grpc_port=50051
+      - --func_config_file=/tmp/nightcore/func_config.json
+      - --num_io_workers=8
+      - --max_running_requests=24
+      - --lb_pick_least_load
+    ports:
+      - 8080:8080
+    volumes:
+      - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
+
+  foo:
+    image: zyuxuan0115/nightcore:test-foo
+    command:
+      - --func_id=10
+      - --root_path_for_ipc=/tmp/nightcore/ipc
+      - --fprocess_output_dir=/tmp/nightcore/output
+    env_file:
+      - common.env
+    environment:
+      - GOGC=1000
+      - FAAS_GO_MAX_PROC_FACTOR=8
+      - SWARM_TASK_SLOT={{.Task.Slot}}
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+    depends_on:
+      - nightcore-engine
+
+  bar:
+    image: zyuxuan0115/nightcore:test-bar
+    command:
+      - --func_id=11
+      - --root_path_for_ipc=/tmp/nightcore/ipc
+      - --fprocess_output_dir=/tmp/nightcore/output
+    env_file:
+      - common.env
+    environment:
+      - GOGC=1000
+      - FAAS_GO_MAX_PROC_FACTOR=8
+      - SWARM_TASK_SLOT={{.Task.Slot}}
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+    depends_on:
+      - nightcore-engine
