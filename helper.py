@@ -33,12 +33,12 @@ def setup_docker_swarm_for_machines(machine_infos):
                 raise Exception('More than one manager machine')
             run_remote_command(
                 machine_info['dns'],
-                ['docker', 'swarm', 'init', '--advertise-addr', machine_info['ip']])
+                ['sudo', 'docker', 'swarm', 'init', '--advertise-addr', machine_info['ip']])
             time.sleep(10)
             manager_machine = name
             join_token, _ = run_remote_command(
                 machine_info['dns'],
-                ['docker', 'swarm', 'join-token', '-q', 'worker'])
+                ['sudo', 'docker', 'swarm', 'join-token', '-q', 'worker'])
             join_token = join_token.strip()
     if manager_machine is None:
         raise Exception('No manager machine')
@@ -46,12 +46,12 @@ def setup_docker_swarm_for_machines(machine_infos):
         if machine_info['role'] == 'worker':
             run_remote_command(
                 machine_info['dns'],
-                ['docker', 'swarm', 'join', '--token', join_token,
+                ['sudo', 'docker', 'swarm', 'join', '--token', join_token,
                  machine_infos[manager_machine]['ip']+':2377'])
     time.sleep(10)
     for name, machine_info in machine_infos.items():
         if 'labels' in machine_info:
-            cmd = ['docker', 'node', 'update']
+            cmd = ['sudo', 'docker', 'node', 'update']
             for label_str in machine_info['labels']:
                 cmd.extend(['--label-add', label_str])
             cmd.append(name)
@@ -59,10 +59,8 @@ def setup_docker_swarm_for_machines(machine_infos):
 
 def start_machines_main(base_dir, use_spot_instances,
                         spot_instances_waiting_time):
-    if os.path.exists(os.path.join(base_dir, 'machines.json')):
-        raise Exception('Machines already started')
-    with open(os.path.join(base_dir, 'config.json')) as fin:
-        config = json.load(fin)
+    with open(os.path.join(base_dir, 'machines.json')) as fin:
+        machine_infos = json.load(fin)
     try:
         time.sleep(60)
         setup_hostname_for_machines(machine_infos)
@@ -70,7 +68,6 @@ def start_machines_main(base_dir, use_spot_instances,
         with open(os.path.join(base_dir, 'machines.json'), 'w') as fout:
             json.dump(machine_infos, fout, indent=4, sort_keys=True)
     except Exception as e:
-        stop_instances(machine_infos)
         raise e
 
 def stop_machines_main(base_dir):
@@ -171,10 +168,10 @@ def get_container_id_main(base_dir, service_name, machine_name):
         machine_name = config['services'][service_name]['placement']
     machine_info = machine_infos[machine_name]
     short_id, _ = run_remote_command(machine_info['dns'],
-                                     ['docker', 'ps', '-q', '-f', 'name='+service_name])
+                                     ['sudo', 'docker', 'ps', '-q', '-f', 'name='+service_name])
     short_id = short_id.strip()
     if short_id != '':
-        container_info, _ = run_remote_command(machine_info['dns'], ['docker', 'inspect', short_id])
+        container_info, _ = run_remote_command(machine_info['dns'], ['sudo', 'docker', 'inspect', short_id])
         container_info = json.loads(container_info)[0]
         print(container_info['Id'])
 
@@ -187,15 +184,15 @@ def collect_container_logs_main(base_dir, log_path):
     for machine_info in machine_infos.values():
         if machine_info['role'] == 'client':
             continue
-        container_ids, _ = run_remote_command(machine_info['dns'], ['docker', 'ps', '-q'])
+        container_ids, _ = run_remote_command(machine_info['dns'], ['sudo', 'docker', 'ps', '-q'])
         container_ids = container_ids.strip().split()
         for container_id in container_ids:
             container_info, _ = run_remote_command(
-                machine_info['dns'], ['docker', 'inspect', container_id])
+                machine_info['dns'], ['sudo', 'docker', 'inspect', container_id])
             container_info = json.loads(container_info)[0]
             container_name = container_info['Name'][1:]  # remove prefix '/'
             log_stdout, log_stderr = run_remote_command(
-                machine_info['dns'], ['docker', 'container', 'logs', container_id])
+                machine_info['dns'], ['sudo', 'docker', 'container', 'logs', container_id])
             with open(os.path.join(log_path, '%s.stdout' % container_name), 'w') as fout:
                 fout.write(log_stdout)
             with open(os.path.join(log_path, '%s.stderr' % container_name), 'w') as fout:
