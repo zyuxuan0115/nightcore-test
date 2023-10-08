@@ -40,6 +40,7 @@ def setup_docker_swarm_for_machines(machine_infos):
                 machine_info['dns'],
                 ['sudo', 'docker', 'swarm', 'join-token', '-q', 'worker'])
             join_token = join_token.strip()
+            print("manager token: "+join_token)
     if manager_machine is None:
         raise Exception('No manager machine')
     for name, machine_info in machine_infos.items():
@@ -62,12 +63,13 @@ def start_machines_main(base_dir, use_spot_instances,
     with open(os.path.join(base_dir, 'machines.json')) as fin:
         machine_infos = json.load(fin)
     try:
-        time.sleep(60)
+        time.sleep(20)
         setup_hostname_for_machines(machine_infos)
         setup_docker_swarm_for_machines(machine_infos)
         with open(os.path.join(base_dir, 'machines.json'), 'w') as fout:
             json.dump(machine_infos, fout, indent=4, sort_keys=True)
     except Exception as e:
+        print("has exception")
         raise e
 
 def stop_machines_main(base_dir):
