@@ -39,11 +39,11 @@ services:
     image: zyuxuan0115/nightcore:test-foo
     command:
       - --func_id=1
-			- --fprocess_mode=cpp
+      - --fprocess_mode=cpp
       - --root_path_for_ipc=/tmp/nightcore/ipc
       - --fprocess_output_dir=/tmp/nightcore/output
       - --fprocess="/nightcore/func_worker_v1 libfoo.so"
-			- --v=1
+      - --v=1
     env_file:
       - common.env
     environment:
@@ -63,7 +63,7 @@ services:
       - --root_path_for_ipc=/tmp/nightcore/ipc
       - --fprocess_output_dir=/tmp/nightcore/output
       - --fprocess="/nightcore/func_worker_v1 libbar.so"
-			- --v=1
+      - --v=1
     env_file:
       - common.env
     environment:
