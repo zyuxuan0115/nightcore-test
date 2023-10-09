@@ -1,19 +1,8 @@
-FROM ubuntu:bionic as builder
-RUN apt update && apt upgrade -y && \
-    apt install -y build-essential cmake wget git
-
-COPY . .
-RUN git clone --recurse-submodules https://github.com/ut-osa/nightcore.git
-WORKDIR /nightcore
-RUN ./build_deps.sh && make -j $(nproc)
-RUN echo '[{ "funcName": "Bar", "funcId": 2, "minWorkers": 1, "maxWorkers": 1 }]' > /nightcore/examples/c/func_config.json
-RUN cd /nightcore/examples/c && sh compile.sh
+FROM zyuxuan0115/nightcore:test as nightcore
 FROM ubuntu:bionic as release
 
-COPY --from=builder /nightcore/bin/release/gateway         /nightcore/gateway
-COPY --from=builder /nightcore/bin/release/engine          /nightcore/engine
-COPY --from=builder /nightcore/bin/release/launcher        /nightcore/launcher
-COPY --from=builder /nightcore/bin/release/func_worker_v1  /nightcore/func_worker_v1
-COPY --from=builder /nightcore/examples/c/libbar.so        /nightcore/libbar.so
+COPY --from=nightcore /nightcore/bin/release/launcher        /nightcore/launcher
+COPY --from=nightcore /nightcore/bin/release/func_worker_v1  /nightcore/func_worker_v1
+COPY --from=nightcore /nightcore/examples/c/libbar.so        /nightcore/libbar.so
 
-ENTRYPOINT /nightcore/launcher
+WORKDIR /nightcore
