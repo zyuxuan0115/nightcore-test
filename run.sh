@@ -33,12 +33,12 @@ done
 
 for name in $ALL_ENGINE_NODES; do
     HOST=`python3 $HELPER_SCRIPT get-host --base-dir=$BASE_DIR --machine-name=$name`
-#    scp -qr $SRC_DIR/data $HOST:~
-#    ssh -q $HOST -- sudo rm -rf /mnt/inmem/nightcore
-#    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore
-#    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore/output /mnt/inmem/nightcore/ipc
-#    ssh -q $HOST -- sudo cp -r ~/data /tmp
-#    ssh -q $HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
+    scp -q $BASE_DIR/run_launcher $HOST:/tmp/run_launcher
+    ssh -q $HOST -- sudo rm -rf /mnt/inmem/nightcore
+    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore
+    ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore/output /mnt/inmem/nightcore/ipc
+    ssh -q $HOST -- sudo cp /tmp/run_launcher /mnt/inmem/nightcore/run_launcher
+    ssh -q $HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
 done
 
 ssh -q $MANAGER_HOST -- sudo docker stack deploy \

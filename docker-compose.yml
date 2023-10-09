@@ -25,52 +25,31 @@ services:
       - /nightcore/gateway
       - --listen_addr=0.0.0.0
       - --http_port=8080
-      - --grpc_port=50051
       - --func_config_file=/tmp/nightcore/func_config.json
       - --num_io_workers=8
       - --max_running_requests=24
       - --lb_pick_least_load
-    ports:
-      - 8080:8080
     volumes:
       - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
 
   foo:
     image: zyuxuan0115/nightcore:test-foo
-    command:
-      - --func_id=1
-      - --fprocess_mode=cpp
-      - --root_path_for_ipc=/tmp/nightcore/ipc
-      - --fprocess_output_dir=/tmp/nightcore/output
-      - --fprocess="/nightcore/func_worker_v1 libfoo.so"
-      - --v=1
-    env_file:
-      - common.env
-    environment:
-      - GOGC=1000
-      - FAAS_GO_MAX_PROC_FACTOR=8
-      - SWARM_TASK_SLOT={{.Task.Slot}}
+    hostname: nightcore-worker1
+    restart: always
+    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/foo.so", "1"]
     volumes:
       - /mnt/inmem/nightcore:/tmp/nightcore
+    working_dir: /nightcore
     depends_on:
       - nightcore-engine
 
   bar:
     image: zyuxuan0115/nightcore:test-bar
-    command:
-      - --func_id=2
-      - --fprocess_mode=cpp
-      - --root_path_for_ipc=/tmp/nightcore/ipc
-      - --fprocess_output_dir=/tmp/nightcore/output
-      - --fprocess="/nightcore/func_worker_v1 libbar.so"
-      - --v=1
-    env_file:
-      - common.env
-    environment:
-      - GOGC=1000
-      - FAAS_GO_MAX_PROC_FACTOR=8
-      - SWARM_TASK_SLOT={{.Task.Slot}}
+    hostname: nightcore-worker2
+    restart: always
+    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/bar.so", "2"]
     volumes:
       - /mnt/inmem/nightcore:/tmp/nightcore
+    working_dir: /nightcore
     depends_on:
       - nightcore-engine
