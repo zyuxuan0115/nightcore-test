@@ -59,7 +59,7 @@ services:
     image: zyuxuan0115/nightcore:test-bar
     command:
       - --func_id=2
-			- --fprocess_mode=cpp
+      - --fprocess_mode=cpp
       - --root_path_for_ipc=/tmp/nightcore/ipc
       - --fprocess_output_dir=/tmp/nightcore/output
       - --fprocess="/nightcore/func_worker_v1 libbar.so"
