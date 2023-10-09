@@ -6,6 +6,7 @@ COPY . .
 RUN git clone --recurse-submodules https://github.com/ut-osa/nightcore.git
 WORKDIR /nightcore
 RUN ./build_deps.sh && make -j $(nproc)
+RUN cd /nightcore/examples/c && sh compile.sh
 
 FROM ubuntu:bionic as release
 
@@ -13,5 +14,4 @@ COPY --from=builder /nightcore/bin/release/gateway         /nightcore/gateway
 COPY --from=builder /nightcore/bin/release/engine          /nightcore/engine
 COPY --from=builder /nightcore/bin/release/launcher        /nightcore/launcher
 COPY --from=builder /nightcore/bin/release/func_worker_v1  /nightcore/func_worker_v1
-WORKDIR /nightcore/examples/c
-RUN ./compile.sh
+COPY --from=builder /nightcore/examples/c/                 /nightcore/examples/c/
