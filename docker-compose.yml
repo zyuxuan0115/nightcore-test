@@ -41,6 +41,7 @@ services:
       - --func_id=1
       - --root_path_for_ipc=/tmp/nightcore/ipc
       - --fprocess_output_dir=/tmp/nightcore/output
+      - --fprocess="$NIGHTCORE_ROOT/bin/$BUILD_TYPE/func_worker_v1 $BASE_DIR/libfoo.so"
     env_file:
       - common.env
     environment:
@@ -58,6 +59,7 @@ services:
       - --func_id=2
       - --root_path_for_ipc=/tmp/nightcore/ipc
       - --fprocess_output_dir=/tmp/nightcore/output
+      - --fprocess="$NIGHTCORE_ROOT/bin/$BUILD_TYPE/func_worker_v1 $BASE_DIR/libbar.so"
     env_file:
       - common.env
     environment:
