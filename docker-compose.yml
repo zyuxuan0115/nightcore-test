@@ -33,18 +33,24 @@ services:
       - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
 
   foo:
-    image: zyuxuan0115/nightcore:test-foo
-    hostname: foo
-    restart: always
-    entrypoint: ["/nightcore/run_launcher", "/nightcore/libfoo.so", "1"]
-    volumes:
-      - /mnt/inmem/nightcore:/tmp/nightcore
-    working_dir: /nightcore
+    image: zyuxuan0115/nightcore:test
+    entrypoint:
+      - /nightcore/launcher
+      - --func_id=1
+      - --fprocess_mode=cpp
+      - --fprocess_output_dir=/nightcore
+      - --fprocess="/nightcore/func_worker_v1 /nightcore/libfoo.so"
+      - --v=1
     depends_on:
       - nightcore-engine
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+      - /sys/fs/cgroup:/tmp/root_cgroupfs
+    environment:
+      - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
 
   bar:
-    image: zyuxuan0115/nightcore:test-bar
+    image: zyuxuan0115/nightcore:test
     hostname: bar
     restart: always
     entrypoint: ["/nightcore/run_launcher", "/nightcore/libbar.so", "2"]

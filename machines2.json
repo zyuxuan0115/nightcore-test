@@ -1,0 +1,35 @@
+{
+    "nightcore-manager": {
+        "dns": "zyuxuan@ms1209.utah.cloudlab.us",
+        "ip": "128.110.217.214",
+        "role": "manager",
+        "type": "c5.xlarge"
+    },
+    "nightcore-worker1": {
+        "dns": "zyuxuan@ms1128.utah.cloudlab.us",
+        "ip": "128.110.217.188",
+        "labels": [
+            "engine_node=true"
+        ],
+        "role": "worker",
+        "type": "c5.xlarge"
+    },
+    "nightcore-worker2": {
+        "dns": "zyuxuan@ms1236.utah.cloudlab.us",
+        "ip": "128.110.217.241",
+        "labels": [
+            "engine_node=true"
+        ],
+        "role": "worker",
+        "type": "c5.xlarge"
+    },
+    "client": {
+        "dns":"zyuxuan@ms0802.utah.cloudlab.us",
+				"ip":"128.110.217.27",
+				"labels": [
+					""
+				],
+				"role": "client",
+				"type": "c5.xlarge"
+    }
+}
