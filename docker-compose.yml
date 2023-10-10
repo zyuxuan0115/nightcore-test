@@ -36,7 +36,7 @@ services:
     image: zyuxuan0115/nightcore:test-foo
     hostname: foo
     restart: always
-    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/foo.so", "1"]
+    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/libfoo.so", "1"]
     volumes:
       - /mnt/inmem/nightcore:/tmp/nightcore
     working_dir: /nightcore
@@ -47,7 +47,7 @@ services:
     image: zyuxuan0115/nightcore:test-bar
     hostname: bar
     restart: always
-    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/bar.so", "2"]
+    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/libbar.so", "2"]
     volumes:
       - /mnt/inmem/nightcore:/tmp/nightcore
     working_dir: /nightcore
