@@ -6,7 +6,7 @@ services:
       - /nightcore/engine
       - --gateway_addr=nightcore-gateway
       - --root_path_for_ipc=/tmp/nightcore/ipc
-      - --func_config_file=/tmp/nightcore/func_config.json
+      - --func_config_file=/nightcore/func_config.json
       - --num_io_workers=1
       - --gateway_conn_per_worker=32
       - --disable_monitor
@@ -25,7 +25,7 @@ services:
       - /nightcore/gateway
       - --listen_addr=0.0.0.0
       - --http_port=8080
-      - --func_config_file=/tmp/nightcore/func_config.json
+      - --func_config_file=/nightcore/func_config.json
       - --num_io_workers=8
       - --max_running_requests=24
       - --lb_pick_least_load
@@ -36,7 +36,7 @@ services:
     image: zyuxuan0115/nightcore:test-foo
     hostname: foo
     restart: always
-    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/libfoo.so", "1"]
+    entrypoint: ["/nightcore/run_launcher", "/nightcore/libfoo.so", "1"]
     volumes:
       - /mnt/inmem/nightcore:/tmp/nightcore
     working_dir: /nightcore
@@ -47,7 +47,7 @@ services:
     image: zyuxuan0115/nightcore:test-bar
     hostname: bar
     restart: always
-    entrypoint: ["/tmp/nightcore/run_launcher", "/nightcore/libbar.so", "2"]
+    entrypoint: ["/nightcore/run_launcher", "/nightcore/libbar.so", "2"]
     volumes:
       - /mnt/inmem/nightcore:/tmp/nightcore
     working_dir: /nightcore
