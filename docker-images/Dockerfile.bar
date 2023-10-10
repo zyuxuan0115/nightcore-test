@@ -1,8 +1,9 @@
 FROM zyuxuan0115/nightcore:test as nightcore
-FROM ubuntu:bionic as release
 
 COPY --from=nightcore /nightcore/bin/release/launcher        /nightcore/launcher
 COPY --from=nightcore /nightcore/bin/release/func_worker_v1  /nightcore/func_worker_v1
 COPY --from=nightcore /nightcore/examples/c/libbar.so        /nightcore/libbar.so
+
+ARG NUM_CPUS=1
 
 WORKDIR /nightcore

@@ -6,9 +6,9 @@
         "nightcore-client": { "type": "c5.2xlarge", "role": "client" }
     },
     "services": {
-        "foo": { "placement_label": "engine_node", "replicas": 1 },
-        "bar": { "placement_label": "engine_node", "replicas": 1 },
-        "nightcore-engine": { "placement_label": "engine_node", "replicas": 2 },
+        "foo": { "placement_label": "engine_node" },
+        "bar": { "placement_label": "engine_node" },
+        "nightcore-engine": { "placement_label": "engine_node", "replicas": 2},
         "nightcore-gateway": { "placement": "nightcore-manager" }
     }
 }
