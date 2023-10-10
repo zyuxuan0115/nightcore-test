@@ -10,9 +10,9 @@ RUN cd /nightcore/examples/c && sh compile.sh
 
 FROM ubuntu:bionic as release
 
-COPY --from=nightcore /nightcore/launcher        /nightcore/launcher
-COPY --from=nightcore /nightcore/func_worker_v1  /nightcore/func_worker_v1
-COPY --from=nightcore /nightcore/libbar.so       /nightcore/libbar.so
+COPY --from=builder /nightcore/bin/release/launcher        /nightcore/launcher
+COPY --from=builder /nightcore/bin/release/func_worker_v1  /nightcore/func_worker_v1
+COPY --from=builder /nightcore/examples/c/libbar.so        /nightcore/libbar.so
 
 ARG NUM_CPUS=1
 
