@@ -29,6 +29,8 @@ services:
       - --num_io_workers=8
       - --max_running_requests=24
       - --lb_pick_least_load
+    ports: 
+      - 8080:8080
     volumes:
       - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
 
