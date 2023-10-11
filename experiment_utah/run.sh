@@ -4,7 +4,7 @@ BASE_DIR=$(pwd)
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=mixed_api.lua
 
-HELPER_SCRIPT=$BASE_DIR/helper2
+HELPER_SCRIPT=$BASE_DIR/helper
 
 python3 $HELPER_SCRIPT start-machines
 
