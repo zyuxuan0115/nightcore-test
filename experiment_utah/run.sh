@@ -38,6 +38,7 @@ for name in $ALL_ENGINE_NODES; do
     ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore
     ssh -q $HOST -- sudo mkdir -p /mnt/inmem/nightcore/output /mnt/inmem/nightcore/ipc
     ssh -q $HOST -- sudo cp /tmp/run_launcher /mnt/inmem/nightcore/run_launcher
+    ssh -q $HOST -- sudo chmod 777 /mnt/inmem/nightcore/run_launcher
     ssh -q $HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
 done
 
