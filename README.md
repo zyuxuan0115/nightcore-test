@@ -6,4 +6,8 @@ in `/etc/hosts` add `127.0.0.1 nightcore-manager`
 
 ### upgrade docker
 - This [page](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package)
-- docker version should be higher than 19.02
+- docker version should be higher or equal to than 19.03
+- some useful docker command
+  + `sudo docker run -it <container_name> bash`
+  + `sudo docker ps -a`
+
