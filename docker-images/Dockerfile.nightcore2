@@ -20,5 +20,6 @@ COPY --from=builder /nightcore/examples/c/libfoo.so        /nightcore/libfoo.so
 COPY --from=builder /nightcore/examples/c/libbar.so        /nightcore/libbar.so
 COPY --from=builder /nightcore-test/experiment_utah2/func_config.json	   /nightcore/func_config.json
 COPY --from=builder /nightcore-test/experiment_utah2/run_gateway   /nightcore/run_gateway
+RUN chmod 777 /nightcore/run_gateway
 
 WORKDIR /nightcore
