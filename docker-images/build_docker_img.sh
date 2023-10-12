@@ -11,3 +11,9 @@ sudo docker build --no-cache -t zyuxuan0115/nightcore:test \
        .
 
 sudo docker push zyuxuan0115/nightcore:test
+
+sudo docker build --no-cache -t zyuxuan0115/nightcore:test2 \
+       -f Dockerfile.nightcore2 \
+       .
+
+sudo docker push zyuxuan0115/nightcore:test2
