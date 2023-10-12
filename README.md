@@ -11,5 +11,5 @@ in `/etc/hosts` add `127.0.0.1 nightcore-manager`
   + `sudo docker run -it <container_name> bash`
   + `sudo docker ps -a`
   + `sudo docker system prune` -- in case the space is used up by docker build
-  + `sudo docker logs -f` -- see the output from a docker container
+  + `sudo docker logs -f <container_id>` -- see the output from a docker container
 
