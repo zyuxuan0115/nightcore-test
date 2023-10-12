@@ -10,4 +10,5 @@ in `/etc/hosts` add `127.0.0.1 nightcore-manager`
 - some useful docker command
   + `sudo docker run -it <container_name> bash`
   + `sudo docker ps -a`
+  + `sudo docker system prune` -- in case the space is used up by docker build
 
