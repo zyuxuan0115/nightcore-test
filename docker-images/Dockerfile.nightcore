@@ -23,5 +23,3 @@ COPY --from=builder /nightcore-test/experiment_utah/run_launcher	   /nightcore/r
 RUN chmod 777 /nightcore/run_launcher
 
 WORKDIR /nightcore
-
-#ENTRYPOINT ["/nightcore/run_launcher","/nightcore/libfoo.so", "1"] 
