@@ -19,5 +19,6 @@ COPY --from=builder /nightcore/bin/release/func_worker_v1  /nightcore/func_worke
 COPY --from=builder /nightcore/examples/c/libfoo.so        /nightcore/libfoo.so
 COPY --from=builder /nightcore/examples/c/libbar.so        /nightcore/libbar.so
 COPY --from=builder /nightcore-test/experiment_utah/func_config.json	   /nightcore/func_config.json
+COPY --from=builder /nightcore-test/experiment_utah/run_launcher	   /nightcore/run_launcher
 
 WORKDIR /nightcore

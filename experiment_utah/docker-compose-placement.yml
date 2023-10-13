@@ -5,14 +5,14 @@ services:
         constraints:
         - node.labels.engine_node == true
         max_replicas_per_node: 1
-      replicas: 2
+      replicas: 1
   foo:
     deploy:
       placement:
         constraints:
         - node.labels.engine_node == true
         max_replicas_per_node: 1
-      replicas: 2
+      replicas: 1
   nightcore-engine:
     deploy:
       placement:

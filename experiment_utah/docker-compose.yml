@@ -36,14 +36,7 @@ services:
 
   foo:
     image: zyuxuan0115/nightcore:test
-    entrypoint:
-      - /nightcore/launcher
-      - --func_id=1
-      - --fprocess_mode=cpp
-      - --fprocess_output_dir=/nightcore
-      - --root_path_for_ipc=/tmp/nightcore/ipc
-      - --fprocess='/nightcore/func_worker_v1 /nightcore/libfoo.so'
-      - --v=1
+    entrypoint: ["/nightcore/run_launcher", "/nightcore/libfoo.so", "1"] 
     depends_on:
       - nightcore-engine
     volumes:
