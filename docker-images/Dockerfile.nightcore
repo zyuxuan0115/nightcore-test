@@ -24,4 +24,4 @@ RUN chmod 777 /nightcore/run_launcher
 
 WORKDIR /nightcore
 
-ENTRYPOINT ["/nightcore/run_launcher","/nightcore/libfoo.so", "1"] 
+#ENTRYPOINT ["/nightcore/run_launcher","/nightcore/libfoo.so", "1"] 
