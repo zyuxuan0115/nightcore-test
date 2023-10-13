@@ -55,7 +55,7 @@ done
 rm -rf $OUTPUT_DIR
 mkdir -p $OUTPUT_DIR
 
-ssh -q $CLIENT_HOST -- curl -X POST -d "Hello" http://$ENTRY_HOST:8080/function/Foo > $OUTPUT_DIR/log
+#ssh -q $CLIENT_HOST -- curl -X POST -d "Hello" http://$ENTRY_HOST:8080/function/Foo > $OUTPUT_DIR/log
 
 
 : <<'END'

@@ -8,7 +8,7 @@
     "services": {
         "nightcore-gateway": { "placement": "nightcore-manager" },
         "nightcore-engine": { "placement_label": "engine_node", "replicas": 2},
-        "foo": { "placement_label": "engine_node" },
-        "bar": { "placement_label": "engine_node" }
+        "foo": { "placement_label": "engine_node","replicas":1 },
+        "bar": { "placement_label": "engine_node" , "replicas":1}
    }
 }
