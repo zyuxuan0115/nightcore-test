@@ -6,7 +6,7 @@ sleep 20
   --gateway_addr=nightcore-gateway \
   --root_path_for_ipc=/tmp/nightcore/ipc \
   --func_config_file=/nightcore/func_config.json \
-  --num_io_workers=1 \
-  --gateway_conn_per_worker=1 \
+  --num_io_workers=2 \
+  --gateway_conn_per_worker=4 \
   --disable_monitor \
   --instant_rps_p_norm=0.8
