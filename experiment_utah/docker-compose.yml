@@ -18,8 +18,8 @@ services:
       - --listen_addr=0.0.0.0
       - --http_port=8080
       - --func_config_file=/nightcore/func_config.json
-      - --num_io_workers=8
-      - --max_running_requests=24
+      - --num_io_workers=2
+      - --max_running_requests=4
       - --lb_pick_least_load
     ports: 
       - 8080:8080
