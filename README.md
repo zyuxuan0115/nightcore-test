@@ -11,6 +11,8 @@
   + `./build_deps.sh`
   + Before compilation, need to comment out `nightcore/src/common/stat.h`'s line #236
   + `make -j`
+- The command to run `Foo` and `Bar`
+  + `curl -X POST -d "Hello" http://<manager's IP>:8080/function/Foo`
 
 ### setup ssh key for all 4 nodes
 in `~/.ssh/authorized_keys`, add `id_ed25519.pub` from other machines
