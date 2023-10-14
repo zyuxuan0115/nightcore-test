@@ -7,6 +7,8 @@ check() {
   return 0
 }
 
+apt update && apt install lsof -y
+
 until check; do
   echo "Waiting for gateway to be ready"
   sleep 5
