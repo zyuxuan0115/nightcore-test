@@ -1,5 +1,5 @@
 #!/bin/bash
-function check {
+check() {
   STATUS=`lsof -Pi :8080 -sTCP:LISTEN -t`
   if [ "$STATUS" = "" ]; then
     return 1
