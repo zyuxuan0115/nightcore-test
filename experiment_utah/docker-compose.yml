@@ -33,6 +33,12 @@ services:
       - 8080:8080
     volumes:
       - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
+    healthcheck:
+      test: ["CMD", "sh", "/nightcore/gateway_check.sh"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 10s
 
   foo:
     image: zyuxuan0115/nightcore:test
