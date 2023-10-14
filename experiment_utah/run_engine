@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sleep 20
+
+/nightcore/engine \
+  --gateway_addr=nightcore-gateway \
+  --root_path_for_ipc=/tmp/nightcore/ipc \
+  --func_config_file=/nightcore/func_config.json \
+  --num_io_workers=1 \
+  --gateway_conn_per_worker=32 \
+  --disable_monitor \
+  --instant_rps_p_norm=0.8
