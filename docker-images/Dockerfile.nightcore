@@ -22,6 +22,7 @@ COPY --from=builder /nightcore-test/experiment_utah/func_config.json	       /nig
 COPY --from=builder /nightcore-test/experiment2/func_foo_config.json	   /nightcore/func_foo_config.json
 COPY --from=builder /nightcore-test/experiment2/func_bar_config.json	   /nightcore/func_bar_config.json
 COPY --from=builder /nightcore-test/experiment_utah/run_launcher	   /nightcore/run_launcher
+COPY --from=builder /nightcore-test/experiment_utah/run_engine	     /nightcore/run_engine
 COPY --from=builder /nightcore-test/experiment_utah/gateway_check.sh   /nightcore/gateway_check.sh
 
 RUN chmod 777 /nightcore/run_launcher
