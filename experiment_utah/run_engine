@@ -1,9 +1,5 @@
 #!/bin/bash
-git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git /nightcore-new
-cd /nightcore-new 
-./build_deps.sh && make -j $(nproc)
-sleep 10
-/nightcore-new/bin/release/engine \
+/nightcore/bin/release/engine \
   --gateway_addr=nightcore-gateway \
   --root_path_for_ipc=/tmp/nightcore/ipc \
   --func_config_file=/nightcore/func_config.json \

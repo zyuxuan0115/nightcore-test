@@ -1,8 +1,5 @@
 #!/bin/bash
-git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git /nightcore-new
-cd /nightcore-new 
-./build_deps.sh && make -j $(nproc)
-/nightcore-new/bin/release/gateway \
+/nightcore/bin/release/gateway \
   --listen_addr=0.0.0.0 \
   --http_port=8080 \
   --func_config_file=/nightcore/func_config.json \
