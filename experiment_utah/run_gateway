@@ -1,0 +1,10 @@
+git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git /nightcore
+cd /nightcore 
+./build_deps.sh && make -j $(nproc)
+/nightcore/bin/release/gateway \
+  --listen_addr=0.0.0.0 \
+  --http_port=8080 \
+  --func_config_file=/nightcore/func_config.json \
+  --num_io_workers=4 \
+  --max_running_requests=8 \
+  --lb_pick_least_load 
