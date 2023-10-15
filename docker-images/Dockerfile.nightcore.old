@@ -26,8 +26,9 @@ COPY --from=builder /nightcore-test/experiment2/func_foo_config.json	   /nightco
 COPY --from=builder /nightcore-test/experiment2/func_bar_config.json	   /nightcore/func_bar_config.json
 COPY --from=builder /nightcore-test/experiment_utah/run_launcher	   /nightcore/run_launcher
 COPY --from=builder /nightcore-test/experiment_utah/run_engine	     /nightcore/run_engine
+COPY --from=builder /nightcore-test/experiment_utah/run_gateway	     /nightcore/run_gateway
 
-RUN chmod 777 /nightcore/run_launcher
-RUN chmod 777 /nightcore/run_engine
-
+RUN chmod +x /nightcore/run_launcher
+RUN chmod +x /nightcore/run_engine
+RUN chmod +x /nightcore/run_gateway
 WORKDIR /nightcore
