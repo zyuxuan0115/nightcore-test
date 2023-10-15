@@ -1,0 +1,19 @@
+FROM ubuntu:bionic as builder
+RUN apt update && apt upgrade -y && \
+    apt install -y build-essential cmake wget git curl
+
+COPY . .
+
+RUN mkdir nightcore
+WORKDIR nightcore
+
+RUN git clone https://github.com/zyuxuan0115/nightcore-test.git /nightcore-test
+
+COPY /nightcore-test/experiment_utah/func_config.json	       /nightcore/func_config.json
+COPY /nightcore-test/experiment2/func_foo_config.json	   /nightcore/func_foo_config.json
+COPY /nightcore-test/experiment2/func_bar_config.json	   /nightcore/func_bar_config.json
+COPY /nightcore-test/experiment_utah/run_gateway	   /nightcore/run_gateway
+
+RUN chmod 777 /nightcore/run_gateway
+
+WORKDIR /nightcore
