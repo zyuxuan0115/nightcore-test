@@ -5,4 +5,5 @@
   --func_config_file=/nightcore/func_config.json \
   --num_io_workers=4 \
   --max_running_requests=8 \
-  --lb_pick_least_load 
+  --lb_pick_least_load \
+  --v=1
