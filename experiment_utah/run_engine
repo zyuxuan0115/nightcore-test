@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sleep 120
 /nightcore/engine \
   --gateway_addr=nightcore-gateway \
   --root_path_for_ipc=/tmp/nightcore/ipc \
