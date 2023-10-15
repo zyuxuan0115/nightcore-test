@@ -1,5 +1,4 @@
 #!/bin/bash
-sleep 40
 
 /nightcore/launcher \
     --root_path_for_ipc=/tmp/nightcore/ipc \
