@@ -1,7 +1,7 @@
 # Readme
 ### Build nightcore without any container
 - [github page](https://github.com/ut-osa/nightcore/tree/asplos-release) of nightcore
-  + `git clone --recurse-submodules git@github.com:zyuxuan0115/nightcore.git`
+  + `git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git`
   + need to install
     * [the newer version of cmake (3.25)](https://cmake.org/download/)
     * [gcc-10](http://www.netgull.com/gcc/releases/gcc-10.1.0/)
