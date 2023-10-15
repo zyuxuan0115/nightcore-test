@@ -1,3 +1,4 @@
+#!/bin/bash
 git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git /nightcore-new
 cd /nightcore-new 
 ./build_deps.sh && make -j $(nproc)

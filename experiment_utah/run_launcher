@@ -1,6 +1,9 @@
 #!/bin/bash
-sleep 140
-/nightcore/launcher \
+git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git /nightcore-new
+cd /nightcore-new 
+./build_deps.sh && make -j $(nproc)
+sleep 20
+/nightcore-new/bin/release/launcher \
     --root_path_for_ipc=/tmp/nightcore/ipc \
     --fprocess_mode=cpp \
     --fprocess_output_dir=/nightcore \
