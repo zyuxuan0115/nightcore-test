@@ -2,7 +2,7 @@
 /nightcore/bin/release/engine \
   --gateway_addr=nightcore-gateway \
   --root_path_for_ipc=/tmp/nightcore/ipc \
-  --func_config_file=/nightcore/func_config.json \
+  --func_config_file=/nightcore/func_config2.json \
   --num_io_workers=2 \
   --gateway_conn_per_worker=4 \
   --disable_monitor \
