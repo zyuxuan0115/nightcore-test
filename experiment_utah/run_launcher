@@ -1,5 +1,5 @@
 #!/bin/bash
-sleep 20
+sleep 5
 /nightcore/bin/release/launcher \
     --root_path_for_ipc=/tmp/nightcore/ipc \
     --fprocess_mode=cpp \
