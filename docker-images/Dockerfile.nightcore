@@ -4,31 +4,17 @@ RUN apt update && apt upgrade -y && \
 
 COPY . .
 RUN git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git /nightcore
-WORKDIR /nightcore
-RUN ./build_deps.sh && make -j $(nproc)
+RUN cd /nightcore && ./build_deps.sh && make -j $(nproc)
 RUN cd /nightcore/examples/c && sh compile.sh
-
 RUN git clone https://github.com/zyuxuan0115/nightcore-test.git /nightcore-test
-
-FROM ubuntu:bionic as release
-
-RUN apt update && apt upgrade -y && \
-    apt install -y build-essential cmake wget git curl
-
-COPY --from=builder /nightcore/bin/release/gateway         /nightcore/gateway
-COPY --from=builder /nightcore/bin/release/engine          /nightcore/engine
-COPY --from=builder /nightcore/bin/release/launcher        /nightcore/launcher
-COPY --from=builder /nightcore/bin/release/func_worker_v1  /nightcore/func_worker_v1
-COPY --from=builder /nightcore/examples/c/libfoo.so        /nightcore/libfoo.so
-COPY --from=builder /nightcore/examples/c/libbar.so        /nightcore/libbar.so
-COPY --from=builder /nightcore-test/experiment_utah/func_config.json	       /nightcore/func_config.json
-COPY --from=builder /nightcore-test/experiment2/func_foo_config.json	   /nightcore/func_foo_config.json
-COPY --from=builder /nightcore-test/experiment2/func_bar_config.json	   /nightcore/func_bar_config.json
-COPY --from=builder /nightcore-test/experiment_utah/run_launcher	   /nightcore/run_launcher
-COPY --from=builder /nightcore-test/experiment_utah/run_engine	     /nightcore/run_engine
-COPY --from=builder /nightcore-test/experiment_utah/run_gateway	     /nightcore/run_gateway
+RUN cp /nightcore-test/experiment_utah/run_launcher /nightcore/run_launcher
+RUN cp /nightcore-test/experiment_utah/run_engine /nightcore/run_engine
+RUN cp /nightcore-test/experiment_utah/run_gateway /nightcore/run_gateway
 
 RUN chmod +x /nightcore/run_launcher
 RUN chmod +x /nightcore/run_engine
 RUN chmod +x /nightcore/run_gateway
+
+RUN cp /nightcore-test/experiment_utah/func_config.json /nightcore/func_config.json
+
 WORKDIR /nightcore
