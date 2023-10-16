@@ -17,6 +17,5 @@ RUN chmod +x /nightcore/run_engine
 RUN chmod +x /nightcore/run_gateway
 
 RUN cp /nightcore-test/experiment_utah/func_config.json /nightcore/func_config.json
-RUN cp /nightcore-test/invocation_time/func_config.json /nightcore/func_config2.json
 
 WORKDIR /nightcore
