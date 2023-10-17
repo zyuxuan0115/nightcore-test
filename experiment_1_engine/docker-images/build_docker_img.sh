@@ -6,9 +6,9 @@
 
 ROOT_DIR=$(pwd)
 
-sudo docker build --no-cache -t zyuxuan0115/nightcore:test \
+sudo docker build --no-cache -t zyuxuan0115/nightcore:test-1-engine \
        -f Dockerfile.nightcore \
        .
 
-sudo docker push zyuxuan0115/nightcore:test
+sudo docker push zyuxuan0115/nightcore:test-1-engine
 
