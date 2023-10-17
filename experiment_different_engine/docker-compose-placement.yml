@@ -13,13 +13,20 @@ services:
         - node.labels.engine_node == true
         max_replicas_per_node: 1
       replicas: 1
-  nightcore-engine:
+  nightcore-engine-1:
     deploy:
       placement:
         constraints:
         - node.labels.engine_node == true
         max_replicas_per_node: 1
-      replicas: 2
+      replicas: 1
+  nightcore-engine-2:
+    deploy:
+      placement:
+        constraints:
+        - node.labels.engine_node == true
+        max_replicas_per_node: 1
+      replicas: 1
   nightcore-gateway:
     deploy:
       placement:
