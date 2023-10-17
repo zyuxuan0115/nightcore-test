@@ -1,13 +1,13 @@
 {
-    "nightcore-manager": {
-        "dns": "zyuxuan@ms1334.utah.cloudlab.us",
-        "ip": "128.110.218.28",
-        "role": "client",
-        "type": "c5.xlarge"
-    },
     "nightcore-client": {
         "dns": "zyuxuan@ms1337.utah.cloudlab.us",
         "ip": "128.110.218.31",
+        "role": "client",
+        "type": "c5.xlarge"
+    },
+    "nightcore-manager": {
+        "dns": "zyuxuan@ms1334.utah.cloudlab.us",
+        "ip": "128.110.218.28",
         "role": "manager",
         "type": "c5.xlarge"
     },
