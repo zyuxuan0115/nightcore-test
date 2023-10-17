@@ -1,5 +1,5 @@
 # Readme
-### Build nightcore without any container
+### Build [nightcore](https://github.com/zyuxuan0115/nightcore) without any container
 - [github page](https://github.com/ut-osa/nightcore/tree/asplos-release) of nightcore
   + `git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git`
   + need to install
@@ -16,7 +16,8 @@
   + `curl -X POST -d "Hello" http://<manager's IP>:8080/function/Foo`
 
 ### setup ssh key for all 4 nodes
-in `~/.ssh/authorized_keys`, add `id_ed25519.pub` from other machines
+- `ssh-keygen -t ed25519 -C "zyuxuan@seas.upenn.edu"`
+- in `~/.ssh/authorized_keys`, add `id_ed25519.pub` from other machines
 
 ### change the host name of the manager machine
 - on manager node, in `/etc/hosts` add `127.0.0.1 nightcore-manager`
