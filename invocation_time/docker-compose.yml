@@ -29,7 +29,7 @@ services:
 
   foo:
     image: zyuxuan0115/nightcore:test
-    entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c_timer/libfoo.so", "1"] 
+    entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c/libfoo.so", "1", "/nightcore/examples/c/libbar.so", "2"] 
     depends_on:
       - nightcore-engine
     volumes:
@@ -40,7 +40,7 @@ services:
 
   bar:
     image: zyuxuan0115/nightcore:test
-    entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c_timer/libbar.so", "2"] 
+    entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c/libbar.so", "2", "/nightcore/examples/c/libfoo.so", "1"] 
     depends_on:
       - nightcore-engine
     volumes:
