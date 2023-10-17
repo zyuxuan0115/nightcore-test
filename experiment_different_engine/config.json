@@ -7,9 +7,9 @@
     },
     "services": {
         "nightcore-gateway": { "placement": "nightcore-manager" },
-        "nightcore-engine-1": { "placement_label": "engine_node"},
-        "nightcore-engine-2": { "placement_label": "engine_node"},
-        "foo": { "placement_label": "engine_node"},
-        "bar": { "placement_label": "engine_node"}
+        "nightcore-engine-1": { "placement": "nightcore-worker1"},
+        "nightcore-engine-2": { "placement": "nightcore-worker2"},
+        "foo": { "placement": "nightcore-worker1"},
+        "bar": { "placement": "nightcore-worker2"}
    }
 }
