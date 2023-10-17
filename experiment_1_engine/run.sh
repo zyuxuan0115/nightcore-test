@@ -16,7 +16,7 @@ echo $MANAGER_HOST
 echo $ENTRY_HOST
 echo $ALL_HOSTS
 
-ALL_ENGINE_NODES="nightcore-worker1 nightcore-worker2 nightcore-manager"
+ALL_ENGINE_NODES="nightcore-worker1 nightcore-manager"
 
 python3 $HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
 scp -q $BASE_DIR/docker-compose.yml           $MANAGER_HOST:$ROOT_DIR

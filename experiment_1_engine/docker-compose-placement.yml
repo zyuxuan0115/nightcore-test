@@ -19,7 +19,7 @@ services:
         constraints:
         - node.labels.engine_node == true
         max_replicas_per_node: 1
-      replicas: 2
+      replicas: 1
   nightcore-gateway:
     deploy:
       placement:
