@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   nightcore-engine-1:
-    image: zyuxuan0115/nightcore:test
+    image: zyuxuan0115/nightcore:test-diff-engine
     entrypoint: ["sh", "/nightcore/run_engine_1"]
     depends_on:
       - nightcore-gateway
@@ -12,7 +12,7 @@ services:
       - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
 
   nightcore-engine-2:
-    image: zyuxuan0115/nightcore:test
+    image: zyuxuan0115/nightcore:test-diff-engine
     entrypoint: ["sh", "/nightcore/run_engine_2"]
     depends_on:
       - nightcore-gateway
@@ -23,7 +23,7 @@ services:
       - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
 
   nightcore-gateway:
-    image: zyuxuan0115/nightcore:test
+    image: zyuxuan0115/nightcore:test-diff-engine
     entrypoint: ["sh", "/nightcore/run_gateway"]
     ports: 
       - 8080:8080
@@ -31,7 +31,7 @@ services:
       - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
 
   foo:
-    image: zyuxuan0115/nightcore:test
+    image: zyuxuan0115/nightcore:test-diff-engine
     entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c/libfoo.so", "1"] 
     depends_on:
       - nightcore-engine-1
@@ -42,7 +42,7 @@ services:
       - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
 
   bar:
-    image: zyuxuan0115/nightcore:test
+    image: zyuxuan0115/nightcore:test-diff-engine
     entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c/libbar.so", "2"] 
     depends_on:
       - nightcore-engine-2
