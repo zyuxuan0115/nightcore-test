@@ -1,5 +1,5 @@
 {
-    "client": {
+    "nightcore-client": {
         "dns": "zyuxuan@ms1334.utah.cloudlab.us",
         "ip": "128.110.218.28",
         "role": "client",
@@ -14,15 +14,6 @@
     "nightcore-worker1": {
         "dns": "zyuxuan@ms1335.utah.cloudlab.us",
         "ip": "128.110.218.29",
-        "labels": [
-            "engine_node=true"
-        ],
-        "role": "worker",
-        "type": "c5.xlarge"
-    },
-    "nightcore-worker2": {
-        "dns": "zyuxuan@ms1303.utah.cloudlab.us",
-        "ip": "128.110.217.253",
         "labels": [
             "engine_node=true"
         ],
