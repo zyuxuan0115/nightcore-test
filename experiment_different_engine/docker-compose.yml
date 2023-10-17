@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+  nightcore-engine-1:
+    image: zyuxuan0115/nightcore:test
+    entrypoint: ["sh", "/nightcore/run_engine_1"]
+    depends_on:
+      - nightcore-gateway
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+      - /sys/fs/cgroup:/tmp/root_cgroupfs
+    environment:
+      - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
+
+  nightcore-engine-2:
+    image: zyuxuan0115/nightcore:test
+    entrypoint: ["sh", "/nightcore/run_engine_2"]
+    depends_on:
+      - nightcore-gateway
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+      - /sys/fs/cgroup:/tmp/root_cgroupfs
+    environment:
+      - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
+
+  nightcore-gateway:
+    image: zyuxuan0115/nightcore:test
+    entrypoint: ["sh", "/nightcore/run_gateway"]
+    ports: 
+      - 8080:8080
+    volumes:
+      - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
+
+  foo:
+    image: zyuxuan0115/nightcore:test
+    entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c/libfoo.so", "1"] 
+    depends_on:
+      - nightcore-engine-1
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+      - /sys/fs/cgroup:/tmp/root_cgroupfs
+    environment:
+      - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
+
+  bar:
+    image: zyuxuan0115/nightcore:test
+    entrypoint: ["/nightcore/run_launcher", "/nightcore/examples/c/libbar.so", "2"] 
+    depends_on:
+      - nightcore-engine-2
+    volumes:
+      - /mnt/inmem/nightcore:/tmp/nightcore
+      - /sys/fs/cgroup:/tmp/root_cgroupfs
+    environment:
+      - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
