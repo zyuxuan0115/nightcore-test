@@ -1,0 +1,3 @@
+[
+    { "funcName": "Foo", "funcId": 1, "minWorkers": 1, "maxWorkers": 2 }
+]
