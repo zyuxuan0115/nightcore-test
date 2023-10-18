@@ -24,7 +24,7 @@ scp -q $BASE_DIR/docker-compose-placement.yml $MANAGER_HOST:$ROOT_DIR
 scp -q $BASE_DIR/common.env                   $MANAGER_HOST:$ROOT_DIR
 
 ssh -q $MANAGER_HOST -- sudo docker stack rm test2func
-sleep 20
+sleep 10
 
 for host in $ALL_HOSTS; do
     scp -q $BASE_DIR/func_config.json  $host:/tmp/nightcore_config.json
@@ -43,7 +43,7 @@ done
 
 ssh -q $MANAGER_HOST -- sudo docker stack deploy \
     -c $ROOT_DIR/docker-compose.yml -c $ROOT_DIR/docker-compose-placement.yml test2func
-sleep 60
+sleep 30
 
 for name in $ALL_ENGINE_NODES; do
     HOST=`python3 $HELPER_SCRIPT get-host --base-dir=$BASE_DIR --machine-name=$name`
