@@ -3,19 +3,22 @@ services:
     deploy:
       placement:
         constraints:
-        - node.hostname == nightcore-worker1
+        - node.labels.engine_node == true
+        max_replicas_per_node: 1
       replicas: 1
   foo:
     deploy:
       placement:
         constraints:
-        - node.hostname == nightcore-worker1
+        - node.labels.engine_node == true
+        max_replicas_per_node: 1
       replicas: 1
   nightcore-engine:
     deploy:
       placement:
         constraints:
-        - node.hostname == nightcore-worker1
+        - node.labels.engine_node == true
+        max_replicas_per_node: 1
       replicas: 1
   nightcore-gateway:
     deploy:

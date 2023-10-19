@@ -11,7 +11,7 @@
         "role": "manager",
         "type": "c5.xlarge"
     },
-    "nightcore-worker1": {
+    "nightcore-worker2": {
         "dns": "zyuxuan@ms1303.utah.cloudlab.us",
         "ip": "128.110.217.253",
         "labels": [
