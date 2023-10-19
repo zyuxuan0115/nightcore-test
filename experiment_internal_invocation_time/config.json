@@ -1,0 +1,13 @@
+{
+    "machines": {
+        "nightcore-worker2": { "type": "c5.xlarge", "role": "worker", "labels": ["engine_node=true"] },
+        "nightcore-manager": { "type": "c5.xlarge", "role": "manager", "labels": ["engine_node=true"] },
+        "nightcore-client": { "type": "c5.xlarge", "role": "client" }
+    },
+    "services": {
+        "nightcore-gateway": { "placement": "nightcore-manager" },
+        "nightcore-engine": { "placement_label": "engine_node" },
+        "foo": { "placement_label": "engine_node"},
+        "bar": { "placement_label": "engine_node"}
+    }
+}
