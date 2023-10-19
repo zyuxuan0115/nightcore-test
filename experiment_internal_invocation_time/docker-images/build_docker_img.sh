@@ -6,9 +6,9 @@
 
 ROOT_DIR=$(pwd)
 
-sudo docker build --no-cache -t zyuxuan0115/nightcore:test-1-engine \
+sudo docker build --no-cache -t zyuxuan0115/nightcore:test-internal-time \
        -f Dockerfile.nightcore \
        .
 
-sudo docker push zyuxuan0115/nightcore:test-1-engine
+sudo docker push zyuxuan0115/nightcore:test-internal-time
 
