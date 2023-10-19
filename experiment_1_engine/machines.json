@@ -12,8 +12,8 @@
         "type": "c5.xlarge"
     },
     "nightcore-worker1": {
-        "dns": "zyuxuan@ms1334.utah.cloudlab.us",
-        "ip": "128.110.218.28",
+        "dns": "zyuxuan@ms1303.utah.cloudlab.us",
+        "ip": "128.110.217.253",
         "labels": [
             "engine_node=true"
         ],
