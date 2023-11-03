@@ -12,10 +12,15 @@ main(){
    int rc1;
    pthread_t thread1;
 
-   clock_t start = clock();
+   // creating threads
+   pthread_mutex_lock( &mutex1 );
+
    if( (rc1=pthread_create( &thread1, NULL, &functionC, NULL)) ){
       printf("Thread creation failed: %d\n", rc1);
    }
+
+   clock_t start = clock();
+   pthread_mutex_unlock( &mutex1 );
 
    pthread_join( thread1, NULL);
 
@@ -24,6 +29,8 @@ main(){
 
    printf("Time spent on pthread: %f seconds\n", seconds);
 
+
+   // normal function call
    clock_t start2 = clock();
    function();
    clock_t end2 = clock();
@@ -35,10 +42,10 @@ main(){
 }
 
 void *functionC(){
-   //pthread_mutex_lock( &mutex1 );
+   pthread_mutex_lock( &mutex1 );
    //counter++;
    //printf("Counter value: %d\n",counter);
-   //pthread_mutex_unlock( &mutex1 );
+   pthread_mutex_unlock( &mutex1 );
 }
 
 void function(){
