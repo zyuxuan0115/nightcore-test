@@ -1,3 +1,4 @@
+#include <sys/mman.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -47,7 +48,6 @@ main(){
    pthread_mutex_unlock( &mutex);
  
    pthread_join( thread2, NULL);
-
 
    //--------------------------------------//
    // normal function call
