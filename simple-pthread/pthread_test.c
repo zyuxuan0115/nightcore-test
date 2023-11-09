@@ -3,9 +3,6 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
-#include "mpt/mpt.h"
-#include "mpt/hash.h"
-#include "mpt/pkey.h"
 
 void *functionCond(void*);
 void *functionMutex(void*);

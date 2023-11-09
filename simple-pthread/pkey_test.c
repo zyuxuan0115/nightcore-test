@@ -4,9 +4,9 @@
 #include <pthread.h>
 #include <time.h>
 #include <errno.h>
-#include <mpt/mpt.h>
-#include <mpt/hash.h>
-#include <mpt/pkey.h>
+//#include <mpt/mpt.h>
+//#include <mpt/hash.h>
+//#include <mpt/pkey.h>
 
 #define MMAP_PAGE_SIZE 4*1024 
 
@@ -14,9 +14,10 @@ void *functionMutex(void*);
 void function();
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 clock_t start;
+int pkey;
 
 main(){
-   int pkey = pkey_alloc(0, PKEY_DISABLE_ACCESS);
+   pkey = pkey_alloc(0, PKEY_DISABLE_ACCESS);
    if (pkey == ENOSPC) {
       printf("No available keys\n");
    }
@@ -47,10 +48,12 @@ main(){
 }
 
 void *functionMutex(void* arg){
-   pthread_mutex_lock( &mutex );
-   // do something (serverless function)
+   int ret = pkey_mprotect(arg, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, pkey); 
    int* ptr_int = (int*) arg;
    *ptr_int = 5;
+
+   pthread_mutex_lock( &mutex );
+   // do something (serverless function)
    pthread_mutex_unlock( &mutex);
    clock_t end = clock();
    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
