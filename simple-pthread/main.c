@@ -2,34 +2,54 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
+#include "mpt/mpt.h"
+#include "mpt/hash.h"
+#include "mpt/pkey.h"
 
-void *functionC();
+void *functionCond(void*);
+void *functionMutex(void*);
 void function();
-pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER; 
 int  counter = 0;
+bool condition = false;
+clock_t start;
 
 main(){
+   // creating thread (condition variable version)
    int rc1;
-   pthread_t thread1;
-
-   // creating threads
-   pthread_mutex_lock( &mutex1 );
-
-   if( (rc1=pthread_create( &thread1, NULL, &functionC, NULL)) ){
+   pthread_t thread;
+   if( (rc1 = pthread_create( &thread, NULL, &functionCond, NULL)) ){
       printf("Thread creation failed: %d\n", rc1);
    }
 
-   clock_t start = clock();
-   pthread_mutex_unlock( &mutex1 );
+   pthread_mutex_lock(&mutex);
+   // do something 
+   // the data for serverless function is ready
+   condition = true;
+   start = clock();
+   pthread_cond_signal(&cond);
+   pthread_mutex_unlock( &mutex);
+ 
+   pthread_join( thread, NULL);
 
-   pthread_join( thread1, NULL);
+   //--------------------------------------//
+   // creating thread (mutex version)
+   int rc2;
+   pthread_mutex_lock(&mutex);
+   pthread_t thread2;
+   if( (rc2 = pthread_create( &thread2, NULL, &functionMutex, NULL)) ){
+      printf("Thread creation failed: %d\n", rc2);
+   }
+   // do something 
+   // the data for serverless function is ready
+   start = clock();
+   pthread_mutex_unlock( &mutex);
+ 
+   pthread_join( thread2, NULL);
 
-   clock_t end = clock();
-   float seconds = (float)(end - start) / CLOCKS_PER_SEC;
 
-   printf("Time spent on pthread: %f seconds\n", seconds);
-
-
+   //--------------------------------------//
    // normal function call
    clock_t start2 = clock();
    function();
@@ -41,11 +61,25 @@ main(){
    exit(0);
 }
 
-void *functionC(){
-   pthread_mutex_lock( &mutex1 );
-   //counter++;
-   //printf("Counter value: %d\n",counter);
-   pthread_mutex_unlock( &mutex1 );
+void *functionCond(void*){
+   pthread_mutex_lock( &mutex );
+   while(!condition){
+      pthread_cond_wait(&cond, &mutex); //wait for the condition
+   }
+   // do something (serverless function)
+   pthread_mutex_unlock( &mutex);
+   clock_t end = clock();
+   float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+   printf("Time spent on pthread (CondVar): %f seconds\n", seconds);
+}
+
+void *functionMutex(void*){
+   pthread_mutex_lock( &mutex );
+   // do something (serverless function)
+   pthread_mutex_unlock( &mutex);
+   clock_t end = clock();
+   float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+   printf("Time spent on pthread (Mutex): %f seconds\n", seconds);
 }
 
 void function(){
