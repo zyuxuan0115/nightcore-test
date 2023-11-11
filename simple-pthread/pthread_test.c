@@ -31,7 +31,7 @@ int stick_this_thread_to_core(int core_id) {
 }
 
 main(){
-   stick_this_thread_to_core(0);
+   if (stick_this_thread_to_core(0)==EINVAL) exit(-1);
 
    //--------------------------------------//
    // creating thread (mutex version)
@@ -79,7 +79,7 @@ main(){
 }
 
 void *functionCond(void*){
-   stick_this_thread_to_core(2);
+   if (stick_this_thread_to_core(2)==EINVAL) exit(-1);
    pthread_mutex_lock( &mutex1 );
    while(!condition){
       pthread_cond_wait(&cond, &mutex1); //wait for the condition
@@ -92,7 +92,7 @@ void *functionCond(void*){
 }
 
 void *functionMutex(void*){
-   stick_this_thread_to_core(8);
+   if (stick_this_thread_to_core(8)==EINVAL) exit(-1);
    pthread_mutex_lock( &mutex2 );
    // do something (serverless function)
    pthread_mutex_unlock( &mutex2);
