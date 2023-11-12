@@ -5,8 +5,10 @@
 #include <time.h>
 #include <errno.h>
 #include <mpt/mpt.h>
-#include <mpt/hash.h>
-#include <mpt/pkey.h>
+//#include <mpt/hash.h>
+//#include <mpt/pkey.h>
+#include <mpk_heap.h>
+#include <pkey.h>
 
 #define MMAP_PAGE_SIZE 4*1024 
 
@@ -17,19 +19,26 @@ clock_t start;
 int pkey;
 
 main(){
-   pkey = pkey_alloc(0, PKEY_DISABLE_ACCESS);
-   if (pkey == ENOSPC) {
-      printf("No available keys\n");
-   }
-   void* ptr = mmap(NULL, MMAP_PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_ANONYMOUS|MAP_PRIVATE, -1, 0);
+   int mpk_id = mpk_create();
+   void* ptr = mpk_mmap(mpk_id, NULL, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
+/*
+   mpt_init(-1);
+   void* ptr;
+   int mpk_id = mpt_mmap(&ptr, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, 0);
+*/
+   printf("mpk_id = %d\n",mpk_id);
+
    if (ptr==NULL){
       printf("mmap fails\n");
    }
    // memory cannot be access at all in main thread
-   int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_NONE, pkey); 
+   int ret = mpt_begin(mpk_id, PROT_NONE);
 
    int* ptr_int = (int*) ptr;
    *ptr_int  = 5;
+
+   mpt_end(mpk_id);
+
    // creating thread (mutex version)
    int rc;
    pthread_mutex_lock(&mutex);
@@ -48,10 +57,6 @@ main(){
 }
 
 void *functionMutex(void* arg){
-   int ret = pkey_mprotect(arg, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, pkey); 
-   int* ptr_int = (int*) arg;
-   *ptr_int = 5;
-
    pthread_mutex_lock( &mutex );
    // do something (serverless function)
    pthread_mutex_unlock( &mutex);

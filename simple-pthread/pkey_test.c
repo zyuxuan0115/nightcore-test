@@ -28,8 +28,8 @@ main(){
    // memory cannot be access at all in main thread
    int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_NONE, pkey); 
 
-   int* ptr_int = (int*) ptr;
-   *ptr_int  = 5;
+//   int* ptr_int = (int*) ptr;
+//   *ptr_int  = 5;
    // creating thread (mutex version)
    int rc;
    pthread_mutex_lock(&mutex);
@@ -58,8 +58,4 @@ void *functionMutex(void* arg){
    clock_t end = clock();
    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
    printf("Time spent on pthread (Mutex): %f seconds\n", seconds);
-}
-
-void function(){
-
 }
