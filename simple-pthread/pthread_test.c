@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <time.h>
 #include <unistd.h>
 #include <errno.h>
+#include <chrono>
+#include <iostream>
+
+using namespace std::chrono;
 
 void *functionCond(void*);
 void *functionMutex(void*);
@@ -15,7 +18,7 @@ pthread_mutex_t mutex2 = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER; 
 
 bool condition = false;
-clock_t start;
+std::chrono::_V2::system_clock::time_point start1;
 
 int stick_this_thread_to_core(int core_id) {
    int num_cores = sysconf(_SC_NPROCESSORS_ONLN);
@@ -33,6 +36,13 @@ int stick_this_thread_to_core(int core_id) {
 main(){
    if (stick_this_thread_to_core(0)==EINVAL) exit(-1);
 
+   start1 = high_resolution_clock::now();
+   pthread_mutex_lock(&mutex2);
+   auto end0 = high_resolution_clock::now();
+   auto duration = duration_cast<nanoseconds>(end0 - start1);
+   std::cout << "Time spent on acquire a clock: "<<duration.count()<<" ns" << std::endl;
+   pthread_mutex_unlock(&mutex2);
+
    //--------------------------------------//
    // creating thread (mutex version)
    int rc2;
@@ -44,7 +54,7 @@ main(){
    // do something 
    // the data for serverless function is ready
    sleep(1);
-   start = clock();
+   start1 = high_resolution_clock::now(); 
    pthread_mutex_unlock( &mutex2);
  
    pthread_join( thread2, NULL);
@@ -60,7 +70,7 @@ main(){
    // do something 
    // the data for serverless function is ready
    condition = true;
-   start = clock();
+   start1 = high_resolution_clock::now(); 
    pthread_cond_signal(&cond);
    pthread_mutex_unlock( &mutex1);
  
@@ -68,12 +78,11 @@ main(){
 
    //--------------------------------------//
    // normal function call
-   clock_t start2 = clock();
+   auto start2 = high_resolution_clock::now(); 
    function();
-   clock_t end2 = clock();
-   float seconds2 = (float)(end2 - start2) / CLOCKS_PER_SEC;
-
-   printf("Time spent on normal func call: %f seconds\n", seconds2);
+   auto end2 = high_resolution_clock::now();
+   auto duration2 = duration_cast<nanoseconds>(end2 - start2);
+   std::cout <<"Time spent on normal func call: "<<duration2.count()<<" ns" << std::endl;
 
    exit(0);
 }
@@ -86,9 +95,10 @@ void *functionCond(void*){
    }
    // do something (serverless function)
    pthread_mutex_unlock( &mutex1);
-   clock_t end = clock();
-   float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-   printf("Time spent on pthread (CondVar): %f seconds\n", seconds);
+   auto end1 = high_resolution_clock::now();
+   auto duration = duration_cast<nanoseconds>(end1 - start1);
+   std::cout << "Time spent on pthread (CondVar):"<<duration.count()<<" ns" << std::endl;
+
 }
 
 void *functionMutex(void*){
@@ -96,9 +106,9 @@ void *functionMutex(void*){
    pthread_mutex_lock( &mutex2 );
    // do something (serverless function)
    pthread_mutex_unlock( &mutex2);
-   clock_t end = clock();
-   float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-   printf("Time spent on pthread (Mutex): %f seconds\n", seconds);
+   auto end1 = high_resolution_clock::now();
+   auto duration = duration_cast<nanoseconds>(end1 - start1);
+   std::cout << "Time spent on pthread (mutex):"<<duration.count()<<" ns" << std::endl;
 }
 
 void function(){
