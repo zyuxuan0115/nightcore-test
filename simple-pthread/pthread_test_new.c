@@ -31,14 +31,14 @@ main(){
    pthread_sigmask(SIG_BLOCK, &fSigSet, NULL);
 
    if (stick_this_thread_to_core(0)==EINVAL) exit(-1);
-/*
+
    auto start0 = high_resolution_clock::now();
    pthread_mutex_lock(&mutex2);
    auto end0 = high_resolution_clock::now();
    auto duration = duration_cast<nanoseconds>(end0 - start0);
-   std::cout << "Time spent on acquire a lock: "<<duration.count()<<" ns" << std::endl;
+   std::cout << "Time spent on acquiring a free lock: "<<duration.count()<<" ns" << std::endl;
    pthread_mutex_unlock(&mutex2);
-*/
+
    //--------------------------------------//
    // creating thread (mutex version)
    int rc2;
@@ -52,7 +52,6 @@ main(){
    sleep(1);
    start = high_resolution_clock::now(); 
    pthread_mutex_unlock( &mutex2);
- 
    pthread_join( thread2, NULL);
 
    //--------------------------------------//
@@ -101,7 +100,7 @@ main(){
 }
 
 void *functionCond(void*){
-   if (stick_this_thread_to_core(3)==EINVAL) exit(-1);
+  // if (stick_this_thread_to_core(3)==EINVAL) exit(-1);
    pthread_mutex_lock( &mutex1 );
    while(!condition){
       pthread_cond_wait(&cond, &mutex1); //wait for the condition
@@ -111,27 +110,29 @@ void *functionCond(void*){
    auto end = high_resolution_clock::now();
    auto duration = duration_cast<nanoseconds>(end - start);
    std::cout << "Time spent on pthread (CondVar):"<<duration.count()<<" ns" << std::endl;
-
+   pthread_exit(0);
 }
 
 void *functionMutex(void*){
-   if (stick_this_thread_to_core(7)==EINVAL) exit(-1);
+  // if (stick_this_thread_to_core(7)==EINVAL) exit(-1);
    pthread_mutex_lock( &mutex2 );
    // do something (serverless function)
    pthread_mutex_unlock( &mutex2);
    auto end = high_resolution_clock::now();
    auto duration = duration_cast<nanoseconds>(end - start);
    std::cout << "Time spent on pthread (mutex):"<<duration.count()<<" ns" << std::endl;
+   pthread_exit(0);
 }
 
 void *functionSignal(void*){
-   if (stick_this_thread_to_core(15)==EINVAL) exit(-1);
+  // if (stick_this_thread_to_core(15)==EINVAL) exit(-1);
    int fSigReceived;
    sigwait(&fSigSet, &fSigReceived); 
    // do something (serverless function)
    auto end = high_resolution_clock::now();
    auto duration = duration_cast<nanoseconds>(end - start);
    std::cout << "Time spent on pthread (signal):"<<duration.count()<<" ns" << std::endl;
+   pthread_exit(0);
 }
 
 int stick_this_thread_to_core(int core_id) {
