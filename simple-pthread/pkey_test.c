@@ -17,19 +17,25 @@ clock_t start;
 int pkey;
 
 main(){
-   pkey = pkey_alloc(0, PKEY_DISABLE_ACCESS);
-   if (pkey == ENOSPC) {
-      printf("No available keys\n");
-   }
    void* ptr = mmap(NULL, MMAP_PAGE_SIZE, PROT_NONE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
    if (ptr==NULL){
       printf("mmap fails\n");
    }
    // memory cannot be access at all in main thread
-   int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, pkey); 
+   pkey = pkey_alloc(0, PKEY_DISABLE_ACCESS);
+   if (pkey < 0) {
+      printf("No available keys\n");
+   }
+   int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_NONE, pkey); 
+   if (ret < 0) {printf("pkey_mprotect failed\n");}
 
+//   *ptr_int  = 5;
+   pthread_mutex_lock(&mutex);
    int* ptr_int = (int*) ptr;
-   *ptr_int  = 5;
+   if ((pkey_set(pkey, 0)<0) && (pkey>=0)) {printf("pkey_set error\n");}
+   
+   *ptr_int = 7;
+   pthread_mutex_unlock(&mutex);
 
    // creating thread (mutex version)
    int rc;
