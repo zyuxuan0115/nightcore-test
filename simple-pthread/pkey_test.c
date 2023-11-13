@@ -21,15 +21,16 @@ main(){
    if (pkey == ENOSPC) {
       printf("No available keys\n");
    }
-   void* ptr = mmap(NULL, MMAP_PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_ANONYMOUS|MAP_PRIVATE, -1, 0);
+   void* ptr = mmap(NULL, MMAP_PAGE_SIZE, PROT_NONE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
    if (ptr==NULL){
       printf("mmap fails\n");
    }
    // memory cannot be access at all in main thread
-   int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_NONE, pkey); 
+   int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, pkey); 
 
-//   int* ptr_int = (int*) ptr;
-//   *ptr_int  = 5;
+   int* ptr_int = (int*) ptr;
+   *ptr_int  = 5;
+
    // creating thread (mutex version)
    int rc;
    pthread_mutex_lock(&mutex);
@@ -37,6 +38,7 @@ main(){
    if( (rc = pthread_create( &thread, NULL, &functionMutex, ptr)) ){
       printf("Thread creation failed: %d\n", rc);
    }
+
    // do something 
    // the data for serverless function is ready
    start = clock();
