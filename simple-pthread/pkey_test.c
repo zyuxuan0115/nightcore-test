@@ -25,9 +25,7 @@ main(){
    }
 
    // memory cannot be access at all in main thread
-   printf("%d\n", PKEY_DISABLE_ACCESS);
-   int pkey = pkey_alloc(0, 0);
-
+   int pkey = pkey_alloc(0, PKEY_DISABLE_ACCESS);
    if (pkey<0){ 
       printf("pkey = %d, no available keys\n", pkey);
       err(EXIT_FAILURE, "pkey_alloc");
