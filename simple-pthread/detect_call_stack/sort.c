@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <pthread.h>
 #define ARRAY_LEN 50000
 #define TIMES 20
 static struct timeval tm1;
@@ -11,6 +12,16 @@ void bubble_sort3(int* a, int n);
 void* sort_array(void*);
 
 int main(){
+   pthread_t threads[2];
+
+   for (int i=0; i<2; i++){
+      pthread_create(&threads[i], NULL, &sort_array, NULL);
+   }
+
+   for (int i=0; i<2; i++){
+      pthread_join(threads[i], NULL);
+   }
+
    printf("[sort] bubble sort is done\n");
    return 0;
 }
@@ -33,6 +44,7 @@ void* sort_array(void* arg) {
       bubble_sort3(data, ARRAY_LEN);
          j++;
    }
+   pthread_exit(0);
 }
 
 void bubble_sort (int *a, int n) {
