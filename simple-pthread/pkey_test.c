@@ -4,11 +4,13 @@
 #include <pthread.h>
 #include <time.h>
 #include <errno.h>
+#include <err.h>
 //#include <mpt/mpt.h>
 //#include <mpt/hash.h>
 //#include <mpt/pkey.h>
 
 #define MMAP_PAGE_SIZE 4*1024 
+#define _GNU_SOURCE
 
 void *functionMutex(void*);
 void function();
@@ -21,18 +23,25 @@ main(){
    if (ptr==NULL){
       printf("mmap fails\n");
    }
+
    // memory cannot be access at all in main thread
-   pkey = pkey_alloc(0, PKEY_DISABLE_ACCESS);
-   if (pkey < 0) {
-      printf("No available keys\n");
+   printf("%d\n", PKEY_DISABLE_ACCESS);
+   int pkey = pkey_alloc(0, 0);
+
+   if (pkey<0){ 
+      printf("pkey = %d, no available keys\n", pkey);
+      err(EXIT_FAILURE, "pkey_alloc");
    }
+
+   printf("pkey = %d\n", pkey);
+
    int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_NONE, pkey); 
    if (ret < 0) {printf("pkey_mprotect failed\n");}
 
 //   *ptr_int  = 5;
    pthread_mutex_lock(&mutex);
    int* ptr_int = (int*) ptr;
-   if ((pkey_set(pkey, 0)<0) && (pkey>=0)) {printf("pkey_set error\n");}
+   if ((pkey_set(pkey, PKEY_DISABLE_WRITE)<0) && (pkey>=0)) {printf("pkey_set error\n");}
    
    *ptr_int = 7;
    pthread_mutex_unlock(&mutex);
