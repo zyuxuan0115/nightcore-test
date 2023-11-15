@@ -18,7 +18,7 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 clock_t start;
 int pkey;
 
-main(){
+int main(){
    void* ptr = mmap(NULL, MMAP_PAGE_SIZE, PROT_NONE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
    if (ptr==NULL){
       printf("mmap fails\n");
@@ -36,13 +36,10 @@ main(){
    int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_NONE, pkey); 
    if (ret < 0) {printf("pkey_mprotect failed\n");}
 
-//   *ptr_int  = 5;
-   pthread_mutex_lock(&mutex);
    int* ptr_int = (int*) ptr;
    if ((pkey_set(pkey, PKEY_DISABLE_WRITE)<0) && (pkey>=0)) {printf("pkey_set error\n");}
    
    *ptr_int = 7;
-   pthread_mutex_unlock(&mutex);
 
    // creating thread (mutex version)
    int rc;

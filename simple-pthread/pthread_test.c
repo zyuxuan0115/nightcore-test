@@ -24,7 +24,7 @@ sigset_t fSigSet;
 bool condition = false;
 std::chrono::_V2::system_clock::time_point start;
 
-main(){
+int main(){
    sigemptyset(&fSigSet);
    sigaddset(&fSigSet, SIGUSR1);
    sigaddset(&fSigSet, SIGSEGV);
