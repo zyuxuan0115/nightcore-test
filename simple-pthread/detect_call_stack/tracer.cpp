@@ -60,6 +60,9 @@ int main(){
                print_backtrace(tid);
 	    }
 
+	    for (pid_t tid:tids){
+               assert(ptrace(PTRACE_DETACH, tid, NULL, NULL) != -1);
+	    }
          }
          else{
             printf("[tracer] exit the program\n"); 
@@ -79,6 +82,7 @@ int main(){
 // ignored most of the error-handlings, asserted valid
 void print_backtrace(int pid) {
 
+    printf("================================== tid = %3d ==================================\n", pid);
 	// get an address space and a context
     unw_addr_space_t addr_space = unw_create_addr_space(&_UPT_accessors, __BYTE_ORDER__);
 	assert(addr_space);
