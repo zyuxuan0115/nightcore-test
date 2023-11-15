@@ -13,9 +13,11 @@
 
 void *functionMutex(void*);
 void function();
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-clock_t start;
-int pkey;
+
+typedef struct pthread_args{
+  int pkey;
+  int* ptr;
+} arg;
 
 int main(){
    void* ptr = mmap(NULL, MMAP_PAGE_SIZE, PROT_NONE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
@@ -32,42 +34,42 @@ int main(){
 
    printf("pkey = %d\n", pkey);
 
-   int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_NONE, pkey); 
-   if (ret < 0) {printf("pkey_mprotect failed\n");}
+   int ret = pkey_mprotect(ptr, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, pkey); 
+   if (ret < 0) {
+     printf("pkey_mprotect failed\n");
+   }
 
    int* ptr_int = (int*) ptr;
-   if ((pkey_set(pkey, PKEY_DISABLE_WRITE)<0) && (pkey>=0)) {printf("pkey_set error\n");}
-   
-   *ptr_int = 7;
+
+   arg a1;
+   a1.pkey = pkey;
+   a1.ptr = ptr_int;
 
    // creating thread (mutex version)
    int rc;
-   pthread_mutex_lock(&mutex);
    pthread_t thread;
-   if( (rc = pthread_create( &thread, NULL, &functionMutex, ptr)) ){
+   if( (rc = pthread_create( &thread, NULL, &functionMutex, (void*)&a1)) ){
       printf("Thread creation failed: %d\n", rc);
    }
 
    // do something 
    // the data for serverless function is ready
-   start = clock();
-   pthread_mutex_unlock( &mutex);
  
    pthread_join( thread, NULL);
 
    exit(0);
 }
 
-void *functionMutex(void* arg){
-   int ret = pkey_mprotect(arg, MMAP_PAGE_SIZE, PROT_READ | PROT_WRITE, pkey); 
-   int* ptr_int = (int*) arg;
-   *ptr_int = 5;
+void *functionMutex(void* arguments){
+   arg* args = (arg*)arguments;
+   int pkey = args->pkey;
+   int *ptr = args->ptr;
 
-   pthread_mutex_lock( &mutex );
-   // do something (serverless function)
-   pthread_mutex_unlock( &mutex);
-   clock_t end = clock();
-   float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-   printf("Time spent on pthread (Mutex): %f seconds\n", seconds);
+   if (pkey_set(pkey, 0)<0)  {
+     printf("pkey_set error\n");
+   }
+
+   *ptr = 7;
+
    pthread_exit(0);
 }
