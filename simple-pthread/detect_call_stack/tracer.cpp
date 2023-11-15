@@ -52,7 +52,7 @@ int main(){
                printf("[tracer] timeout\n");
                return 0;
             }
-            printf("[tracer] functions in the call stack are:\n");
+            printf("[tracer] functions on the call stack are:\n");
             
             vector<pid_t> tids = pause_and_get_tids(target_pid);
 
