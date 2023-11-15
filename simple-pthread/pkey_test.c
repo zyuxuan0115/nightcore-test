@@ -10,7 +10,6 @@
 //#include <mpt/pkey.h>
 
 #define MMAP_PAGE_SIZE 4*1024 
-#define _GNU_SOURCE
 
 void *functionMutex(void*);
 void function();
@@ -70,4 +69,5 @@ void *functionMutex(void* arg){
    clock_t end = clock();
    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
    printf("Time spent on pthread (Mutex): %f seconds\n", seconds);
+   pthread_exit(0);
 }
