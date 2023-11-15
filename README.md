@@ -28,6 +28,8 @@
 - docker version should be higher or equal to than 19.03
 - some useful docker command
   + `sudo docker run -it <container_name> bash`
+  + `sudo docker exec -it <container_name> bash`
+  + `sudo docker login --username=zyuxuan0115`
   + `sudo docker ps -a`
   + `sudo docker system prune` -- in case the space is used up by docker build
       * sometimes need `sudo systemctl restart docker.service` after `sudo docker system prune`
