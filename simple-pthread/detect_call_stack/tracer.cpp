@@ -110,7 +110,7 @@ void print_backtrace(int pid) {
 	unw_word_t offp;
 
 	// print the result
-    printf("%3s\t%20s\t%12s\t%12s\t%16s\n", "num", "name", "IP", "SP", "RCX");
+    printf("%3s\t%20s\t%12s\t%12s\t%16s\n", " ", "name", "RIP", "RSP", "RCX");
     do {
         assert(!unw_get_reg(&cursor, UNW_REG_IP, &ip));
         assert(!unw_get_reg(&cursor, UNW_REG_SP, &sp));
