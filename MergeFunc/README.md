@@ -15,4 +15,7 @@ make -j 4
 link from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
 - in `nightcore/examples/c`
-  + run `clang -I../../include -emit-llvm -S foo.c`
+  ```bash
+  > clang -I/proj/zyuxuanssf-PG0/nightcore/include -emit-llvm -S foo.c
+  > opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -MergeFunc < foo.ll > /dev/null
+  ```
