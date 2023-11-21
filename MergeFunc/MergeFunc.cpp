@@ -13,8 +13,21 @@
 
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/Function.h"
+#include "llvm/IR/Module.h"
+#include "llvm/IR/InstrTypes.h"
+#include "llvm/Pass.h"
+#include "llvm/Analysis/Passes.h"
+#include "llvm/Analysis/LoopPass.h"
+#include "llvm/Analysis/LoopInfo.h"
+#include "llvm/IR/Constants.h"
+#include "llvm/IR/Instructions.h"
+#include "llvm/IR/BasicBlock.h"
+#include "llvm/Support/Debug.h"
+#include "llvm/IR/DataLayout.h" //#include "llvm/Target/TargetData.h"
+#include "llvm/ADT/IndexedMap.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/IR/Mangler.h"
 using namespace llvm;
 
 #define DEBUG_TYPE "MergeFunc"
@@ -28,9 +41,44 @@ namespace {
     MergeFunc() : FunctionPass(ID) {}
 
     bool runOnFunction(Function &F) override {
-      ++MergeFuncCounter;
-      errs() << "MergeFunc: ";
-      errs().write_escaped(F.getName()) << '\n';
+      if (F.getName()=="faas_func_call") {
+        for (auto arg = F.arg_begin(); arg != F.arg_end(); arg++){
+          errs()<<"args!\n";  
+        }	
+        for (Function::iterator BBB = F.begin(), BBE = F.end(); BBB != BBE; ++BBB){// for all instructions in a block
+          for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
+            Instruction* I = dyn_cast<Instruction>(IB);
+	    CallBase* CB = dyn_cast<CallBase>(IB);
+	    llvm::errs()<<*I<<"\n";
+            if ((isa<CallInst>(IB)) && (dyn_cast<CallInst>(IB)->isIndirectCall())){
+      		  //if (isa<CallInst>(IB) && ( (dyn_cast<CallInst>(IB)->getCalledFunction() == NULL) || 
+	//					  (dyn_cast<CallInst>(IB)->getCalledFunction()->isDeclaration()))){
+              CallInst* call = dyn_cast<CallInst>(IB);
+              llvm::errs()<<"@@@ "<<*call<<"is indirect call\n";
+    	      if (!CB) {errs()<<"kkkkkkkkkkkkkkkk\n";}
+	      Value* v=call->getCalledValue();
+              Value* sv = v->stripPointerCasts();
+	      //if (hasArgument(v)){
+              //  llvm::errs()<<"@@@ v has args\n";
+	      //}
+	      Instruction* i = dyn_cast<Instruction>(v);
+	      i->getNumOperands();
+	      errs()<<"@@@ number of operands: "<<call->getNumOperands()<<"\n";
+              StringRef fname = sv->getName();
+//	      for (auto arg = v->arg_begin(); arg != v->arg_end(); arg++){
+//                llvm::errs()<<"### new arg\n";
+//	      }
+              errs()<<*v<<"\n";
+	      errs()<<*sv<<"\n";
+	      llvm::errs()<<*call<<"\n";
+	      Function* callFunc = dyn_cast<CallInst>(IB)->getCalledFunction();
+	    }
+          }
+        }	  
+        ++MergeFuncCounter;
+        errs() << "MergeFunc: ";
+        errs().write_escaped(F.getName()) << '\n';
+      }
       return false;
     }
   };
@@ -46,6 +94,7 @@ namespace {
     MergeFunc2() : FunctionPass(ID) {}
 
     bool runOnFunction(Function &F) override {
+     
       ++MergeFuncCounter;
       errs() << "MergeFunc: ";
       errs().write_escaped(F.getName()) << '\n';
