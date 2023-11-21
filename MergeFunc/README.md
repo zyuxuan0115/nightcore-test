@@ -1,7 +1,6 @@
 ### LLVM pass to change PRC into normal calls
 
-- setup LLVM
-  + get [llvm-10.0 source code (tar.gz)](https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0)
+- setup LLVM ([llvm-10.0 source code (tar.gz)](https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0))
 
 ```bash
 git clone https://github.com/llvm/llvm-project.git
