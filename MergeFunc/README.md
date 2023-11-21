@@ -13,4 +13,4 @@ make -j 4
 link from utaustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
 - in `nightcore/examples/c`
-`clang -I../../include -emit-llvm -S foo.c`
+  + run `clang -I../../include -emit-llvm -S foo.c`
