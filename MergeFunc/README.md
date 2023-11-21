@@ -1,3 +1,5 @@
+### 
+
 - setup LLVM
 ```bash
 git clone https://github.com/llvm/llvm-project.git
@@ -10,4 +12,5 @@ make -j 4
 - build passes
 link from utaustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
-
+- in `nightcore/examples/c`
+`clang -I../../include -emit-llvm -S foo.c`
