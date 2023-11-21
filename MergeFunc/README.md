@@ -20,8 +20,9 @@ link from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignm
 ```
 
 - in `nightcore/examples/c`
-
+  + `-g` adds general debug info to IR. might be useful for identify the virtual function call
+  
 ```bash
-> clang -I/proj/zyuxuanssf-PG0/nightcore/include -emit-llvm -S foo.c
+> clang -I/proj/zyuxuanssf-PG0/nightcore/include -g -emit-llvm -S foo.c
 > opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -MergeFunc < foo.ll > /dev/null
 ```
