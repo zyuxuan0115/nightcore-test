@@ -14,8 +14,15 @@ make -j 4
 - build passes
 link from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
+```bash
+> cp -r /proj/zyuxuanssf-PG0/nightcore-test/MergeFunc /proj/zyuxuanssf-PG0/llvm-project/llvm/lib/Transforms/
+> echo 'add_subdirectory(MergeFunc)' >> /proj/zyuxuanssf-PG0/llvm-project/llvm/lib/CMakeList.txt
+> cd llvm-project/build && make -j
+```
+
 - in `nightcore/examples/c`
-  ```bash
-  > clang -I/proj/zyuxuanssf-PG0/nightcore/include -emit-llvm -S foo.c
-  > opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -MergeFunc < foo.ll > /dev/null
-  ```
+
+```bash
+> clang -I/proj/zyuxuanssf-PG0/nightcore/include -emit-llvm -S foo.c
+> opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -MergeFunc < foo.ll > /dev/null
+```
