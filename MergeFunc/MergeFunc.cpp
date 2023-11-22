@@ -48,29 +48,29 @@ namespace {
         for (Function::iterator BBB = F.begin(), BBE = F.end(); BBB != BBE; ++BBB){// for all instructions in a block
           for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
             Instruction* I = dyn_cast<Instruction>(IB);
-	    CallBase* CB = dyn_cast<CallBase>(IB);
 	    llvm::errs()<<*I<<"\n";
             if ((isa<CallInst>(IB)) && (dyn_cast<CallInst>(IB)->isIndirectCall())){
       		  //if (isa<CallInst>(IB) && ( (dyn_cast<CallInst>(IB)->getCalledFunction() == NULL) || 
 	//					  (dyn_cast<CallInst>(IB)->getCalledFunction()->isDeclaration()))){
               CallInst* call = dyn_cast<CallInst>(IB);
               llvm::errs()<<"@@@ "<<*call<<"is indirect call\n";
-    	      if (!CB) {errs()<<"kkkkkkkkkkkkkkkk\n";}
-	      Value* v=call->getCalledValue();
-              Value* sv = v->stripPointerCasts();
-	      //if (hasArgument(v)){
-              //  llvm::errs()<<"@@@ v has args\n";
-	      //}
-	      Instruction* i = dyn_cast<Instruction>(v);
-	      i->getNumOperands();
+	      //Value* v=call->getCalledValue();
+              //Value* sv = v->stripPointerCasts();
+	      //Instruction* Instr = dyn_cast<Instruction>(v);
+	      //Instr->getNumOperands();
 	      errs()<<"@@@ number of operands: "<<call->getNumOperands()<<"\n";
-              StringRef fname = sv->getName();
-//	      for (auto arg = v->arg_begin(); arg != v->arg_end(); arg++){
-//                llvm::errs()<<"### new arg\n";
-//	      }
-              errs()<<*v<<"\n";
-	      errs()<<*sv<<"\n";
-	      llvm::errs()<<*call<<"\n";
+	      for (unsigned i=0; i<call->getNumOperands(); i++){
+		Value* operand = call->getOperand(i);
+		if (isa<ConstantExpr>(operand)){
+		  Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
+		  if (isa<GlobalVariable>(firstop)){
+                    GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
+		    ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
+		    llvm::StringRef real_string = CDA->getAsCString();
+		    errs()<<"### "<<real_string.str()<<"\n";
+		  }
+		}
+	      }
 	      Function* callFunc = dyn_cast<CallInst>(IB)->getCalledFunction();
 	    }
           }
