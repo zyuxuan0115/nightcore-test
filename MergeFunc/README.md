@@ -1,5 +1,5 @@
 ### LLVM pass to convert PRCs into normal calls
-- only works for [nightcore](https://github.com/ut-osa/nightcore)'s serverless functions written in C/C++
+- only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverless functions
 - setup LLVM ([llvm-13.0.1 source code (tar.gz)](https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1))
 
 ```bash
