@@ -36,57 +36,76 @@ STATISTIC(MergeFuncCounter, "Counts number of functions greeted");
 
 namespace {
   // Hello - The first implementation, without getAnalysisUsage.
-  struct MergeFunc : public FunctionPass {
+  struct MergeFunc : public ModulePass {
     static char ID; // Pass identification, replacement for typeid
-    MergeFunc() : FunctionPass(ID) {}
+    MergeFunc() : ModulePass(ID) {}
 
-    bool runOnFunction(Function &F) override {
-      LLVMContext &ctx = F.getContext();
-      if (F.getName()=="faas_func_call") {
-        for (auto arg = F.arg_begin(); arg != F.arg_end(); arg++){
-          errs()<<"args!\n";  
-        }	
-        for (Function::iterator BBB = F.begin(), BBE = F.end(); BBB != BBE; ++BBB){// for all instructions in a block
-          for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
-            Instruction* I = dyn_cast<Instruction>(IB);
-	    llvm::errs()<<*I<<"\n";
-	    // virtual function
-            if ((isa<CallInst>(IB)) && (dyn_cast<CallInst>(IB)->isIndirectCall())){
-              CallInst* VirtualCall = dyn_cast<CallInst>(IB);
-	      if (VirtualCall->getNumOperands()==7){
+    bool runOnModule(Module &M) override {
+      Function *CallerFunc, *CalleeFunc; 
+      for (auto F = M.begin(); F!=M.end(); F++){
+        if (F->getName()=="faas_func_call")  CallerFunc = dyn_cast<Function>(F);
+        else if (F->getName()=="faas_func_call_Bar") CalleeFunc = dyn_cast<Function>(F);
+      }
+
+      //  get the RPC invocation instruction (caller instruction)
+      CallInst* RPCInst;
+      BasicBlock* RPCBB;
+      llvm::StringRef CalleeName = "";
+      for (Function::iterator BBB = CallerFunc->begin(), BBE = CallerFunc->end(); BBB != BBE; ++BBB){
+        for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
+	  // test if it's a virtual function call
+	  // if it is, test if it's a RPC invocation 
+	  // (7 arguments & the 2nd argument is const char*)
+          if ((isa<CallInst>(IB)) && (dyn_cast<CallInst>(IB)->isIndirectCall())){
+            CallInst* VirtualCall = dyn_cast<CallInst>(IB);
+	    if (VirtualCall->getNumOperands()==7){
               llvm::errs()<<"@@@ the indirect call instruction:"<<*VirtualCall<<"\n";
 	      //Value* v=call->getCalledValue();
               //Value* sv = v->stripPointerCasts();
-	      //Instruction* Instr = dyn_cast<Instruction>(v);
-	      //Instr->getNumOperands();
-	        llvm::StringRef CallerName = "";
-	        for (unsigned i=0; i<VirtualCall->getNumOperands(); i++){
-		  Value* operand = VirtualCall->getOperand(i);
-		  if (isa<ConstantExpr>(operand)){
-		    Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
-		    if (isa<GlobalVariable>(firstop)){
-                      GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
-		      ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
-		      if (i==1){
-		        CallerName = CDA->getAsCString();
-		      }
-		    }
+              Value* operand = VirtualCall->getOperand(1);
+              if (isa<ConstantExpr>(operand)){
+		Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
+		if (isa<GlobalVariable>(firstop)){
+                  GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
+		  ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
+		  CalleeName = CDA->getAsCString();
+		  if (CalleeName.str() != ""){
+		    RPCInst = VirtualCall;
+		    RPCBB = dyn_cast<BasicBlock>(IB);
+		    errs()<<"@@@ caller name = "<<CalleeName.str()<<"\n";
 		  }
-	        }
-		if (CallerName != ""){
-                  // it's a RPC
-		  Instruction* NextInst = VirtualCall->getNextNode();
 		}
 	      }
-	      Function* callFunc = dyn_cast<CallInst>(IB)->getCalledFunction();
 	    }
           }
-        }	  
+        }  
       }
+
+      // based on the RPC call, create a normal function call
+      // get the following arguments from the RPC
+      // 3rd argument: char* input
+      // 4st argument: int input_length
+      // 5st argument: char* output
+      // 6st argument: int output_length
+      std::vector<Value*> arguments;
+      std::vector<Type*> argumentTypes;
+      for (int i=3; i<7; i++){
+        arguments.push_back(RPCInst->getOperand(i));
+	argumentTypes.push_back(RPCInst->getOperand(i)->getType());
+      }
+      ArrayRef<Type*> argTypes(argumentTypes);
+      ArrayRef<Value*> args(arguments);
+
+      FunctionType* FuncType = FunctionType::get(IntegerType::getInt32Ty(M.getContext()), argTypes, true);
+      FunctionCallee c = M.getOrInsertFunction("Bar", FuncType);
+
+      CallInst* newcall = CallInst::Create(c, args, "", RPCInst->getNextNode());
       return false;
     }
   };
 }
+
+
 
 char MergeFunc::ID = 0;
 static RegisterPass<MergeFunc> X("MergeFunc", "Merge Function Pass");
