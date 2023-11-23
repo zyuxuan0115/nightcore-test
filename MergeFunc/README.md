@@ -12,7 +12,7 @@
 ```
 
 - build passes
-link from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
+  + link from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
 ```bash
 > cp -r {path to nightcore-test}/nightcore-test/MergeFunc {path to llvm-project}/llvm-project/llvm/lib/Transforms/
