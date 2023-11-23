@@ -1,4 +1,4 @@
-### LLVM pass to convert PRC into normal calls
+### LLVM pass to convert PRCs into normal calls
 
 - setup LLVM ([llvm-13.0.1 source code (tar.gz)](https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1))
 
