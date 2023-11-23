@@ -22,7 +22,8 @@
 
 - in `nightcore/examples/c`
   + `-g` adds general debug info to IR. might be useful for identify the virtual function call
-  + `-enable-new-pm=0` is added when compile the code since I still use the legacy llvm pass 
+  + `-enable-new-pm=0` is added when compile the code since I still use the legacy llvm pass
+  + `--relocation-model=pic`, otherwise clang will report `relocation R_X86_64_32S against '.data' can not be used when making a shared object; recompile with -fPIC`
   
 ```bash
 > cd nightcore/examples/c
