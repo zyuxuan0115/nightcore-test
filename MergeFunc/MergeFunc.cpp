@@ -104,7 +104,7 @@ namespace {
       for (Function::const_arg_iterator J = CalleeFunc->arg_begin(); J != CalleeFunc->arg_begin()+1;
          ++J) {
         NewCalleeFunc->setName(J->getName());
-        VMap[J] = NewCalleeFunc->arg_begin();;
+        VMap[J] = NewCalleeFunc->arg_begin();
       } 
 
       for (Function::const_arg_iterator J = CalleeFunc->arg_begin()+1; J != CalleeFunc->arg_end();
@@ -114,35 +114,11 @@ namespace {
       }
       SmallVector<ReturnInst*, 8> Returns;
 
-//      CloneFunctionInto(NewCalleeFunc, CalleeFunc, VMap, llvm::CloneFunctionChangeType::LocalChangesOnly, Returns);
-/*
-  for (const BasicBlock &BB : *CalleeFunc) {
- 
-    // Create a new basic block and copy instructions into it!
-    BasicBlock *CBB = CloneBasicBlock(&BB, VMap, "", NewCalleeFunc);
- 
-    // Add basic block mapping.
-    VMap[&BB] = CBB;
- 
-    // It is only legal to clone a function if a block address within that
-    // function is never referenced outside of the function.  Given that, we
-    // want to map block addresses from the old function to block addresses in
-    // the clone. (This is different from the generic ValueMapper
-    // implementation, which generates an invalid blockaddress when
-    // cloning a function.)
-    if (BB.hasAddressTaken()) {
-      Constant *OldBBAddr = BlockAddress::get(const_cast<Function *>(CalleeFunc),
-                                              const_cast<BasicBlock *>(&BB));
-      VMap[OldBBAddr] = BlockAddress::get(NewCalleeFunc, CBB);
-    }
- 
-    // Note return instructions for the caller.
-    if (ReturnInst *RI = dyn_cast<ReturnInst>(CBB->getTerminator()))
-      Returns.push_back(RI);
-  }
-*/
-      FunctionCallee c = M.getOrInsertFunction(CalleeName, FuncType);
+      CloneFunctionInto(NewCalleeFunc, CalleeFunc, VMap, llvm::CloneFunctionChangeType::LocalChangesOnly, Returns);
+      NewCalleeFunc->setName(CalleeName);
 
+      // create the call instruction of the callee
+      FunctionCallee c(NewCalleeFunc);
       CallInst* newCall = CallInst::Create(c, args, "", RPCInst->getNextNode());
       return false;
     }
