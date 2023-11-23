@@ -26,8 +26,8 @@ link from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignm
 > clang -I/proj/zyuxuanssf-PG0/nightcore/include -g -emit-llvm foo.c -c -o foo.bc
 > clang -I/proj/zyuxuanssf-PG0/nightcore/include -g -emit-llvm bar.c -c -o bar.bc
 > opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -ChangeFuncName bar.bc -o bar_func_only.bc
-> llvm-link foo.bc bar_func_only.bc -o newfoo.ll -S
-> opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -MergeFunc < newfoo.ll > /dev/null
+> llvm-link foo.bc bar_func_only.bc -o foo_bar.ll -S
+> opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -S -o new_foo.ll -MergeFunc < foo_bar.ll 
 ```
 
 
