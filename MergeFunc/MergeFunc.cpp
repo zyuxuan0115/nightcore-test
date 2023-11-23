@@ -45,9 +45,11 @@ namespace {
     bool runOnModule(Module &M) override {
       Function *CallerFunc = M.getFunction("faas_func_call");
       Function *CalleeFunc = M.getFunction("faas_func_call_Bar"); 
+
       //  get the RPC invocation instruction (caller instruction)
       CallInst* RPCInst;
       BasicBlock* RPCBB;
+      bool hasRPCinvocation = false;
       llvm::StringRef CalleeName = "";
       for (Function::iterator BBB = CallerFunc->begin(), BBE = CallerFunc->end(); BBB != BBE; ++BBB){
         for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
@@ -58,8 +60,6 @@ namespace {
             CallInst* VirtualCall = dyn_cast<CallInst>(IB);
 	    if (VirtualCall->getNumOperands()==7){
               llvm::errs()<<"@@@ the indirect call instruction:"<<*VirtualCall<<"\n";
-	      //Value* v=call->getCalledValue();
-              //Value* sv = v->stripPointerCasts();
               Value* operand = VirtualCall->getOperand(1);
               if (isa<ConstantExpr>(operand)){
 		Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
@@ -70,6 +70,7 @@ namespace {
 		  if (CalleeName.str() != ""){
 		    RPCInst = VirtualCall;
 		    RPCBB = dyn_cast<BasicBlock>(IB);
+                    hasRPCinvocation = true;
 		    errs()<<"@@@ caller name = "<<CalleeName.str()<<"\n";
 		  }
 		}
@@ -78,6 +79,8 @@ namespace {
           }
         }  
       }
+
+      if (!hasRPCinvocation) return false;
 
       // based on the RPC call, create a normal function call
       // get the following arguments from the RPC
@@ -120,6 +123,9 @@ namespace {
       // create the call instruction of the callee
       FunctionCallee c(NewCalleeFunc);
       CallInst* newCall = CallInst::Create(c, args, "", RPCInst->getNextNode());
+
+      // remove old callee function (RPC version)
+      CalleeFunc->eraseFromParent();
       return false;
     }
   };
