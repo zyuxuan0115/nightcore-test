@@ -1,3 +1,5 @@
+#!/bin/bash
+
 NIGHTCORE_PATH=/proj/zyuxuanssf-PG0/nightcore
 LLVM_PATH=/proj/zyuxuanssf-PG0/llvm-project
 
