@@ -28,6 +28,8 @@
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/IR/Mangler.h"
+#include "llvm/Transforms/Utils/Cloning.h"
+
 using namespace llvm;
 
 #define DEBUG_TYPE "MergeFunc"
@@ -41,12 +43,8 @@ namespace {
     MergeFunc() : ModulePass(ID) {}
 
     bool runOnModule(Module &M) override {
-      Function *CallerFunc, *CalleeFunc; 
-      for (auto F = M.begin(); F!=M.end(); F++){
-        if (F->getName()=="faas_func_call")  CallerFunc = dyn_cast<Function>(F);
-        else if (F->getName()=="faas_func_call_Bar") CalleeFunc = dyn_cast<Function>(F);
-      }
-
+      Function *CallerFunc = M.getFunction("faas_func_call");
+      Function *CalleeFunc = M.getFunction("faas_func_call_Bar"); 
       //  get the RPC invocation instruction (caller instruction)
       CallInst* RPCInst;
       BasicBlock* RPCBB;
@@ -89,17 +87,63 @@ namespace {
       // 6st argument: int output_length
       std::vector<Value*> arguments;
       std::vector<Type*> argumentTypes;
-      for (int i=3; i<7; i++){
+      for (int i=2; i<6; i++){
+	llvm::errs()<<*(RPCInst->getOperand(i))<<"\n";
         arguments.push_back(RPCInst->getOperand(i));
 	argumentTypes.push_back(RPCInst->getOperand(i)->getType());
       }
       ArrayRef<Type*> argTypes(argumentTypes);
       ArrayRef<Value*> args(arguments);
-
       FunctionType* FuncType = FunctionType::get(IntegerType::getInt32Ty(M.getContext()), argTypes, true);
-      FunctionCallee c = M.getOrInsertFunction("Bar", FuncType);
 
-      CallInst* newcall = CallInst::Create(c, args, "", RPCInst->getNextNode());
+      Function * NewCalleeFunc = Function::Create(FuncType, CallerFunc->getLinkage(), CalleeName, &M);
+      ValueToValueMapTy VMap;
+      Function::arg_iterator DestI = NewCalleeFunc->arg_begin();
+
+      Function::arg_iterator OrigI = CalleeFunc->arg_begin();
+      for (Function::const_arg_iterator J = CalleeFunc->arg_begin(); J != CalleeFunc->arg_begin()+1;
+         ++J) {
+        NewCalleeFunc->setName(J->getName());
+        VMap[J] = NewCalleeFunc->arg_begin();;
+      } 
+
+      for (Function::const_arg_iterator J = CalleeFunc->arg_begin()+1; J != CalleeFunc->arg_end();
+         ++J) {
+        NewCalleeFunc->setName(J->getName());
+        VMap[J] = DestI++;
+      }
+      SmallVector<ReturnInst*, 8> Returns;
+
+//      CloneFunctionInto(NewCalleeFunc, CalleeFunc, VMap, llvm::CloneFunctionChangeType::LocalChangesOnly, Returns);
+/*
+  for (const BasicBlock &BB : *CalleeFunc) {
+ 
+    // Create a new basic block and copy instructions into it!
+    BasicBlock *CBB = CloneBasicBlock(&BB, VMap, "", NewCalleeFunc);
+ 
+    // Add basic block mapping.
+    VMap[&BB] = CBB;
+ 
+    // It is only legal to clone a function if a block address within that
+    // function is never referenced outside of the function.  Given that, we
+    // want to map block addresses from the old function to block addresses in
+    // the clone. (This is different from the generic ValueMapper
+    // implementation, which generates an invalid blockaddress when
+    // cloning a function.)
+    if (BB.hasAddressTaken()) {
+      Constant *OldBBAddr = BlockAddress::get(const_cast<Function *>(CalleeFunc),
+                                              const_cast<BasicBlock *>(&BB));
+      VMap[OldBBAddr] = BlockAddress::get(NewCalleeFunc, CBB);
+    }
+ 
+    // Note return instructions for the caller.
+    if (ReturnInst *RI = dyn_cast<ReturnInst>(CBB->getTerminator()))
+      Returns.push_back(RI);
+  }
+*/
+      FunctionCallee c = M.getOrInsertFunction(CalleeName, FuncType);
+
+      CallInst* newCall = CallInst::Create(c, args, "", RPCInst->getNextNode());
       return false;
     }
   };
