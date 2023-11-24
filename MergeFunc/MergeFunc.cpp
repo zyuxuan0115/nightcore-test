@@ -36,9 +36,9 @@ using namespace llvm;
 
 namespace {
   // Hello - The first implementation, without getAnalysisUsage.
-  struct MergeFunc : public ModulePass {
+  struct ConvertRPC2NormalCall : public ModulePass {
     static char ID; // Pass identification, replacement for typeid
-    MergeFunc() : ModulePass(ID) {}
+    ConvertRPC2NormalCall() : ModulePass(ID) {}
 
     bool runOnModule(Module &M) override {
       Function *CallerFunc = M.getFunction("faas_func_call");
@@ -140,8 +140,8 @@ namespace {
 
 
 
-char MergeFunc::ID = 0;
-static RegisterPass<MergeFunc> X("MergeFunc", "Merge Function Pass");
+char ConvertRPC2NormalCall::ID = 0;
+static RegisterPass<ConvertRPC2NormalCall> X("ConvertRPC2NormalCall", "Merge Function Pass");
 
 namespace {
   // ChangeFuncName - The second implementation with getAnalysisUsage implemented.
