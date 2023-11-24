@@ -1,4 +1,4 @@
-//===- Hello.cpp - Example code from "Writing an LLVM Pass" ---------------===//
+//===- MergeFunc.cpp - llvm pass for merging 2 serverless function --------===//
 //
 // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 // See https://llvm.org/LICENSE.txt for license information.
@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file implements two versions of the LLVM "Hello World" pass described
+// This file implements the LLVM MergeFunc pass described
 // in docs/WritingAnLLVMPass.html
 //
 //===----------------------------------------------------------------------===//
@@ -33,8 +33,6 @@
 using namespace llvm;
 
 #define DEBUG_TYPE "MergeFunc"
-
-STATISTIC(MergeFuncCounter, "Counts number of functions greeted");
 
 namespace {
   // Hello - The first implementation, without getAnalysisUsage.
@@ -83,14 +81,17 @@ namespace {
       if (!hasRPCinvocation) return false;
 
       // based on the RPC call, create a normal function call
-      // get the following arguments from the RPC
-      // 3rd argument: char* input
-      // 4st argument: int input_length
-      // 5st argument: char* output
-      // 6st argument: int output_length
+      // get the following arguments from the RPC Instruction
+      //     - 1st argument: void* worker_handle 
+      //     - 3rd argument: char* input
+      //     - 4st argument: int input_length
+      //     - 5st argument: char* output
+      //     - 6st argument: int output_length
       std::vector<Value*> arguments;
       std::vector<Type*> argumentTypes;
-      for (int i=2; i<6; i++){
+
+      for (int i=0; i<6; i++){
+        if (i==1) continue;
 	llvm::errs()<<*(RPCInst->getOperand(i))<<"\n";
         arguments.push_back(RPCInst->getOperand(i));
 	argumentTypes.push_back(RPCInst->getOperand(i)->getType());
@@ -103,14 +104,7 @@ namespace {
       ValueToValueMapTy VMap;
       Function::arg_iterator DestI = NewCalleeFunc->arg_begin();
 
-      Function::arg_iterator OrigI = CalleeFunc->arg_begin();
-      for (Function::const_arg_iterator J = CalleeFunc->arg_begin(); J != CalleeFunc->arg_begin()+1;
-         ++J) {
-        NewCalleeFunc->setName(J->getName());
-        VMap[J] = NewCalleeFunc->arg_begin();
-      } 
-
-      for (Function::const_arg_iterator J = CalleeFunc->arg_begin()+1; J != CalleeFunc->arg_end();
+      for (Function::const_arg_iterator J = CalleeFunc->arg_begin(); J != CalleeFunc->arg_end();
          ++J) {
         NewCalleeFunc->setName(J->getName());
         VMap[J] = DestI++;
@@ -121,13 +115,11 @@ namespace {
       NewCalleeFunc->setName(CalleeName);
 
       // create the normal function call of the RPC 
-      // and then elilinate RPC
-      //FunctionCallee c(NewCalleeFunc);
-      //CallInst* newCall = CallInst::Create(c, args, "", RPCInst->getNextNode());
-
+      // and then eliminate RPC call
+      // before RPC call instruction is eliminated, 
+      // need to change all user instructions operand
+      // that depends on the result of the RPC call 
       CallInst* newCall = CallInst::Create(FuncType, NewCalleeFunc, args ,"", RPCInst->getNextNode());
-      // !!! before remove this line, we need to change the source register of 
-      // the user of this instruction.
       Value* DestRPCInst = dyn_cast<Value>(RPCInst);
       for(auto U : DestRPCInst->users()){  // U is of type User*
         for (auto op = U->op_begin(); op != U->op_end(); op++){
@@ -137,8 +129,7 @@ namespace {
             *op = DestNewCall;
           }
         }
-      }
-     
+      } 
       RPCInst->eraseFromParent();
       // remove old callee function (RPC version)
       CalleeFunc->eraseFromParent();
@@ -188,4 +179,4 @@ namespace {
 
 char ChangeFuncName::ID = 0;
 static RegisterPass<ChangeFuncName>
-Y("ChangeFuncName", "Hello World Pass (with getAnalysisUsage implemented)");
+Y("ChangeFuncName", "Change the function name of faas_func_call, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
