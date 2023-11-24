@@ -120,10 +120,26 @@ namespace {
       CloneFunctionInto(NewCalleeFunc, CalleeFunc, VMap, llvm::CloneFunctionChangeType::LocalChangesOnly, Returns);
       NewCalleeFunc->setName(CalleeName);
 
-      // create the call instruction of the callee
-      FunctionCallee c(NewCalleeFunc);
-      CallInst* newCall = CallInst::Create(c, args, "", RPCInst->getNextNode());
+      // create the normal function call of the RPC 
+      // and then elilinate RPC
+      //FunctionCallee c(NewCalleeFunc);
+      //CallInst* newCall = CallInst::Create(c, args, "", RPCInst->getNextNode());
 
+      CallInst* newCall = CallInst::Create(FuncType, NewCalleeFunc, args ,"", RPCInst->getNextNode());
+      // !!! before remove this line, we need to change the source register of 
+      // the user of this instruction.
+      Value* DestRPCInst = dyn_cast<Value>(RPCInst);
+      for(auto U : DestRPCInst->users()){  // U is of type User*
+        for (auto op = U->op_begin(); op != U->op_end(); op++){
+          Value* op_value = dyn_cast<Value>(op);
+          if (op_value == DestRPCInst){
+            Value* DestNewCall = dyn_cast<Value>(newCall);
+            *op = DestNewCall;
+          }
+        }
+      }
+     
+      RPCInst->eraseFromParent();
       // remove old callee function (RPC version)
       CalleeFunc->eraseFromParent();
       return false;
