@@ -39,6 +39,8 @@ namespace {
   struct ConvertRPC2NormalCall : public ModulePass {
     static char ID; // Pass identification, replacement for typeid
     ConvertRPC2NormalCall() : ModulePass(ID) {}
+    bool isRPC(Instruction* Inst);
+    StringRef getRPCCalleeName(Instruction* Inst);
 
     bool runOnModule(Module &M) override {
       Function *CallerFunc = M.getFunction("faas_func_call");
@@ -48,32 +50,14 @@ namespace {
       CallInst* RPCInst;
       BasicBlock* RPCBB;
       bool hasRPCinvocation = false;
-      llvm::StringRef CalleeName = "";
+      StringRef CalleeName = "";
       for (Function::iterator BBB = CallerFunc->begin(), BBE = CallerFunc->end(); BBB != BBE; ++BBB){
         for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
-	  // test if it's a virtual function call
-	  // if it is, test if it's a RPC invocation 
-	  // (7 arguments & the 2nd argument is const char*)
-          if ((isa<CallInst>(IB)) && (dyn_cast<CallInst>(IB)->isIndirectCall())){
-            CallInst* VirtualCall = dyn_cast<CallInst>(IB);
-	    if (VirtualCall->getNumOperands()==7){
-              llvm::errs()<<"@@@ the indirect call instruction:"<<*VirtualCall<<"\n";
-              Value* operand = VirtualCall->getOperand(1);
-              if (isa<ConstantExpr>(operand)){
-		Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
-		if (isa<GlobalVariable>(firstop)){
-                  GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
-		  ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
-		  CalleeName = CDA->getAsCString();
-		  if (CalleeName.str() != ""){
-		    RPCInst = VirtualCall;
-		    RPCBB = dyn_cast<BasicBlock>(IB);
-                    hasRPCinvocation = true;
-		    errs()<<"@@@ caller name = "<<CalleeName.str()<<"\n";
-		  }
-		}
-	      }
-	    }
+          if (isRPC(dyn_cast<Instruction>(IB))){
+            hasRPCinvocation = true;
+            CalleeName = getRPCCalleeName(dyn_cast<Instruction>(IB));
+            RPCInst = dyn_cast<CallInst>(IB);
+            RPCBB = dyn_cast<BasicBlock>(BBB);
           }
         }  
       }
@@ -92,7 +76,6 @@ namespace {
 
       for (int i=0; i<6; i++){
         if (i==1) continue;
-	llvm::errs()<<*(RPCInst->getOperand(i))<<"\n";
         arguments.push_back(RPCInst->getOperand(i));
 	argumentTypes.push_back(RPCInst->getOperand(i)->getType());
       }
@@ -136,12 +119,57 @@ namespace {
       return false;
     }
   };
+
+  bool ConvertRPC2NormalCall::isRPC(Instruction* Inst){
+    // test if it's a virtual function call
+    // if it is, test if it's a RPC invocation 
+    // (7 arguments & the 2nd argument is const char*)
+    StringRef CalleeName = "";
+    bool hasRPCinvocation = false;
+    if ((isa<CallInst>(Inst)) && (dyn_cast<CallInst>(Inst)->isIndirectCall())){
+      CallInst* VirtualCall = dyn_cast<CallInst>(Inst);
+      if (VirtualCall->getNumOperands()==7){
+        Value* operand = VirtualCall->getOperand(1);
+        if (isa<ConstantExpr>(operand)){
+          Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
+          if (isa<GlobalVariable>(firstop)){
+            GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
+	    ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
+            CalleeName = CDA->getAsCString();
+            if (CalleeName.str() != ""){
+              hasRPCinvocation = true;
+	    }
+	  }
+	}
+      }
+    }
+    return hasRPCinvocation;
+  }
+
+  StringRef ConvertRPC2NormalCall::getRPCCalleeName(Instruction* Inst){
+    StringRef CalleeName = "";
+    if ((isa<CallInst>(Inst)) && (dyn_cast<CallInst>(Inst)->isIndirectCall())){
+      CallInst* VirtualCall = dyn_cast<CallInst>(Inst);
+      if (VirtualCall->getNumOperands()==7){
+        Value* operand = VirtualCall->getOperand(1);
+        if (isa<ConstantExpr>(operand)){
+          Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
+          if (isa<GlobalVariable>(firstop)){
+            GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
+	    ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
+            CalleeName = CDA->getAsCString();
+	  }
+	}
+      }
+    }
+    return CalleeName;
+  }
 }
-
-
 
 char ConvertRPC2NormalCall::ID = 0;
 static RegisterPass<ConvertRPC2NormalCall> X("ConvertRPC2NormalCall", "Merge Function Pass");
+
+
 
 namespace {
   // ChangeFuncName - The second implementation with getAnalysisUsage implemented.
@@ -179,4 +207,23 @@ namespace {
 
 char ChangeFuncName::ID = 0;
 static RegisterPass<ChangeFuncName>
-Y("ChangeFuncName", "Change the function name of faas_func_call, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
+Y("ChangeFuncName", "Change the function name of faas_func_call in callee, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
+
+
+
+namespace {
+  struct ChangeCalleeFunc : public ModulePass {
+    static char ID; // Pass identification, replacement for typeid
+    ChangeCalleeFunc() : ModulePass(ID) {}
+
+    bool runOnModule(Module &M) override {
+      Function *CalleeFunc = M.getFunction("Bar");
+      return false;
+    }
+  };
+}
+
+char ChangeCalleeFunc::ID = 0;
+static RegisterPass<ChangeCalleeFunc> Z("ChangeCalleeFunc", "Merge Function Pass");
+
+
