@@ -253,7 +253,13 @@ namespace {
       StoreInst *storeInst1 = new StoreInst(argOutputBufSize, argOutputBufSizeAddr, VirtualCallNextInst);
       LoadInst *loadInst1 = new LoadInst (argOutputBufSize->getType(), argOutputBufSizeAddr, "", VirtualCallNextInst);
       StoreInst *storeInst2 = new StoreInst(outputBufSize, dyn_cast<Value>(loadInst1), VirtualCallNextInst);
-  
+
+      AllocaInst* argOutputBufAddr = new AllocaInst(argOutputBuf->getType(), 0, NULL, "", VirtualCallNextInst);
+      StoreInst *storeInst3 = new StoreInst(argOutputBuf, argOutputBufAddr, VirtualCallNextInst); 
+      LoadInst *loadInst2 = new LoadInst(argOutputBuf->getType(), argOutputBufAddr, "", VirtualCallNextInst);
+      StoreInst *storeInst4 = new StoreInst(outputBuf, dyn_cast<Value>(loadInst2), VirtualCallNextInst);
+
+      VirtualCall->eraseFromParent();
       return false;
     }
   };
