@@ -11,8 +11,6 @@
 > make -j
 ```
 
-- how to build LLVM passes
-  + tutorial from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
 ```bash
 > NIGHTCORE_PATH=/proj/zyuxuanssf-PG0
@@ -22,20 +20,13 @@
 > cd $LLVM_PATH/llvm-project/build && make -j
 ```
 
+### Some notes
+- how to build LLVM passes
+  + tutorial from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
+
 - in `nightcore/examples/c`
   + `-g` adds general debug info to IR. might be useful for identify the virtual function call
   + `-enable-new-pm=0` is added when compile the code since I still use the legacy llvm pass
   + `--relocation-model=pic` need to be added as an argument of `llvm-link`, otherwise clang will report `relocation R_X86_64_32S against '.data' can not be used when making a shared object; recompile with -fPIC`
-  
-```bash
-> cd nightcore/examples/c
-> clang -I/proj/zyuxuanssf-PG0/nightcore/include -fPIC -emit-llvm foo.c -c -o foo.bc
-> clang -I/proj/zyuxuanssf-PG0/nightcore/include -fPIC -emit-llvm bar.c -c -o bar.bc
-> opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -enable-new-pm=0 -ChangeFuncName bar.bc -o bar_func_only.bc
-> llvm-link foo.bc bar_func_only.bc -o foo_bar.ll -S
-> opt -load /proj/zyuxuanssf-PG0/llvm-project/build/lib/LLVMMergeFunc.so -S -enable-new-pm=0 -o new_foo.ll -MergeFunc < foo_bar.ll
-> llc -filetype=obj --relocation-model=pic new_foo.ll -o libfoo.o
-> clang -shared -fPIC -O2 -I../../include libfoo.o -o libfoo.so 
-```
 
 
