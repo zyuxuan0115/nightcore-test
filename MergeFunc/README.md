@@ -35,7 +35,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
 ### Some notes
 - how to build LLVM passes
   + [write an LLVM pass](https://llvm.org/docs/WritingAnLLVMPass.html) from LLVM's website
-  + tutorial from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
+  + a simpler tutorial from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
 - the meaning of some of the flags in `build.sh`
   + `-g` adds general debug info to IR. (might be useful for identify the virtual function call)
