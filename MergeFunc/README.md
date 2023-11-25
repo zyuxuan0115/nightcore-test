@@ -1,5 +1,8 @@
 ### LLVM pass to convert PRCs into normal calls
 Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverless functions
+
+#### build MergeFunc pass
+
 - setup LLVM ([llvm-13.0.1 source code (tar.gz)](https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1))
 
 ```bash
@@ -32,7 +35,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
 > ./build.sh
 ```
 
-### Some notes
+#### Some notes
 - how to build LLVM passes
   + [write an LLVM pass](https://llvm.org/docs/WritingAnLLVMPass.html) from LLVM's website
   + a simpler tutorial from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
