@@ -23,7 +23,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
 ```
 
 - run the pass to merge function `foo` and `bar`
-  + change the `LLVM_PATH` and `NIGHTCORE_PATH` in [build.sh](https://github.com/zyuxuan0115/nightcore-test/blob/main/MergeFunc/build.sh)`
+  + change the `LLVM_PATH` and `NIGHTCORE_PATH` in [build.sh](https://github.com/zyuxuan0115/nightcore-test/blob/main/MergeFunc/build.sh)
 
 ```bash
 > git clone --recurse-submodules git@github.com:ut-osa/nightcore.git
