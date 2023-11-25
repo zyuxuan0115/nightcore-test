@@ -1,7 +1,7 @@
 ## LLVM pass to convert PRCs into normal calls
 Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverless functions
 
-#### build MergeFunc pass
+#### Build MergeFunc pass
 
 - setup LLVM ([llvm-13.0.1 source code (tar.gz)](https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1))
   + `LLVM_PATH=/proj/zyuxuanssf-PG0` in the following script needs to be changed.
