@@ -220,7 +220,38 @@ namespace {
 
     bool runOnModule(Module &M) override {
       Function *CalleeFunc = M.getFunction("Bar");
-      return false;
+      if (!CalleeFunc){
+        errs()<<"@@@ no Bar() function in the address space!\n";
+        return false;
+      }
+      Value* argOutputBuf = dyn_cast<Value>(CalleeFunc->arg_begin()+3);
+      Value* argOutputBufSize = dyn_cast<Value>(CalleeFunc->arg_begin()+4);
+      errs()<<"@@@ argOutputBuf: "<<*argOutputBuf<<"\n";
+      errs()<<"@@@ argOutBufSize: "<<*argOutputBufSize<<", type: "<<*(argOutputBufSize->getType())<<"\n";
+
+      //  get the RPC interface (context->append_output_fn) again
+      CallInst* VirtualCall;
+      BasicBlock* RPCBB;
+      bool hasFaasRuntimeAPI = false;
+      StringRef CalleeName = "";
+      Value* outputBuf;
+      Value* outputBufSize;
+      for (Function::iterator BBB = CalleeFunc->begin(), BBE = CalleeFunc->end(); BBB != BBE; ++BBB){
+        for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
+          if ((isa<CallInst>(IB)) &&
+              (dyn_cast<CallInst>(IB)->isIndirectCall()) &&
+              (IB->getNumOperands()==4)){
+            hasFaasRuntimeAPI = true;
+            VirtualCall = dyn_cast<CallInst>(IB);
+            Value* outputBuf = VirtualCall->getOperand(1);
+            Value* outputBufSize = VirtualCall->getOperand(2);
+            errs()<<"@@@ outputBuf: "<<*outputBuf<<"\n";
+            errs()<<"@@@ outputBufSize: "<<*outputBufSize<<"\n";
+          }
+        }
+      }
+      Instruction* VirtualCallInst = dyn_cast<Instruction>(VirtualCall);
+      AllocaInst* pa = new AllocaInst(argOutputBufSize->getType(), 0, NULL, "", VirtualCallInst);
     }
   };
 }
