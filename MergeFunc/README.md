@@ -15,8 +15,8 @@
   + tutorial from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
 ```bash
-> NIGHTCORE_PATH=/proj/zyuxuanssf-PG0/
-> LLVM_PATH=/proj/zyuxuanssf-PG0/
+> NIGHTCORE_PATH=/proj/zyuxuanssf-PG0
+> LLVM_PATH=/proj/zyuxuanssf-PG0
 > cp -r $NIGHTCORE_PATH/nightcore-test/MergeFunc $LLVM_PATH/llvm-project/llvm/lib/Transforms/
 > echo 'add_subdirectory(MergeFunc)' >> $LLVM_PATH/llvm-project/llvm/lib/CMakeList.txt
 > cd $LLVM_PATH/llvm-project/build && make -j
