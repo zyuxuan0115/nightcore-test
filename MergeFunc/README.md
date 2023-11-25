@@ -18,7 +18,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
 > NIGHTCORE_TEST_PATH=/proj/zyuxuanssf-PG0 
 > LLVM_PATH=/proj/zyuxuanssf-PG0 
 > cp -r $NIGHTCORE_TEST_PATH/nightcore-test/MergeFunc $LLVM_PATH/llvm-project/llvm/lib/Transforms/
-> echo 'add_subdirectory(MergeFunc)' >> $LLVM_PATH/llvm-project/llvm/lib/CMakeList.txt
+> echo 'add_subdirectory(MergeFunc)' >> $LLVM_PATH/llvm-project/llvm/lib/Transforms/CMakeList.txt
 > cd $LLVM_PATH/llvm-project/build && make -j
 ```
 
