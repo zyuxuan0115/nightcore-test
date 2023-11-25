@@ -267,6 +267,22 @@ namespace {
       LoadInst *loadInst2 = new LoadInst(argOutputBuf->getType(), argOutputBufAddr, "", VirtualCallNextInst);
       StoreInst *storeInst4 = new StoreInst(outputBuf, dyn_cast<Value>(loadInst2), VirtualCallNextInst);
 
+      // remove the free() function call after RPG returns
+      Instruction* nextInst = VirtualCallNextInst;
+      std::vector<Instruction*> freeCalls;
+      while (nextInst){
+        if (isa<CallInst>(nextInst)){
+          CallInst* call = dyn_cast<CallInst>(nextInst);
+          Function* func = call->getCalledFunction();
+          if ((func) && (func->getName()=="free")){
+            freeCalls.push_back(nextInst);
+          }
+        }
+        nextInst = nextInst->getNextNode();
+      }
+      for (auto inst: freeCalls)
+        inst->eraseFromParent();
+
       VirtualCall->eraseFromParent();
       return false;
     }
