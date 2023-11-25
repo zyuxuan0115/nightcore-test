@@ -25,7 +25,7 @@
   + change the `LLVM_PATH` and `NIGHTCORE_PATH` in `nightcore-test/MergeFunc/build.sh`
 
 ```bash
-> chmod +x build.sh
+> sudo chmod +x build.sh
 > ./build.sh
 ```
 
