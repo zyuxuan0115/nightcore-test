@@ -1,15 +1,26 @@
-//===- MergeFunc.cpp - llvm pass for merging 2 serverless function --------===//
+//===- MergeFunc.cpp - llvm pass for merging 2 serverless functions ------===//
 //
-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-// See https://llvm.org/LICENSE.txt for license information.
-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+// This file contains 3 options: - ChangeFuncName, ConvertRPC2NormalCall,
+//                                 RemoveCalleeRPCReturn
 //
-//===----------------------------------------------------------------------===//
+// ChangeFuncName: Change the function name of faas_func_call in callee, 
+//                 otherwise the new function cannot be merged into the 
+// 		   same address space due to duplication of the function 
+//                 sympols.
 //
-// This file implements the LLVM MergeFunc pass described
-// in docs/WritingAnLLVMPass.html
+// ConvertRPC2NormalCall: Convert RPC to normal function call by changing 
+//                        the arguments of the function and the call 
+//			  instruction.
 //
-//===----------------------------------------------------------------------===//
+// RemoveCalleeRPCReturn: change how RPC's callee functions returns the 
+// 			  value.
+// 
+//===---------------------------------------------------------------------===//
+//
+// This file described how to use this LLVM MergeFunc pass is in 
+// https://github.com/zyuxuan0115/nightcore-test/blob/main/MergeFunc/README.md
+//
+//===---------------------------------------------------------------------===//
 
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/Function.h"
@@ -23,7 +34,6 @@
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/BasicBlock.h"
 #include "llvm/Support/Debug.h"
-#include "llvm/IR/DataLayout.h" //#include "llvm/Target/TargetData.h"
 #include "llvm/ADT/IndexedMap.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
@@ -35,9 +45,8 @@ using namespace llvm;
 #define DEBUG_TYPE "MergeFunc"
 
 namespace {
-  // Hello - The first implementation, without getAnalysisUsage.
   struct ConvertRPC2NormalCall : public ModulePass {
-    static char ID; // Pass identification, replacement for typeid
+    static char ID; 
     ConvertRPC2NormalCall() : ModulePass(ID) {}
     bool isRPC(Instruction* Inst);
     StringRef getRPCCalleeName(Instruction* Inst);
@@ -46,7 +55,7 @@ namespace {
       Function *CallerFunc = M.getFunction("faas_func_call");
       Function *CalleeFunc = M.getFunction("faas_func_call_Bar"); 
 
-      //  get the RPC invocation instruction (caller instruction)
+      // get the RPC invocation instruction (caller instruction)
       CallInst* RPCInst;
       BasicBlock* RPCBB;
       bool hasRPCinvocation = false;
@@ -104,7 +113,7 @@ namespace {
       // that depends on the result of the RPC call 
       CallInst* newCall = CallInst::Create(FuncType, NewCalleeFunc, args ,"", RPCInst->getNextNode());
       Value* DestRPCInst = dyn_cast<Value>(RPCInst);
-      for(auto U : DestRPCInst->users()){  // U is of type User*
+      for(auto U : DestRPCInst->users()){ 
         for (auto op = U->op_begin(); op != U->op_end(); op++){
           Value* op_value = dyn_cast<Value>(op);
           if (op_value == DestRPCInst){
@@ -167,14 +176,13 @@ namespace {
 }
 
 char ConvertRPC2NormalCall::ID = 0;
-static RegisterPass<ConvertRPC2NormalCall> X("ConvertRPC2NormalCall", "Merge Function Pass");
+static RegisterPass<ConvertRPC2NormalCall> X("ConvertRPC2NormalCall", "Convert RPC to normal function call by changing the arguments of the function and the call instruction");
 
 
 
 namespace {
-  // ChangeFuncName - The second implementation with getAnalysisUsage implemented.
   struct ChangeFuncName : public ModulePass {
-    static char ID; // Pass identification, replacement for typeid
+    static char ID; 
     ChangeFuncName() : ModulePass(ID) {}
   
     bool runOnModule(Module &M) override {
@@ -211,22 +219,20 @@ Y("ChangeFuncName", "Change the function name of faas_func_call in callee, other
 
 
 namespace {
-  struct ChangeCalleeFunc : public ModulePass {
-    static char ID; // Pass identification, replacement for typeid
-    ChangeCalleeFunc() : ModulePass(ID) {}
+  struct RemoveCalleeRPCReturn : public ModulePass {
+    static char ID; 
+    RemoveCalleeRPCReturn() : ModulePass(ID) {}
 
     bool runOnModule(Module &M) override {
       Function *CalleeFunc = M.getFunction("Bar");
       if (!CalleeFunc){
-        errs()<<"@@@ no Bar() function in the address space!\n";
+        errs()<<"Error: no Bar() function in the address space!\n";
         return false;
       }
       Value* argOutputBuf = dyn_cast<Value>(CalleeFunc->arg_begin()+3);
       Value* argOutputBufSize = dyn_cast<Value>(CalleeFunc->arg_begin()+4); 
-      errs()<<"@@@ argOutputBuf: "<<*argOutputBuf<<"\n";
-      errs()<<"@@@ argOutBufSize: "<<*argOutputBufSize<<", type: "<<*(argOutputBufSize->getType())<<"\n";
 
-      //  get the RPC interface (context->append_output_fn) again
+      // get the RPC interface (context->append_output_fn) again
       CallInst* VirtualCall;
       BasicBlock* RPCBB;
       bool hasFaasRuntimeAPI = false;
@@ -242,12 +248,14 @@ namespace {
             VirtualCall = dyn_cast<CallInst>(IB);
             outputBuf = VirtualCall->getOperand(1);
             outputBufSize = VirtualCall->getOperand(2);
-            errs()<<"@@@ outputBuf: "<<*outputBuf<<"\n";
-            errs()<<"@@@ outputBufSize: "<<*outputBufSize<<"\n";
           }
         }  
       }
 
+      // replace context->append_output_fn with copyting data
+      // to the output buffer. Also need to erase the 
+      // context->append_output_fn function call and the free()
+      // function after that.
       Instruction* VirtualCallNextInst = dyn_cast<Instruction>(VirtualCall)->getNextNode();
       AllocaInst* argOutputBufSizeAddr = new AllocaInst(argOutputBufSize->getType(), 0, NULL, "", VirtualCallNextInst);
       StoreInst *storeInst1 = new StoreInst(argOutputBufSize, argOutputBufSizeAddr, VirtualCallNextInst);
@@ -265,7 +273,7 @@ namespace {
   };
 }
 
-char ChangeCalleeFunc::ID = 0;
-static RegisterPass<ChangeCalleeFunc> Z("ChangeCalleeFunc", "Merge Function Pass");
+char RemoveCalleeRPCReturn::ID = 0;
+static RegisterPass<RemoveCalleeRPCReturn> Z("RemoveCalleeRPCReturn", "change how RPC's callee functions returns the value");
 
 

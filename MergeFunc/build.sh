@@ -18,7 +18,7 @@ llvm-link foo.ll bar_only.ll -o foo_rpc_bar.ll -S
 
 # change the "faas_func_call_Bar" to be "Bar" (normal function call)
 opt -load $LLVM_PATH/build/lib/LLVMMergeFunc.so -S -enable-new-pm=0 -o foo_bar.ll -ConvertRPC2NormalCall < foo_rpc_bar.ll
-opt -load $LLVM_PATH/build/lib/LLVMMergeFunc.so -S -enable-new-pm=0 -o new_foo.ll -ChangeCalleeFunc < foo_bar.ll
+opt -load $LLVM_PATH/build/lib/LLVMMergeFunc.so -S -enable-new-pm=0 -o new_foo.ll -RemoveCalleeRPCReturn < foo_bar.ll
 
 # finally generate obj of libfoo and link the .obj file
 llc -filetype=obj -relocation-model=pic new_foo.ll -o libfoo.o
