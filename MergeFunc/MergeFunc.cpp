@@ -207,7 +207,9 @@ namespace {
 
 char ChangeFuncName::ID = 0;
 static RegisterPass<ChangeFuncName>
-Y("ChangeFuncName", "Change the function name of faas_func_call in callee, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
+Y("ChangeFuncName", "Change the function name of faas_func_call in callee, \
+                     otherwise the new function cannot be merged into the \
+                     same address space due to duplicate of the function sympols");
 
 
 
