@@ -198,7 +198,6 @@ namespace {
       return false;
     }
 
-    // We don't modify the program, so we preserve all analyses.
     void getAnalysisUsage(AnalysisUsage &AU) const override {
       AU.setPreservesAll();
     }
@@ -207,9 +206,7 @@ namespace {
 
 char ChangeFuncName::ID = 0;
 static RegisterPass<ChangeFuncName>
-Y("ChangeFuncName", "Change the function name of faas_func_call in callee, \
-                     otherwise the new function cannot be merged into the \
-                     same address space due to duplicate of the function sympols");
+Y("ChangeFuncName", "Change the function name of faas_func_call in callee, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
 
 
 
@@ -225,7 +222,7 @@ namespace {
         return false;
       }
       Value* argOutputBuf = dyn_cast<Value>(CalleeFunc->arg_begin()+3);
-      Value* argOutputBufSize = dyn_cast<Value>(CalleeFunc->arg_begin()+4);
+      Value* argOutputBufSize = dyn_cast<Value>(CalleeFunc->arg_begin()+4); 
       errs()<<"@@@ argOutputBuf: "<<*argOutputBuf<<"\n";
       errs()<<"@@@ argOutBufSize: "<<*argOutputBufSize<<", type: "<<*(argOutputBufSize->getType())<<"\n";
 
@@ -238,8 +235,8 @@ namespace {
       Value* outputBufSize;
       for (Function::iterator BBB = CalleeFunc->begin(), BBE = CalleeFunc->end(); BBB != BBE; ++BBB){
         for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
-          if ((isa<CallInst>(IB)) &&
-              (dyn_cast<CallInst>(IB)->isIndirectCall()) &&
+          if ((isa<CallInst>(IB)) && 
+              (dyn_cast<CallInst>(IB)->isIndirectCall()) && 
               (IB->getNumOperands()==4)){
             hasFaasRuntimeAPI = true;
             VirtualCall = dyn_cast<CallInst>(IB);
@@ -248,10 +245,25 @@ namespace {
             errs()<<"@@@ outputBuf: "<<*outputBuf<<"\n";
             errs()<<"@@@ outputBufSize: "<<*outputBufSize<<"\n";
           }
-        }
+        }  
       }
+
       Instruction* VirtualCallInst = dyn_cast<Instruction>(VirtualCall);
       AllocaInst* pa = new AllocaInst(argOutputBufSize->getType(), 0, NULL, "", VirtualCallInst);
+
+      StoreInst *storeInst1 = new StoreInst(argOutputBufSize, pa, VirtualCall);
+/*
+      Instruction* curInst = dyn_cast<Instruction>(outputBufSize);
+      std::vector<Instruction*> dependencyChain{curInst};
+      while(!isa<AllocaInst>(curInst)){
+        int NumNoneConstantOperand = 0;
+        for (auto operand = curInst->operands().begin();
+             operand != curInst->operands().end(); ++operand) {
+          if (!isa<Constant>(operand)) NumNoneConstantOperand++;
+        } 
+      }
+  */   
+      return false;
     }
   };
 }
