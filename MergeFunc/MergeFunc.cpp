@@ -240,29 +240,20 @@ namespace {
               (IB->getNumOperands()==4)){
             hasFaasRuntimeAPI = true;
             VirtualCall = dyn_cast<CallInst>(IB);
-            Value* outputBuf = VirtualCall->getOperand(1);
-            Value* outputBufSize = VirtualCall->getOperand(2);
+            outputBuf = VirtualCall->getOperand(1);
+            outputBufSize = VirtualCall->getOperand(2);
             errs()<<"@@@ outputBuf: "<<*outputBuf<<"\n";
             errs()<<"@@@ outputBufSize: "<<*outputBufSize<<"\n";
           }
         }  
       }
 
-      Instruction* VirtualCallInst = dyn_cast<Instruction>(VirtualCall);
-      AllocaInst* pa = new AllocaInst(argOutputBufSize->getType(), 0, NULL, "", VirtualCallInst);
-
-      StoreInst *storeInst1 = new StoreInst(argOutputBufSize, pa, VirtualCall);
-/*
-      Instruction* curInst = dyn_cast<Instruction>(outputBufSize);
-      std::vector<Instruction*> dependencyChain{curInst};
-      while(!isa<AllocaInst>(curInst)){
-        int NumNoneConstantOperand = 0;
-        for (auto operand = curInst->operands().begin();
-             operand != curInst->operands().end(); ++operand) {
-          if (!isa<Constant>(operand)) NumNoneConstantOperand++;
-        } 
-      }
-  */   
+      Instruction* VirtualCallNextInst = dyn_cast<Instruction>(VirtualCall)->getNextNode();
+      AllocaInst* argOutputBufSizeAddr = new AllocaInst(argOutputBufSize->getType(), 0, NULL, "", VirtualCallNextInst);
+      StoreInst *storeInst1 = new StoreInst(argOutputBufSize, argOutputBufSizeAddr, VirtualCallNextInst);
+      LoadInst *loadInst1 = new LoadInst (argOutputBufSize->getType(), argOutputBufSizeAddr, "", VirtualCallNextInst);
+      StoreInst *storeInst2 = new StoreInst(outputBufSize, dyn_cast<Value>(loadInst1), VirtualCallNextInst);
+  
       return false;
     }
   };
