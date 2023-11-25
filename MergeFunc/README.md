@@ -11,11 +11,12 @@
 > make -j
 ```
 - build the `MergeFunc.so` pass
+  + `NIGHTCORE_TEST_PATH=/proj/zyuxuanssf-PG0` and `LLVM_PATH=/proj/zyuxuanssf-PG0` need to be changed. 
 
 ```bash
 > git clone https://github.com/zyuxuan0115/nightcore-test.git
-> NIGHTCORE_TEST_PATH=/proj/zyuxuanssf-PG0 (needs to be changed)
-> LLVM_PATH=/proj/zyuxuanssf-PG0 (needs to be changed)
+> NIGHTCORE_TEST_PATH=/proj/zyuxuanssf-PG0 
+> LLVM_PATH=/proj/zyuxuanssf-PG0 
 > cp -r $NIGHTCORE_TEST_PATH/nightcore-test/MergeFunc $LLVM_PATH/llvm-project/llvm/lib/Transforms/
 > echo 'add_subdirectory(MergeFunc)' >> $LLVM_PATH/llvm-project/llvm/lib/CMakeList.txt
 > cd $LLVM_PATH/llvm-project/build && make -j
