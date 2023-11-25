@@ -10,7 +10,7 @@
 > cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lldb;lld" DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" ../llvm
 > make -j
 ```
-
+- build the `MergeFunc.so` pass
 
 ```bash
 > NIGHTCORE_PATH=/proj/zyuxuanssf-PG0
@@ -18,6 +18,11 @@
 > cp -r $NIGHTCORE_PATH/nightcore-test/MergeFunc $LLVM_PATH/llvm-project/llvm/lib/Transforms/
 > echo 'add_subdirectory(MergeFunc)' >> $LLVM_PATH/llvm-project/llvm/lib/CMakeList.txt
 > cd $LLVM_PATH/llvm-project/build && make -j
+```
+
+- run the pass to merge function `foo` and `bar`
+```
+> 
 ```
 
 ### Some notes
