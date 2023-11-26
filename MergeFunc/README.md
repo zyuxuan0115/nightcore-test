@@ -30,13 +30,22 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
 ```
 
 - run the pass to merge function `foo` and `bar`
+  + build nightcore by following the instructions in this [webpage](https://github.com/ut-osa/nightcore)
   + the path of `LLVM_PATH` and `NIGHTCORE_PATH` in [build.sh](https://github.com/zyuxuan0115/nightcore-test/blob/main/MergeFunc/build.sh) need to be changed
 
 ```bash
 > git clone --recurse-submodules git@github.com:ut-osa/nightcore.git
-> cd $NIGHTCORE_TEST_PATH/nightcore-test/MergeFunc
+> NIGHTCORE_PATH=/proj/zyuxuanssf-PG0 
+> cd $NIGHTCORE_PATH/nightcore/examples/c_merge/
+> cp $NIGHTCORE_TEST_PATH/nightcore-test/MergeFunc/build.sh .
 > sudo chmod +x build.sh
 > ./build.sh
+```
+
+- test it with nightcore
+```bash
+> ./run_stack &
+> curl -X POST -d "Hello" http://127.0.0.1:8080/function/Foo
 ```
 
 #### Some notes
