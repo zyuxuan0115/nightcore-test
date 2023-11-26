@@ -1,7 +1,6 @@
 //===- MergeFunc.cpp - llvm pass for merging 2 serverless functions ------===//
 //
-// This file contains 3 options: - ChangeFuncName, ConvertRPC2NormalCall,
-//                                 RemoveCalleeRPCReturn
+// This file contains 2 componentss: - ChangeFuncName, MergeFunc
 //
 // ChangeFuncName: Change the function name of faas_func_call in callee, 
 //                 otherwise the new function cannot be merged into the 
