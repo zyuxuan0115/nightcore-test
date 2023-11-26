@@ -73,9 +73,9 @@ namespace {
       // get the following arguments from the RPC Instruction
       //     - 1st argument: void* worker_handle 
       //     - 3rd argument: char* input
-      //     - 4st argument: int input_length
-      //     - 5st argument: char* output
-      //     - 6st argument: int output_length
+      //     - 4th argument: int input_length
+      //     - 5th argument: char* output
+      //     - 6th argument: int output_length
       std::vector<Value*> arguments;
       std::vector<Type*> argumentTypes;
 
