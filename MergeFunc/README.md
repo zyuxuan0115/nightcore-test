@@ -45,7 +45,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
 - test it with nightcore
   + after running the following commands, you should see `From function Bar: Hello, World` in terminal
 ```bash
-> ./run_stack &
+> ./run_stack.sh &
 > curl -X POST -d "Hello" http://127.0.0.1:8080/function/Foo
 ```
 
