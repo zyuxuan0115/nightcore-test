@@ -105,8 +105,8 @@ namespace {
       // create the normal function call of the RPC 
       // and then eliminate RPC call
       // before RPC call instruction is eliminated, 
-      // need to change all user instructions operand
-      // that depends on the result of the RPC call 
+      // need to change all user instructions' operands
+      // that depend on the result of the RPC call 
       CallInst* newCall = CallInst::Create(FuncType, NewCalleeFunc, args ,"", RPCInst->getNextNode());
       Value* DestRPCInst = dyn_cast<Value>(RPCInst);
       for(auto U : DestRPCInst->users()){ 
@@ -146,7 +146,7 @@ namespace {
         }  
       }
 
-      // replace context->append_output_fn with copyting data
+      // replace context->append_output_fn with copying data
       // to the output buffer. Also need to erase the 
       // context->append_output_fn function call and the free()
       // function after that.
