@@ -161,7 +161,7 @@ namespace {
       LoadInst *loadInst2 = new LoadInst(argOutputBuf->getType(), argOutputBufAddr, "", VirtualCallNextInst);
       StoreInst *storeInst4 = new StoreInst(outputBuf, dyn_cast<Value>(loadInst2), VirtualCallNextInst);
 
-      // remove the free() function call after RPG returns
+      // remove the free() function call after RPC returns
       Instruction* nextInst = VirtualCallNextInst;
       std::vector<Instruction*> freeCalls;
       while (nextInst){
