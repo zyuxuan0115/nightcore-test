@@ -34,7 +34,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
   + the path of `LLVM_PATH` and `NIGHTCORE_PATH` in [build.sh](https://github.com/zyuxuan0115/nightcore-test/blob/main/MergeFunc/build.sh) need to be changed
 
 ```bash
-> git clone --recurse-submodules git@github.com:ut-osa/nightcore.git
+> git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git
 > NIGHTCORE_PATH=/proj/zyuxuanssf-PG0 
 > cd $NIGHTCORE_PATH/nightcore/examples/c_merge/
 > cp $NIGHTCORE_TEST_PATH/nightcore-test/MergeFunc/build.sh .
