@@ -49,7 +49,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
   + `opt` needs to run with the `-enable-new-pm=0` flag since I still use the legacy llvm pass
   + `llvm-link` needs to run with the `--relocation-model=pic` flag, otherwise clang will report `relocation R_X86_64_32S against '.data' can not be used when making a shared object; recompile with -fPIC` 
 
-- to test whether there is a function "Bar" in the address spece of libfoo.so
+- to test whether there is a function "Bar" in the address space of libfoo.so
   + first run `objdump -d libfoo.so | less`
   + then search for `Bar`
 
