@@ -6,7 +6,7 @@
 // ChangeFuncName: Change the function name of faas_func_call in callee, 
 //                 otherwise the new function cannot be merged into the 
 // 		   same address space due to duplication of the function 
-//                 sympols.
+//                 symbols.
 //
 // ConvertRPC2NormalCall: Convert RPC to normal function call by changing 
 //                        the arguments of the function and the call 
@@ -267,7 +267,7 @@ namespace {
       LoadInst *loadInst2 = new LoadInst(argOutputBuf->getType(), argOutputBufAddr, "", VirtualCallNextInst);
       StoreInst *storeInst4 = new StoreInst(outputBuf, dyn_cast<Value>(loadInst2), VirtualCallNextInst);
 
-      // remove the free() function call after RPG returns
+      // remove the free() function call after RPC returns
       Instruction* nextInst = VirtualCallNextInst;
       std::vector<Instruction*> freeCalls;
       while (nextInst){
