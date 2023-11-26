@@ -1,6 +1,6 @@
 //===- MergeFunc.cpp - llvm pass for merging 2 serverless functions ------===//
 //
-// This file contains 2 componentss: - ChangeFuncName, MergeFunc
+// This file contains 2 components: - ChangeFuncName, MergeFunc
 //
 // ChangeFuncName: Change the function name of faas_func_call in callee, 
 //                 otherwise the new function cannot be merged into the 
