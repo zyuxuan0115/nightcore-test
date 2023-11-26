@@ -12,7 +12,7 @@
 //                        the arguments of the function and the call 
 //			  instruction.
 //
-// RemoveCalleeRPCReturn: change how RPC's callee functions returns the 
+// RemoveCalleeRPCReturn: change how RPC's callee functions return the 
 // 			  value.
 // 
 //===---------------------------------------------------------------------===//
