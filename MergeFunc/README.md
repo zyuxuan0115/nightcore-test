@@ -55,7 +55,7 @@ Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverle
   + a simpler tutorial from UTAustin [here](https://www.cs.utexas.edu/~pingali/CS380C/2020/assignments/llvm-guide.html)
 
 - the meaning of some of the flags in `build.sh`
-  + `-g` adds general debug info to IR. (might be useful for identify the virtual function call)
+  + `-g` adds general debug info to IR. (might be useful for identifying the virtual function call)
   + `opt` needs to run with the `-enable-new-pm=0` flag since I still use the legacy llvm pass
   + `llvm-link` needs to run with the `--relocation-model=pic` flag, otherwise clang will report `relocation R_X86_64_32S against '.data' can not be used when making a shared object; recompile with -fPIC` 
 
