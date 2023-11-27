@@ -1,3 +1,4 @@
+cp bashrc ~/.bashrc && source ~/.bashrc
 rm -rf /proj/zyuxuanssf-PG0/docker
 mkdir /proj/zyuxuanssf-PG0/docker && cd /proj/zyuxuanssf-PG0/docker
 wget https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/containerd.io_1.6.9-1_amd64.deb
