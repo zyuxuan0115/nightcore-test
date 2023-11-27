@@ -1,4 +1,4 @@
-## LLVM pass to convert RPCs into normal calls
+## LLVM pass to merge serverless functions
 Only works for [nightcore](https://github.com/ut-osa/nightcore)'s C/C++ serverless functions
 
 #### Build MergeFunc pass
