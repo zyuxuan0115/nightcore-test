@@ -1,6 +1,6 @@
 //===- MergeFunc.cpp - llvm pass for merging 2 serverless functions ------===//
 //
-// This file contains 2 componentss: - ChangeFuncName, MergeFunc
+// This file contains 2 components: - ChangeFuncName, MergeFunc
 //
 // ChangeFuncName: Change the function name of faas_func_call in callee, 
 //                 otherwise the new function cannot be merged into the 
@@ -73,9 +73,9 @@ namespace {
       // get the following arguments from the RPC Instruction
       //     - 1st argument: void* worker_handle 
       //     - 3rd argument: char* input
-      //     - 4st argument: int input_length
-      //     - 5st argument: char* output
-      //     - 6st argument: int output_length
+      //     - 4th argument: int input_length
+      //     - 5th argument: char* output
+      //     - 6th argument: int output_length
       std::vector<Value*> arguments;
       std::vector<Type*> argumentTypes;
 
@@ -105,8 +105,8 @@ namespace {
       // create the normal function call of the RPC 
       // and then eliminate RPC call
       // before RPC call instruction is eliminated, 
-      // need to change all user instructions operand
-      // that depends on the result of the RPC call 
+      // need to change all user instructions' operands
+      // that depend on the result of the RPC call 
       CallInst* newCall = CallInst::Create(FuncType, NewCalleeFunc, args ,"", RPCInst->getNextNode());
       Value* DestRPCInst = dyn_cast<Value>(RPCInst);
       for(auto U : DestRPCInst->users()){ 
@@ -146,7 +146,7 @@ namespace {
         }  
       }
 
-      // replace context->append_output_fn with copyting data
+      // replace context->append_output_fn with copying data
       // to the output buffer. Also need to erase the 
       // context->append_output_fn function call and the free()
       // function after that.
