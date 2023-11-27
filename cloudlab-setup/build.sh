@@ -1,3 +1,4 @@
+#!/bin/bash
 cp bashrc ~/.bashrc 
 source ~/.bashrc
 rm -rf /proj/zyuxuanssf-PG0/docker
