@@ -2,23 +2,28 @@
 BASE_DIR=`realpath $(dirname $0)`
 ROOT_DIR=`realpath $BASE_DIR/../..`
 
+echo "$BASE_DIR $ROOT_DIR"
+
 EXP_DIR=$BASE_DIR/results/$1
 QPS=$2
 
 SRC_DIR=$ROOT_DIR/workloads/DeathStarBench/mediaMicroservices
-HELPER_SCRIPT=$ROOT_DIR/scripts/exp_helper
+HELPER_SCRIPT=$BASE_DIR/helper
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=compose-review.lua
 
-MANAGER_HOST=`$HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
-CLIENT_HOST=`$HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
-ENTRY_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nginx-thrift`
-MONGO_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=media-mongodb`
-GATEWAY_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
-ALL_HOSTS=`$HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
+MANAGER_HOST=`python3 $HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
+CLIENT_HOST=`python3 $HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
+ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nginx-thrift`
+MONGO_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=media-mongodb`
+GATEWAY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
+ALL_HOSTS=`python3 $HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
+
+echo "$MANAGER_HOST $CLIENT_HOST $ENTRY_HOST $MONGO_HOST $GATEWAY_HOST $ALL_HOSTS"
 
 ALL_ENGINE_NODES="nightcore-mm-middle1 nightcore-mm-middle2 nightcore-mm-middle3 nightcore-mm-middle4"
 
+: <<'END'
 $HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
 scp -q $BASE_DIR/docker-compose.yml $MANAGER_HOST:~
 scp -q $BASE_DIR/docker-compose-placement.yml $MANAGER_HOST:~
@@ -93,3 +98,4 @@ for name in $ALL_ENGINE_NODES; do
     mkdir $EXP_DIR/logs/func_worker_$name
     rsync -arq $HOST:/mnt/inmem/nightcore/output/* $EXP_DIR/logs/func_worker_$name
 done
+END
