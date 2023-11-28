@@ -6,23 +6,31 @@ EXP_DIR=$BASE_DIR/results/$1
 QPS=$2
 
 SRC_DIR=$ROOT_DIR/workloads/DeathStarBench/mediaMicroservices
-HELPER_SCRIPT=$ROOT_DIR/scripts/exp_helper
+HELPER_SCRIPT=$BASE_DIR/helper
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=compose-review.lua
 
-MANAGER_HOST=`$HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
-CLIENT_HOST=`$HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
-ENTRY_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nginx-thrift`
-MONGO_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=media-mongodb`
-ENGINE_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-engine`
-GATEWAY_HOST=`$HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
-ALL_HOSTS=`$HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
+MANAGER_HOST=`python3 $HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
+CLIENT_HOST=`python3 $HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
+ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nginx-thrift`
+MONGO_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=media-mongodb`
+ENGINE_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-engine`
+GATEWAY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
+ALL_HOSTS=`python3 $HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
 
-$HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
+echo "MANAGER_HOST=$MANAGER_HOST"
+echo "CLIENT_HOST=$CLIENT_HOST"
+echo "ENTRY_HOST=$ENTRY_HOST"
+echo "MONGO_HOST=$MONGO_HOST"
+echo "ENGINE_HOST=$ENGINE_HOST"
+echo "GATEWAY_HOST=$GATEWAY_HOST"
+echo "ALL_HOSTS=$ALL_HOSTS"
+
+python3 $HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
 scp -q $BASE_DIR/docker-compose.yml $MANAGER_HOST:~
 scp -q $BASE_DIR/docker-compose-placement.yml $MANAGER_HOST:~
 
-ssh -q $MANAGER_HOST -- docker stack rm media-microservices
+ssh -q $MANAGER_HOST -- sudo docker stack rm media-microservices
 sleep 20
 ssh -q $ENTRY_HOST -- sudo rm -rf /tmp/mediaMicroservices
 ssh -q $ENTRY_HOST -- mkdir -p /tmp/mediaMicroservices
@@ -33,11 +41,12 @@ ssh -q $ENGINE_HOST -- sudo mkdir -p /mnt/inmem/nightcore
 ssh -q $ENGINE_HOST -- sudo mkdir -p /mnt/inmem/nightcore/output /mnt/inmem/nightcore/ipc
 
 for host in $ALL_HOSTS; do
-    scp -q $BASE_DIR/nightcore_config.json  $host:/tmp/nightcore_config.json
-    scp -q $BASE_DIR/service-config.json    $host:/tmp/service-config.json
+    echo $host
+    scp -q $BASE_DIR/nightcore_config.json  $host:/tmp
+    scp -q $BASE_DIR/service-config.json    $host:/tmp
 done
 
-scp -q $BASE_DIR/run_launcher $ENGINE_HOST:/tmp/run_launcher
+scp -q $BASE_DIR/run_launcher $ENGINE_HOST:/tmp
 ssh -q $ENGINE_HOST -- sudo cp /tmp/run_launcher /mnt/inmem/nightcore/run_launcher
 ssh -q $ENGINE_HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
 
