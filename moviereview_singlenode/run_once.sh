@@ -41,6 +41,8 @@ scp -q $BASE_DIR/run_launcher $ENGINE_HOST:/tmp/run_launcher
 ssh -q $ENGINE_HOST -- sudo cp /tmp/run_launcher /mnt/inmem/nightcore/run_launcher
 ssh -q $ENGINE_HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
 
+: <<'END'
+
 rsync -arq $SRC_DIR/nginx-web-server    $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/gen-lua             $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/mediaMicroservices
@@ -80,3 +82,4 @@ $HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$EXP_DIR/l
 
 mkdir $EXP_DIR/logs/func_worker
 rsync -arq $ENGINE_HOST:/mnt/inmem/nightcore/output/* $EXP_DIR/logs/func_worker
+END
