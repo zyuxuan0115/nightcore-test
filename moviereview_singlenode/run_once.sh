@@ -5,7 +5,7 @@ ROOT_DIR=`realpath $BASE_DIR/../..`
 EXP_DIR=$BASE_DIR/results/$1
 QPS=$2
 
-SRC_DIR=$ROOT_DIR/workloads/DeathStarBench/mediaMicroservices
+SRC_DIR=$BASE_DIR/DeathStarBench/mediaMicroservices
 HELPER_SCRIPT=$BASE_DIR/helper
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=compose-review.lua
@@ -47,18 +47,20 @@ for host in $ALL_HOSTS; do
 done
 
 scp -q $BASE_DIR/run_launcher $ENGINE_HOST:/tmp
-ssh -q $ENGINE_HOST -- sudo cp /tmp/run_launcher /mnt/inmem/nightcore/run_launcher
-ssh -q $ENGINE_HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
-
-: <<'END'
+ssh -q $ENGINE_HOST -- sudo cp /tmp/run_launcher /mnt/inmem/nightcore
+ssh -q $ENGINE_HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore
+ssh -q $ENGINE_HOST -- sudo mv /mnt/inmem/nightcore/nightcore_config.json /mnt/inmem/nightcore/func_config.json
 
 rsync -arq $SRC_DIR/nginx-web-server    $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/gen-lua             $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/mediaMicroservices
 
+
 ssh -q $MANAGER_HOST -- docker stack deploy \
     -c ~/docker-compose.yml -c ~/docker-compose-placement.yml media-microservices
 sleep 60
+
+: <<'END'
 
 ENGINE_CONTAINER_ID=`$HELPER_SCRIPT get-container-id --service nightcore-engine`
 echo 4096 | ssh -q $ENGINE_HOST -- sudo tee /sys/fs/cgroup/cpu,cpuacct/docker/$ENGINE_CONTAINER_ID/cpu.shares
