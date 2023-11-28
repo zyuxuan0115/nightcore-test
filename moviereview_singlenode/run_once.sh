@@ -1,7 +1,7 @@
 #!/bin/bash
 BASE_DIR=`realpath $(dirname $0)`
 ROOT_DIR=`realpath $BASE_DIR/../..`
-
+REMOTE_SERVER_HOME_DIR=/users/zyuxuan
 EXP_DIR=$BASE_DIR/results/$1
 QPS=$2
 
@@ -57,7 +57,7 @@ rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/mediaMicroservices
 
 
 ssh -q $MANAGER_HOST -- docker stack deploy \
-    -c ~/docker-compose.yml -c ~/docker-compose-placement.yml media-microservices
+    -c $REMOTE_SERVER_HOME_DIR/docker-compose.yml -c $REMOTE_SERVER_HOME_DIR/docker-compose-placement.yml media-microservices
 sleep 60
 
 : <<'END'
