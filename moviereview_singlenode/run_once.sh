@@ -56,15 +56,15 @@ rsync -arq $SRC_DIR/gen-lua             $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/mediaMicroservices
 
 
-ssh -q $MANAGER_HOST -- docker stack deploy \
+ssh -q $MANAGER_HOST -- sudo docker stack deploy \
     -c $REMOTE_SERVER_HOME_DIR/docker-compose.yml -c $REMOTE_SERVER_HOME_DIR/docker-compose-placement.yml media-microservices
 sleep 60
 
-: <<'END'
 
-ENGINE_CONTAINER_ID=`$HELPER_SCRIPT get-container-id --service nightcore-engine`
+ENGINE_CONTAINER_ID=`python3 $HELPER_SCRIPT get-container-id --service nightcore-engine`
 echo 4096 | ssh -q $ENGINE_HOST -- sudo tee /sys/fs/cgroup/cpu,cpuacct/docker/$ENGINE_CONTAINER_ID/cpu.shares
 
+: <<'END'
 scp -q $SRC_DIR/scripts/register_users.sh    $CLIENT_HOST:~
 scp -q $SRC_DIR/scripts/write_movie_info.py  $CLIENT_HOST:~
 scp -q $SRC_DIR/wrk2_scripts/$WRK_SCRIPT     $CLIENT_HOST:~
