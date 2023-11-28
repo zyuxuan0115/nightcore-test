@@ -1,0 +1,32 @@
+{
+    "client": {
+        "dns": "zyuxuan@clnode193.clemson.cloudlab.us",
+        "ip": "130.127.133.202",
+        "role": "client",
+        "type": "c5.xlarge"
+    },
+    "nightcore-manager": {
+        "dns": "zyuxuan@clnode196.clemson.cloudlab.us",
+        "ip": "130.127.133.205",
+        "role": "manager",
+        "type": "c5.xlarge"
+    },
+    "nightcore-worker1": {
+        "dns": "zyuxuan@clnode202.clemson.cloudlab.us",
+        "ip": "130.127.133.211",
+        "labels": [
+            "engine_node=true"
+        ],
+        "role": "worker",
+        "type": "c5.xlarge"
+    },
+    "nightcore-worker2": {
+        "dns": "zyuxuan@clnode191.clemson.cloudlab.us",
+        "ip": "130.127.133.200",
+        "labels": [
+            "engine_node=true"
+        ],
+        "role": "worker",
+        "type": "c5.xlarge"
+    }
+}
