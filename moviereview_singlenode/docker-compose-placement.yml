@@ -1,0 +1,158 @@
+services:
+  cast-info-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  cast-info-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  compose-review-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  compose-review-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  media-mongodb:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-mongodb
+      replicas: 1
+  movie-id-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  movie-id-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  movie-info-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  movie-info-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  movie-review-redis:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  movie-review-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  nginx-thrift:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-front
+      replicas: 1
+  nightcore-engine:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  nightcore-gateway:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-front
+      replicas: 1
+  plot-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  plot-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  rating-redis:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  rating-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  review-storage-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  review-storage-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  text-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  unique-id-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  user-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  user-review-redis:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-cache
+      replicas: 1
+  user-review-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+  user-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-mm-middle
+      replicas: 1
+version: '3.8'
