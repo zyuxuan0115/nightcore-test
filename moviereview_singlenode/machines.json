@@ -25,5 +25,12 @@
         "ip": "130.127.133.200",
         "role": "worker",
         "type": "c5.xlarge"
+    },
+    "nightcore-mm-client": {
+        "dns": "zyuxuan@clnode191.clemson.cloudlab.us",
+        "ip": "130.127.133.211",
+        "role": "client",
+        "type": "c5.xlarge"
     }
+
 }
