@@ -30,7 +30,6 @@
         "plot-memcached": { "placement": "nightcore-mm-cache" },
         "movie-info-service": { "placement": "nightcore-mm-middle" },
         "movie-info-memcached": { "placement": "nightcore-mm-cache" },
-        "nginx-thrift": { "placement": "nightcore-mm-front" },
         "nightcore-engine": { "placement": "nightcore-mm-middle" },
         "nightcore-gateway": { "placement": "nightcore-mm-front" }
     }
