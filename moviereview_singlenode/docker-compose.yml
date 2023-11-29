@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   nightcore-engine:
-    image: zjia/nightcore:asplos-ae
+    image: zyuxuan0115/nightcore:main
     entrypoint:
       - /nightcore/engine
       - --gateway_addr=nightcore-gateway
@@ -20,7 +20,7 @@ services:
       - FAAS_CGROUP_FS_ROOT=/tmp/root_cgroupfs
 
   nightcore-gateway:
-    image: zjia/nightcore:asplos-ae
+    image: zyuxuan0115/nightcore:main
     entrypoint:
       - /nightcore/gateway
       - --listen_addr=0.0.0.0
@@ -33,7 +33,7 @@ services:
       - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
   
   unique-id-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: unique-id-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/UniqueIdService/libUniqueIdService.so", "1"]
@@ -45,7 +45,7 @@ services:
       - nightcore-engine
 
   movie-id-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: movie-id-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/MovieIdService/libMovieIdService.so", "2"]
@@ -57,7 +57,7 @@ services:
       - nightcore-engine
 
   text-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: text-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/TextService/libTextService.so", "3"]
@@ -69,7 +69,7 @@ services:
       - nightcore-engine
 
   rating-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: rating-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/RatingService/libRatingService.so", "4"]
@@ -81,7 +81,7 @@ services:
       - nightcore-engine
 
   user-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: user-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/UserService/libUserService.so", "5"]
@@ -93,7 +93,7 @@ services:
       - nightcore-engine
 
   compose-review-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: compose-review-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/ComposeReviewService/libComposeReviewService.so", "6"]
@@ -105,7 +105,7 @@ services:
       - nightcore-engine
 
   review-storage-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: review-storage-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/ReviewStorageService/libReviewStorageService.so", "7"]
@@ -117,7 +117,7 @@ services:
       - nightcore-engine
 
   user-review-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: user-review-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/UserReviewService/libUserReviewService.so", "8"]
@@ -129,7 +129,7 @@ services:
       - nightcore-engine
 
   movie-review-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: movie-review-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/MovieReviewService/libMovieReviewService.so", "9"]
@@ -141,7 +141,7 @@ services:
       - nightcore-engine
 
   cast-info-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: cast-info-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/CastInfoService/libCastInfoService.so", "10"]
@@ -153,7 +153,7 @@ services:
       - nightcore-engine
 
   plot-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: plot-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/PlotService/libPlotService.so", "11"]
@@ -165,7 +165,7 @@ services:
       - nightcore-engine
 
   movie-info-service:
-    image: zjia/nightcore-moviereview:asplos-ae
+    image: zyuxuan0115/nightcore-moviereview:main
     hostname: movie-info-service
     restart: always
     entrypoint: ["/tmp/nightcore/run_launcher", "./build/src/MovieInfoService/libMovieInfoService.so", "12"]
@@ -226,19 +226,19 @@ services:
     command: ["redis-server", "--save", "", "--io-threads", "4"]
     restart: always
 
-  nginx-thrift:
-    image: zjia/openresty-thrift:xenial
-    hostname: nginx-thrift
-    ports:
-      - 8080:8080
-    restart: always
-    volumes:
-      - /tmp/service-config.json:/media-microservices/config/service-config.json
-      - /tmp/mediaMicroservices/nginx-web-server/lua-scripts:/usr/local/openresty/nginx/lua-scripts
-      - /tmp/mediaMicroservices/nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-      - /tmp/mediaMicroservices/nginx-web-server/jaeger-config.json:/usr/local/openresty/nginx/jaeger-config.json
-      - /tmp/mediaMicroservices/gen-lua:/gen-lua
-      - /tmp/mediaMicroservices/docker/openresty-thrift/lua-thrift:/usr/local/openresty/lualib/thrift
+#  nginx-thrift:
+#    image: zjia/openresty-thrift:xenial
+#    hostname: nginx-thrift
+#    ports:
+#      - 8080:8080
+#    restart: always
+#    volumes:
+#      - /tmp/service-config.json:/media-microservices/config/service-config.json
+#      - /tmp/mediaMicroservices/nginx-web-server/lua-scripts:/usr/local/openresty/nginx/lua-scripts
+#      - /tmp/mediaMicroservices/nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+#      - /tmp/mediaMicroservices/nginx-web-server/jaeger-config.json:/usr/local/openresty/nginx/jaeger-config.json
+#      - /tmp/mediaMicroservices/gen-lua:/gen-lua
+#      - /tmp/mediaMicroservices/docker/openresty-thrift/lua-thrift:/usr/local/openresty/lualib/thrift
 
   cast-info-memcached:
     image: memcached:1.5.22
