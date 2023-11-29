@@ -56,8 +56,6 @@ rsync -arq $SRC_DIR/nginx-web-server    $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/gen-lua             $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/mediaMicroservices
 
-echo "file copy is done"
-
 ssh -q $MANAGER_HOST -- sudo docker stack deploy \
     -c $REMOTE_SERVER_HOME_DIR/docker-compose.yml -c $REMOTE_SERVER_HOME_DIR/docker-compose-placement.yml media-microservices
 sleep 60
@@ -66,18 +64,18 @@ sleep 60
 ENGINE_CONTAINER_ID=`python3 $HELPER_SCRIPT get-container-id --service nightcore-engine`
 echo 4096 | ssh -q $ENGINE_HOST -- sudo tee /sys/fs/cgroup/cpu,cpuacct/docker/$ENGINE_CONTAINER_ID/cpu.shares
 
-: <<'END'
 scp -q $SRC_DIR/scripts/register_users.sh    $CLIENT_HOST:~
 scp -q $SRC_DIR/scripts/write_movie_info.py  $CLIENT_HOST:~
 scp -q $SRC_DIR/wrk2_scripts/$WRK_SCRIPT     $CLIENT_HOST:~
 scp -qr $SRC_DIR/datasets/tmdb               $CLIENT_HOST:~
 
-ssh -q $CLIENT_HOST -- ~/register_users.sh $ENTRY_HOST
-ssh -q $CLIENT_HOST -- python3 ~/write_movie_info.py -x $ENTRY_HOST \
-    -c ~/tmdb/casts.json -m ~/tmdb/movies.json
+ssh -q $CLIENT_HOST -- $REMOTE_SERVER_HOME_DIR/register_users.sh $ENTRY_HOST
+ssh -q $CLIENT_HOST -- python3 $REMOTE_SERVER_HOME_DIR/write_movie_info.py -x $ENTRY_HOST \
+    -c $REMOTE_SERVER_HOME_DIR/tmdb/casts.json -m $REMOTE_SERVER_HOME_DIR/tmdb/movies.json
 
 sleep 10
 
+: <<'END'
 rm -rf $EXP_DIR
 mkdir -p $EXP_DIR
 
