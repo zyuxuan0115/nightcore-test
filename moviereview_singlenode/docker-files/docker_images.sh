@@ -25,9 +25,7 @@ function build_deathstarbench {
 
 function push_deathstarbench {
     docker push zjia/cpp-microservice-deps:asplos-ae
-    docker push zjia/nightcore-socialnetwork:asplos-ae
     docker push zjia/nightcore-moviereview:asplos-ae
-    docker push zjia/nightcore-hotelresv:asplos-ae
 }
 
 HIPSTERSHOP_SERVICES="frontend-api \
@@ -43,13 +41,11 @@ cartservice"
 function build {
     build_nightcore
     build_deathstarbench
-    build_hipstershop
 }
 
 function push {
     push_nightcore
     push_deathstarbench
-    push_hipstershop
 }
 
 case "$1" in
