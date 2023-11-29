@@ -4,9 +4,11 @@ ROOT_DIR=`realpath $(dirname $0)/..`
 echo $ROOT_DIR
 
 function build_nightcore {
-    docker build -t zyuxuan0115/nightcore:main \
+    rm -rf nightcore
+    git clone --recurse-submodules https://github.com/ut-osa/nightcore.git nightcore 
+    sudo docker build -t zyuxuan0115/nightcore:main \
         -f $ROOT_DIR/docker-files/Dockerfile.nightcore \
-        $ROOT_DIR/nightcore
+        $ROOT_DIR/docker-files/nightcore
 }
 
 function push_nightcore {
