@@ -5,7 +5,7 @@ echo $ROOT_DIR
 
 function build_nightcore {
     docker build -t zyuxuan0115/nightcore:main \
-        -f $ROOT_DIR/Dockerfile.nightcore \
+        -f $ROOT_DIR/docker-files/Dockerfile.nightcore \
         $ROOT_DIR/nightcore
 }
 
@@ -16,12 +16,12 @@ function push_nightcore {
 function build_deathstarbench {
     docker build -t zyuxuan0115/cpp-microservice-deps:main \
         --build-arg NUM_CPUS=$(nproc) \
-        $ROOT_DIR/workloads/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
+        $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
 
-    docker build -t zjia/nightcore-moviereview:main \
-        -f $ROOT_DIR/dockerfiles/Dockerfile.moviereview \
+    docker build -t zyuxuan0115/nightcore-moviereview:main \
+        -f $ROOT_DIR/docker-files/Dockerfile.moviereview \
         --build-arg NUM_CPUS=$(nproc) \
-        $ROOT_DIR/workloads/DeathStarBench
+        $ROOT_DIR/DeathStarBench
 }
 
 function push_deathstarbench {
