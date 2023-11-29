@@ -12,7 +12,8 @@ WRK_SCRIPT=compose-review.lua
 
 MANAGER_HOST=`python3 $HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
 CLIENT_HOST=`python3 $HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
-ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nginx-thrift`
+#ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nginx-thrift`
+ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
 MONGO_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=media-mongodb`
 ENGINE_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-engine`
 GATEWAY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
@@ -55,6 +56,7 @@ rsync -arq $SRC_DIR/nginx-web-server    $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/gen-lua             $ENTRY_HOST:/tmp/mediaMicroservices
 rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/mediaMicroservices
 
+echo "file copy is done"
 
 ssh -q $MANAGER_HOST -- sudo docker stack deploy \
     -c $REMOTE_SERVER_HOME_DIR/docker-compose.yml -c $REMOTE_SERVER_HOME_DIR/docker-compose-placement.yml media-microservices
