@@ -6,7 +6,7 @@ COPY --from=nightcore /nightcore/func_worker_v1 /nightcore/func_worker_v1
 
 ARG NUM_CPUS=1
 
-COPY ../DeathStarBench /DeathStarBench
+COPY . /DeathStarBench
 
 RUN cd /DeathStarBench/mediaMicroservices \
     && mkdir -p build \
