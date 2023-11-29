@@ -75,22 +75,24 @@ ssh -q $CLIENT_HOST -- python3 $REMOTE_SERVER_HOME_DIR/write_movie_info.py -x $E
 
 sleep 10
 
-: <<'END'
 rm -rf $EXP_DIR
 mkdir -p $EXP_DIR
 
 ssh -q $CLIENT_HOST -- $WRK_BIN -t 4 -c 48 -d 30 -L -U \
-    -s ~/$WRK_SCRIPT \
+    -s $REMOTE_SERVER_HOME_DIR/$WRK_SCRIPT \
     http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >$EXP_DIR/wrk_warmup.log
 
 sleep 5
 
 ssh -q $CLIENT_HOST -- $WRK_BIN -t 4 -c 48 -d 150 -L -U \
-    -s ~/$WRK_SCRIPT \
+    -s $REMOTE_SERVER_HOME_DIR/$WRK_SCRIPT \
     http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >$EXP_DIR/wrk.log
 
-$HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$EXP_DIR/logs
+
+python3 $HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$EXP_DIR/logs
 
 mkdir $EXP_DIR/logs/func_worker
 rsync -arq $ENGINE_HOST:/mnt/inmem/nightcore/output/* $EXP_DIR/logs/func_worker
+: <<'END'
+
 END
