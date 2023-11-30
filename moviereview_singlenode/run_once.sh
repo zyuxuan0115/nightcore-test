@@ -10,6 +10,7 @@ HELPER_SCRIPT=$BASE_DIR/helper
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=compose-review.lua
 
+
 MANAGER_HOST=`python3 $HELPER_SCRIPT get-docker-manager-host --base-dir=$BASE_DIR`
 CLIENT_HOST=`python3 $HELPER_SCRIPT get-client-host --base-dir=$BASE_DIR`
 #ENTRY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nginx-thrift`
@@ -18,6 +19,17 @@ MONGO_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --servi
 ENGINE_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-engine`
 GATEWAY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
 ALL_HOSTS=`python3 $HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
+
+#for host in $ALL_HOSTS; do
+#    ssh -q $host "echo '127.0.0.1     nightcore-mm-mongodb' | sudo tee -a /etc/hosts"
+#    ssh -q $host "echo '127.0.0.1     nightcore-mm-middle' | sudo tee -a /etc/hosts"
+#    ssh -q $host "echo '127.0.0.1     nightcore-mm-cache' | sudo tee -a /etc/hosts"
+#    ssh -q $host "echo '127.0.0.1     nightcore-mm-front' | sudo tee -a /etc/hosts"
+#    ssh -q $host "echo '127.0.0.1     nightcore-mm-client' | sudo tee -a /etc/hosts"
+#done
+
+python3 $HELPER_SCRIPT start-machines
+
 
 echo "MANAGER_HOST=$MANAGER_HOST"
 echo "CLIENT_HOST=$CLIENT_HOST"
@@ -68,6 +80,7 @@ scp -q $SRC_DIR/scripts/register_users.sh    $CLIENT_HOST:~
 scp -q $SRC_DIR/scripts/write_movie_info.py  $CLIENT_HOST:~
 scp -q $SRC_DIR/wrk2_scripts/$WRK_SCRIPT     $CLIENT_HOST:~
 scp -qr $SRC_DIR/datasets/tmdb               $CLIENT_HOST:~
+: <<'END'
 
 ssh -q $CLIENT_HOST -- $REMOTE_SERVER_HOME_DIR/register_users.sh $ENTRY_HOST
 ssh -q $CLIENT_HOST -- python3 $REMOTE_SERVER_HOME_DIR/write_movie_info.py -x $ENTRY_HOST \
@@ -93,6 +106,5 @@ python3 $HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$E
 
 mkdir $EXP_DIR/logs/func_worker
 rsync -arq $ENGINE_HOST:/mnt/inmem/nightcore/output/* $EXP_DIR/logs/func_worker
-: <<'END'
 
 END
