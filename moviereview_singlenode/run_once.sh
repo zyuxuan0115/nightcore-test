@@ -20,16 +20,18 @@ ENGINE_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --serv
 GATEWAY_HOST=`python3 $HELPER_SCRIPT get-service-host --base-dir=$BASE_DIR --service=nightcore-gateway`
 ALL_HOSTS=`python3 $HELPER_SCRIPT get-all-server-hosts --base-dir=$BASE_DIR`
 
-#for host in $ALL_HOSTS; do
+for host in $ALL_HOSTS; do
+    ssh -q $host -- sudo docker swarm leave -f
+    ssh -q $host -- sudo systemctl restart docker.service
+#echo $host
 #    ssh -q $host "echo '127.0.0.1     nightcore-mm-mongodb' | sudo tee -a /etc/hosts"
 #    ssh -q $host "echo '127.0.0.1     nightcore-mm-middle' | sudo tee -a /etc/hosts"
 #    ssh -q $host "echo '127.0.0.1     nightcore-mm-cache' | sudo tee -a /etc/hosts"
 #    ssh -q $host "echo '127.0.0.1     nightcore-mm-front' | sudo tee -a /etc/hosts"
 #    ssh -q $host "echo '127.0.0.1     nightcore-mm-client' | sudo tee -a /etc/hosts"
-#done
+done
 
 python3 $HELPER_SCRIPT start-machines
-
 
 echo "MANAGER_HOST=$MANAGER_HOST"
 echo "CLIENT_HOST=$CLIENT_HOST"

@@ -32,11 +32,11 @@ def setup_hostname_for_machines(machine_infos):
 
 def setup_docker_swarm_for_machines(machine_infos):
     manager_machine = None
-    for name, machine_info in machine_infos.items():
-        run_remote_command_without_exception(
-            machine_info['dns'],
-            ['sudo', 'docker', 'swarm', 'leave', '--force'])
-
+#    for name, machine_info in machine_infos.items():
+#        print(machine_info['dns'])
+#        run_remote_command_without_exception(
+#            machine_info['dns'],
+#            ['sudo', 'docker', 'swarm', 'leave', '--force'])
     for name, machine_info in machine_infos.items():
         if machine_info['role'] == 'manager':
             if manager_machine is not None:

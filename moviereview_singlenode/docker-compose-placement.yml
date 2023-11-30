@@ -65,12 +65,6 @@ services:
         constraints:
         - node.hostname == nightcore-mm-middle
       replicas: 1
-  nginx-thrift:
-    deploy:
-      placement:
-        constraints:
-        - node.hostname == nightcore-mm-front
-      replicas: 1
   nightcore-engine:
     deploy:
       placement:
