@@ -33,6 +33,6 @@
   + `./contrib/download_prerequisites`
   + `./configure --prefix=/proj/zyuxuanssf-PG0/gcc-10`
     * after building gcc-10, `export CXX=/proj/zyuxuanssf-PG0/gcc-10`
-  + [Python 3.12](https://devguide.python.org/getting-started/setup-building/#build-dependencies) (for nightcore-benchmark's script)
+- [Python 3.12](https://devguide.python.org/getting-started/setup-building/#build-dependencies) (for nightcore-benchmark's script)
     * python3 does not need to be installed manually
 
