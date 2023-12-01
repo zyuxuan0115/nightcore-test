@@ -36,6 +36,6 @@
   + `sudo docker system prune` -- in case the space is used up by docker build
       * sometimes need `sudo systemctl restart docker.service` after `sudo docker system prune`
   + `sudo docker logs -f <container_id>` -- see the output from a docker container
-  + to check why a container is setup but never be used
-      * sudo docker inspect <container_id>
+  + to check why a container is created but never be successfully setup
+      * `sudo docker inspect <container_id>`
 
