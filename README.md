@@ -1,14 +1,10 @@
 # Readme
 ### Build [nightcore](https://github.com/zyuxuan0115/nightcore) without any container
+- the cloudlab profile I used is (vhive-ubuntu20)[https://www.cloudlab.us/instantiate.php?project=faas-sched&profile=vhive-ubuntu20]
+- the cloudlab machine I used is `Cloud-Clemson c6420` 
 - [github page](https://github.com/ut-osa/nightcore/tree/asplos-release) of nightcore
   + `git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git`
-  + need to install
-    * [the newer version of cmake (3.25)](https://cmake.org/download/)
-    * [gcc-10](http://www.netgull.com/gcc/releases/gcc-10.1.0/)
-      - `./contrib/download_prerequisites`
-      - `./configure --prefix=/proj/zyuxuanssf-PG0/gcc-10`
-      - after building gcc-10, `export CXX=/proj/zyuxuanssf-PG0/gcc-10`
-    * [Python 3.12](https://devguide.python.org/getting-started/setup-building/#build-dependencies) (for nightcore-benchmark's script)
+  + need to install [the newer version of cmake (cmake-3.28.0-rc5)](https://cmake.org/download/)
   + `./build_deps.sh`
   + Before compilation, need to comment out `nightcore/src/common/stat.h`'s line #236
   + `make -j`
@@ -30,4 +26,13 @@
   + `sudo docker logs -f <container_id>` -- see the output from a docker container
   + to check why a container is created but never be successfully setup
       * `sudo docker inspect <container_id>`
+
+### other resources that might be useful
+- [gcc-10](http://www.netgull.com/gcc/releases/gcc-10.1.0/)
+  + gcc does not need to be installed manually
+  + `./contrib/download_prerequisites`
+  + `./configure --prefix=/proj/zyuxuanssf-PG0/gcc-10`
+    * after building gcc-10, `export CXX=/proj/zyuxuanssf-PG0/gcc-10`
+  + [Python 3.12](https://devguide.python.org/getting-started/setup-building/#build-dependencies) (for nightcore-benchmark's script)
+    * python3 does not need to be installed manually
 
