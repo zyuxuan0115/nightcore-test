@@ -82,7 +82,6 @@ scp -q $SRC_DIR/scripts/register_users.sh    $CLIENT_HOST:~
 scp -q $SRC_DIR/scripts/write_movie_info.py  $CLIENT_HOST:~
 scp -q $SRC_DIR/wrk2_scripts/$WRK_SCRIPT     $CLIENT_HOST:~
 scp -qr $SRC_DIR/datasets/tmdb               $CLIENT_HOST:~
-: <<'END'
 
 ssh -q $CLIENT_HOST -- $REMOTE_SERVER_HOME_DIR/register_users.sh $ENTRY_HOST
 ssh -q $CLIENT_HOST -- python3 $REMOTE_SERVER_HOME_DIR/write_movie_info.py -x $ENTRY_HOST \
@@ -108,5 +107,6 @@ python3 $HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$E
 
 mkdir $EXP_DIR/logs/func_worker
 rsync -arq $ENGINE_HOST:/mnt/inmem/nightcore/output/* $EXP_DIR/logs/func_worker
+: <<'END'
 
 END
