@@ -5,7 +5,7 @@ REMOTE_SERVER_HOME_DIR=/users/zyuxuan
 EXP_DIR=$BASE_DIR/results/$1
 QPS=$2
 
-SRC_DIR=$ROOT_DIR/DeathStarBench/socialNetwork
+SRC_DIR=$BASE_DIR/DeathStarBench/socialNetwork
 HELPER_SCRIPT=$BASE_DIR/helper
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=compose-post.lua
@@ -31,7 +31,7 @@ python3 $HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
 scp -q $BASE_DIR/docker-compose-write.yml $MANAGER_HOST:~
 scp -q $BASE_DIR/docker-compose-placement.yml $MANAGER_HOST:~
 
-ssh -q $MANAGER_HOST -- docker stack rm socialnetwork
+ssh -q $MANAGER_HOST -- sudo docker stack rm socialnetwork
 sleep 20
 ssh -q $ENTRY_HOST -- sudo rm -rf /tmp/socialNetwork
 ssh -q $ENTRY_HOST -- mkdir -p /tmp/socialNetwork
@@ -56,7 +56,7 @@ rsync -arq $SRC_DIR/media-frontend      $ENTRY_HOST:/tmp/socialNetwork
 rsync -arq $SRC_DIR/gen-lua             $ENTRY_HOST:/tmp/socialNetwork
 rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/socialNetwork
 
-ssh -q $MANAGER_HOST -- docker stack deploy \
+ssh -q $MANAGER_HOST -- sudo docker stack deploy \
     -c $REMOTE_SERVER_HOME_DIR/docker-compose-write.yml -c $REMOTE_SERVER_HOME_DIR/docker-compose-placement.yml socialnetwork
 sleep 60
 
