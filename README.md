@@ -4,9 +4,9 @@
 - the cloudlab machine I used is `Cloud-Clemson c6420` 
 - [github page](https://github.com/ut-osa/nightcore/tree/asplos-release) of nightcore
   + `git clone --recurse-submodules https://github.com/zyuxuan0115/nightcore.git`
-  + need to install [the newer version of cmake (cmake-3.28.0-rc5)](https://cmake.org/download/)
+  + need to install [a newer version of cmake](https://cmake.org/download/)
   + `./build_deps.sh`
-  + Before compilation, need to comment out `nightcore/src/common/stat.h`'s line #236
+  + before compilation, might need to comment out `nightcore/src/common/stat.h`'s line #236
   + `make -j`
 - The command to run `Foo` and `Bar`
   + `curl -X POST -d "Hello" http://<manager's IP>:8080/function/Foo`
