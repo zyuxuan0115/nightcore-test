@@ -1,5 +1,5 @@
-FROM zyuxuan0115/nightcore:main as nightcore
-FROM zyuxuan0115/cpp-microservice-deps:main
+FROM zjia/nightcore:asplos-ae as nightcore
+FROM zjia/cpp-microservice-deps:asplos-ae
 
 COPY --from=nightcore /nightcore/launcher       /nightcore/launcher
 COPY --from=nightcore /nightcore/func_worker_v1 /nightcore/func_worker_v1
@@ -8,10 +8,10 @@ ARG NUM_CPUS=1
 
 COPY . /DeathStarBench
 
-RUN cd /DeathStarBench/mediaMicroservices \
+RUN cd /DeathStarBench/socialNetwork \
     && mkdir -p build \
     && cd build \
     && cmake .. \
     && make -j${NUM_CPUS}
 
-WORKDIR /DeathStarBench/mediaMicroservices
+WORKDIR /DeathStarBench/socialNetwork
