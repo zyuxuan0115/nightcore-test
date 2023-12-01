@@ -15,14 +15,6 @@
 - The command to run `Foo` and `Bar`
   + `curl -X POST -d "Hello" http://<manager's IP>:8080/function/Foo`
 
-### setup ssh key for all 4 nodes
-- `ssh-keygen -t ed25519 -C "zyuxuan@seas.upenn.edu"`
-- in `~/.ssh/authorized_keys`, add `id_ed25519.pub` from other machines
-
-### change the host name of the manager machine
-- on manager node, in `/etc/hosts` add `127.0.0.1 nightcore-manager`
-- on worker nodes, in `/etc/hosts` add `127.0.0.1 nightcore-worker-i`, where i is the index of workers
-
 ### upgrade docker
 - This [page](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package)
 - docker version should be higher or equal to than 19.03
