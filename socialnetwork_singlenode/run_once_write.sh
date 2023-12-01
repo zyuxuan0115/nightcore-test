@@ -27,7 +27,7 @@ done
 
 python3 $HELPER_SCRIPT start-machines
 
-$HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
+python3 $HELPER_SCRIPT generate-docker-compose --base-dir=$BASE_DIR
 scp -q $BASE_DIR/docker-compose-write.yml $MANAGER_HOST:~
 scp -q $BASE_DIR/docker-compose-placement.yml $MANAGER_HOST:~
 
@@ -84,7 +84,7 @@ ssh -q $CLIENT_HOST -- $WRK_BIN -t 4 -c 48 -d 150 -L -U \
     -s ~/$WRK_SCRIPT \
     http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >$EXP_DIR/wrk.log
 
-$HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$EXP_DIR/logs
+python3 $HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$EXP_DIR/logs
 
 mkdir $EXP_DIR/logs/func_worker
 rsync -arq $ENGINE_HOST:/mnt/inmem/nightcore/output/* $EXP_DIR/logs/func_worker
