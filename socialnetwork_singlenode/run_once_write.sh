@@ -42,13 +42,14 @@ ssh -q $ENGINE_HOST -- sudo mkdir -p /mnt/inmem/nightcore
 ssh -q $ENGINE_HOST -- sudo mkdir -p /mnt/inmem/nightcore/output /mnt/inmem/nightcore/ipc
 
 for host in $ALL_HOSTS; do
-    scp -q $BASE_DIR/nightcore_config.json  $host:/tmp/nightcore_config.json
-    scp -q $BASE_DIR/service-config.json    $host:/tmp/service-config.json
+    scp -q $BASE_DIR/nightcore_config.json  $host:/tmp
+    scp -q $BASE_DIR/service-config.json    $host:/tmp
 done
 
 scp -q $BASE_DIR/run_launcher $ENGINE_HOST:/tmp/run_launcher
 ssh -q $ENGINE_HOST -- sudo cp /tmp/run_launcher /mnt/inmem/nightcore/run_launcher
-ssh -q $ENGINE_HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore/func_config.json
+ssh -q $ENGINE_HOST -- sudo cp /tmp/nightcore_config.json /mnt/inmem/nightcore
+ssh -q $ENGINE_HOST -- sudo mv /mnt/inmem/nightcore/nightcore_config.json /mnt/inmem/nightcore/func_config.json
 
 rsync -arq $SRC_DIR/nginx-web-server    $ENTRY_HOST:/tmp/socialNetwork
 rsync -arq $SRC_DIR/media-frontend      $ENTRY_HOST:/tmp/socialNetwork
@@ -56,17 +57,17 @@ rsync -arq $SRC_DIR/gen-lua             $ENTRY_HOST:/tmp/socialNetwork
 rsync -arq $SRC_DIR/docker              $ENTRY_HOST:/tmp/socialNetwork
 
 ssh -q $MANAGER_HOST -- docker stack deploy \
-    -c ~/docker-compose-write.yml -c ~/docker-compose-placement.yml socialnetwork
+    -c $REMOTE_SERVER_HOME_DIR/docker-compose-write.yml -c $REMOTE_SERVER_HOME_DIR/docker-compose-placement.yml socialnetwork
 sleep 60
 
-ENGINE_CONTAINER_ID=`$HELPER_SCRIPT get-container-id --service nightcore-engine`
+ENGINE_CONTAINER_ID=`python3 $HELPER_SCRIPT get-container-id --service nightcore-engine`
 echo 4096 | ssh -q $ENGINE_HOST -- sudo tee /sys/fs/cgroup/cpu,cpuacct/docker/$ENGINE_CONTAINER_ID/cpu.shares
 
 scp -q $SRC_DIR/scripts/init_social_graph.py                         $CLIENT_HOST:~
 scp -q $SRC_DIR/wrk2_scripts/$WRK_SCRIPT                             $CLIENT_HOST:~
 scp -q $SRC_DIR/datasets/social-graph/socfb-Reed98/socfb-Reed98.mtx  $CLIENT_HOST:~
 
-ssh -q $CLIENT_HOST -- python3 ~/init_social_graph.py $ENTRY_HOST ~/socfb-Reed98.mtx
+ssh -q $CLIENT_HOST -- python3 $REMOTE_SERVER_HOME_DIR/init_social_graph.py $ENTRY_HOST $REMOTE_SERVER_HOME_DIR/socfb-Reed98.mtx
 
 sleep 10
 
@@ -74,7 +75,7 @@ rm -rf $EXP_DIR
 mkdir -p $EXP_DIR
 
 ssh -q $CLIENT_HOST -- $WRK_BIN -t 4 -c 48 -d 30 -L -U \
-    -s ~/$WRK_SCRIPT \
+    -s $REMOTE_SERVER_HOME_DIR/$WRK_SCRIPT \
     http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >$EXP_DIR/wrk_warmup.log
 
 sleep 5
