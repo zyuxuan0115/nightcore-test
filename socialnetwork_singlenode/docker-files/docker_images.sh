@@ -20,15 +20,15 @@ function build_deathstarbench {
         --build-arg NUM_CPUS=$(nproc) \
         $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
 
-    sudo docker build -t zyuxuan0115/nightcore-moviereview:main \
-        -f $ROOT_DIR/docker-files/Dockerfile.moviereview \
+    sudo docker build -t zyuxuan0115/nightcore-socialnetwork:main \
+        -f $ROOT_DIR/docker-files/Dockerfile.socialnetwork \
         --build-arg NUM_CPUS=$(nproc) \
         $ROOT_DIR/DeathStarBench
 }
 
 function push_deathstarbench {
     sudo docker push zyuxuan0115/cpp-microservice-deps:main
-    sudo docker push zyuxuan0115/nightcore-moviereview:main
+    sudo docker push zyuxuan0115/nightcore-socialnetwork:main
 }
 
 HIPSTERSHOP_SERVICES="frontend-api \
