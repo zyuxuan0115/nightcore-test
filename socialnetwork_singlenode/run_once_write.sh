@@ -6,7 +6,7 @@ EXP_DIR=$BASE_DIR/results/$1
 QPS=$2
 
 SRC_DIR=$ROOT_DIR/DeathStarBench/socialNetwork
-HELPER_SCRIPT=$ROOT_DIR/helper
+HELPER_SCRIPT=$BASE_DIR/helper
 WRK_BIN=/usr/local/bin/wrk
 WRK_SCRIPT=compose-post.lua
 
