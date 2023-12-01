@@ -33,9 +33,9 @@
         "type": "c5.xlarge"
     },
     "nightcore-sn-write-home-timeline": {
-			 "dns": "zyuxuan@clnode203.clemson.cloudlab.us",
-       "ip": "130.127.133.212",
-       "role": "worker",
-       "type":"c5.xlarge"
+        "dns": "zyuxuan@clnode203.clemson.cloudlab.us",
+        "ip": "130.127.133.212",
+        "role": "worker",
+        "type": "c5.xlarge"
     }
 }

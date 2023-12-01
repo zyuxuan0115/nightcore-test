@@ -1,0 +1,152 @@
+services:
+  compose-post-redis:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  compose-post-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  home-timeline-redis:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  home-timeline-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  media-frontend:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-front
+      replicas: 1
+  media-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  media-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  nightcore-engine:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  nightcore-gateway:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-front
+      replicas: 1
+  post-storage-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  post-storage-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  social-graph-redis:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  social-graph-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  socialnetwork-mongodb:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-mongodb
+      replicas: 1
+  text-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  unique-id-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  url-shorten-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  url-shorten-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  user-memcached:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  user-mention-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  user-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  user-timeline-redis:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-cache
+      replicas: 1
+  user-timeline-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-middle
+      replicas: 1
+  write-home-timeline-rabbitmq:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-write-home-timeline
+      replicas: 1
+  write-home-timeline-service:
+    deploy:
+      placement:
+        constraints:
+        - node.hostname == nightcore-sn-write-home-timeline
+      replicas: 1
+version: '3.8'

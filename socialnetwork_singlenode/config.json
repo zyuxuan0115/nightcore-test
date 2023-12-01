@@ -30,7 +30,6 @@
         "unique-id-service": { "placement": "nightcore-sn-middle" },
         "user-mention-service": { "placement": "nightcore-sn-middle" },
         "home-timeline-service": { "placement": "nightcore-sn-middle" },
-        "nginx-thrift": { "placement": "nightcore-sn-front" },
         "media-frontend": { "placement": "nightcore-sn-front" },
         "nightcore-gateway": { "placement": "nightcore-sn-front" },
         "nightcore-engine": { "placement": "nightcore-sn-middle" }
