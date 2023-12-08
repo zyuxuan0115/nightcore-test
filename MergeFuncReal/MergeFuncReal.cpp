@@ -48,25 +48,28 @@ namespace {
     StringRef getRPCCalleeName(Instruction* Inst);
 
     bool runOnModule(Module &M) override {
-      Function *CallerFunc = M.getFunction("faas_func_call");
-      Function *CalleeFunc = M.getFunction("faas_func_callee"); 
+      //Function *CallerFunc = M.getFunction("faas_func_call");
+      //Function *CalleeFunc = M.getFunction("faas_func_callee"); 
+      for (auto F = M.begin();F!=M.end() ;F++){
 
       // get the RPC invocation instruction (caller instruction)
-      CallInst* RPCInst;
-      BasicBlock* RPCBB;
-      bool hasRPCinvocation = false;
-      StringRef CalleeName = "";
-      for (Function::iterator BBB = CallerFunc->begin(), BBE = CallerFunc->end(); BBB != BBE; ++BBB){
-        for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
-          if (isRPC(dyn_cast<Instruction>(IB))){
-            hasRPCinvocation = true;
-            CalleeName = getRPCCalleeName(dyn_cast<Instruction>(IB));
-            RPCInst = dyn_cast<CallInst>(IB);
-            RPCBB = dyn_cast<BasicBlock>(BBB);
-          }
-        }  
+        CallInst* RPCInst;
+        BasicBlock* RPCBB;
+        bool hasRPCinvocation = false;
+        StringRef CalleeName = "";
+        for (Function::iterator BBB = F->begin(), BBE = F->end(); BBB != BBE; ++BBB){
+          for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
+            if (isRPC(dyn_cast<Instruction>(IB))){
+              hasRPCinvocation = true;
+        //      CalleeName = getRPCCalleeName(dyn_cast<Instruction>(IB));
+              RPCInst = dyn_cast<CallInst>(IB);
+              RPCBB = dyn_cast<BasicBlock>(BBB);
+            }
+          }  
+        }
       }
 
+/*
       if (!hasRPCinvocation) return false;
 
       // based on the RPC call, create a normal function call
@@ -178,7 +181,7 @@ namespace {
         inst->eraseFromParent();
 
       VirtualCall->eraseFromParent();
-
+*/
       return false;
     }
   };
@@ -192,18 +195,20 @@ namespace {
     if ((isa<CallInst>(Inst)) && (dyn_cast<CallInst>(Inst)->isIndirectCall())){
       CallInst* VirtualCall = dyn_cast<CallInst>(Inst);
       if (VirtualCall->getNumOperands()==7){
-        Value* operand = VirtualCall->getOperand(1);
-        if (isa<ConstantExpr>(operand)){
-          Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
-          if (isa<GlobalVariable>(firstop)){
-            GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
-	    ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
-            CalleeName = CDA->getAsCString();
-            if (CalleeName.str() != ""){
-              hasRPCinvocation = true;
-	    }
-	  }
-	}
+//        Value* operand = VirtualCall->getOperand(1);
+//        if (isa<ConstantExpr>(operand)){
+//          Value *firstop = dyn_cast<ConstantExpr>(operand)->getOperand(0);
+//          if (isa<GlobalVariable>(firstop)){
+//            GlobalVariable* GV = dyn_cast<GlobalVariable>(firstop);
+//	    ConstantDataArray* CDA = dyn_cast<ConstantDataArray>(GV->getInitializer());
+//            CalleeName = CDA->getAsCString();
+//            if (CalleeName.str() != ""){
+//              hasRPCinvocation = true;
+//	    }
+//	  }
+//	}
+	errs()<<"find a virtual func call that has 7 args\n";
+        errs()<<"@@@ "<< *VirtualCall <<"\n";
       }
     }
     return hasRPCinvocation;
@@ -233,7 +238,7 @@ char MergeFuncReal::ID = 0;
 static RegisterPass<MergeFuncReal> X("MergeFuncReal", "Convert RPC to normal function call by changing the arguments of the function and the call instruction");
 
 
-
+/*
 namespace {
   struct ChangeFuncName : public ModulePass {
     static char ID; 
@@ -269,4 +274,4 @@ namespace {
 char ChangeFuncName::ID = 0;
 static RegisterPass<ChangeFuncName>
 Y("ChangeFuncName", "Change the function name of faas_func_call in callee, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
-
+*/
