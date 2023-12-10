@@ -284,7 +284,6 @@ namespace {
         for (auto F = M.begin(); F!=M.end(); F++){
           if (callerSymbols.find(F->getName().str())!=callerSymbols.end()){
             if (F->empty()) continue;
-            if (F->getName().str()=="faas_init") errs()<<"### find faas_init\n";
             bool findDebugInfo = false;
             for (Function::iterator BBB = F->begin(), BBE = F->end(); BBB != BBE; ++BBB){
               for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
@@ -293,27 +292,21 @@ namespace {
                   llvm::SmallString<128> relPath = Loc->getFilename();
                   if ((!relPath.str().empty()) && (relPath.str()[0]!='/')){
                     std::string tmp;
-                    llvm::errs()<<"/proj/zyuxuanssf-PG0/nightcore-test/"+relPath.str()<<"\n";
                     relPath = "/proj/zyuxuanssf-PG0/nightcore-test/"+std::string(relPath);
                   }
                   llvm::SmallString<128> AbsolutePath;
-//                std::string name = func->getName().str() + "_callee";
                   llvm::SmallString<128> currentPath;
-                  llvm::sys::fs::current_path(currentPath); //errs()<<currentPath.str()<<"\n";
+                  llvm::sys::fs::current_path(currentPath);
                   llvm::sys::fs::real_path(relPath,AbsolutePath);
 
-                  if((relPath.str()=="socialnetwork_singlenode/DeathStarBench/socialNetwork/src/logger.h") ||
-                     (relPath.str()=="socialnetwork_singlenode/DeathStarBench/socialNetwork/src/tracing.h") ||
-                     (relPath.str()=="socialnetwork_singlenode/DeathStarBench/socialNetwork/src/utils.h")) {
-//      	      func->setName(new_name);
+                  if((std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/tracing.h") ||
+                     (std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/logger.h") ||
+                     (std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/utils.h")) {
+                    Function* func = dyn_cast<Function>(F);
+                    errs()<<"@@@ "<<func->getName().str()<<", filename = "<<AbsolutePath.str()<<"\n";//	          const char* new_name = name.c_str();
+                    std::string name = func->getName().str() + "_callee";
+           	    func->setName(name);
                   }
-
-                  Function* func = dyn_cast<Function>(F);
-                  errs()<<"@@@ "<<func->getName().str()<<", filename = "<<AbsolutePath.str()<<"\n";//	          const char* new_name = name.c_str();
-
-
-// errs()<<"@@@ "<<func->getName().str()<<", filename = "<<relPath.str()<<"\n";//	          const char* new_name = name.c_str();
-
                   findDebugInfo = true;
                   break;
                 }
@@ -323,42 +316,18 @@ namespace {
           }
         }
 
-/*
-        std::vector<Function*> toBeRemoved;
         for (auto F = M.begin();F!=M.end() ;F++){
-      	  if ( (F->getName()=="_ZN14social_network11init_loggerEv") ||
-               (F->getName()=="_ZN14social_network16load_config_fileERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPN8nlohmann10basic_jsonISt3mapSt6vectorS5_blmdSaNS8_14adl_serializerEEE") ||
-               (F->getName()=="_ZN14social_network11load_configEPN8nlohmann10basic_jsonISt3mapSt6vectorNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEblmdSaNS0_14adl_serializerEEE") ||
-               (F->getName()=="_ZN14social_network11SetUpTracerERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_") ){
-//	   Function* func = dyn_cast<Function>(F);
-//	   toBeRemoved.push_back(func);
-
-            errs()<<"@@@ find function "<<F->getName()<<"\n";
-            Function* func = dyn_cast<Function>(F);
-            std::string name = func->getName().str() + "_remove";
-            const char* new_name = name.c_str();
-      	    func->setName(new_name);
-          }
-	  else if ((F->getName()=="faas_init") ||
-	           (F->getName()=="faas_destroy_func_worker") || 
- 	           (F->getName()=="faas_create_func_worker") ||
-                   (F->getName()=="faas_func_call")){
+	  if ((F->getName()=="faas_init") ||
+	      (F->getName()=="faas_destroy_func_worker") || 
+ 	      (F->getName()=="faas_create_func_worker") ||
+              (F->getName()=="faas_func_call")){
             errs()<<"@@@ find function "<<F->getName()<<"\n";
             Function* func = dyn_cast<Function>(F);
             std::string name = func->getName().str() + "_callee";
 	    const char* new_name = name.c_str();
       	    func->setName(new_name);
 	  }
-        }
-        while(!toBeRemoved.empty()){
-          toBeRemoved.back()->removeFromParent();
-	  toBeRemoved.pop_back();
-        }
-      }
-      else {
-
-      }
-*/
+        } 
       }
       return false;
     }
