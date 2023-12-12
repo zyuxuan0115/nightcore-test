@@ -370,13 +370,65 @@ namespace {
 	        if (Function* fptr = calleeNode->getFunction()){
 	          if (redundantFuncs.find(fptr) != redundantFuncs.end()){
 		    callerCalleePair.push_back(std::make_pair(callerFunc, fptr));
-		    errs()<<"caller: "<<callerFunc->getName()<<", callee: "<<fptr->getName()<<"\n";
+		//    errs()<<"caller: "<<callerFunc->getName()<<", callee: "<<fptr->getName()<<"\n";
 	          }
 		}
 	      }
 	    }
 	  }
-	} 
+	}
+      }
+
+      for (auto pair : callerCalleePair){
+        Function* caller = pair.first;
+ 	std::vector<CallInst*> callToBeChanged;
+ 	for (Function::iterator BBB = caller->begin(), BBE = caller->end(); BBB != BBE; ++BBB){
+	  for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
+            Instruction* I = dyn_cast<Instruction>(IB);
+	    if (isa<CallInst>(I)){
+              CallInst* callInst = dyn_cast<CallInst>(I);
+	      Function* calleeFunc = callInst->getCalledFunction();
+	      if ((calleeFunc) && (calleeFunc==pair.second)){
+		callToBeChanged.push_back(callInst);
+	      }
+	    }
+	  }
+	}
+	for (auto callInst: callToBeChanged){
+          Function* oldCallee = pair.second;
+	  std::string oldFuncName(oldCallee->getName());
+	  std::string newFuncName = oldFuncName.substr(0, oldFuncName.size()-10);
+          Function* newCallee = M.getFunction(newFuncName.c_str());
+
+	  errs()<<"###### "<<newCallee->getName()<<"\n";
+          errs()<<"###### "<<oldCallee->getName()<<"\n";
+
+	  std::vector<Value*> arguments;
+          std::vector<Type*> argumentTypes;
+
+	  for (unsigned i=0; i<callInst->getNumOperands()-1; i++){
+            arguments.push_back(callInst->getOperand(i));
+	    argumentTypes.push_back(callInst->getOperand(i)->getType());
+          }
+
+          ArrayRef<Type*> argTypes(argumentTypes);
+          ArrayRef<Value*> args(arguments);
+	  //FunctionType* FuncType = FunctionType::get(dyn_cast<Value>(callInst)->getType(), argTypes, true);
+          CallInst* newCall = CallInst::Create(newCallee->getFunctionType(), newCallee, args ,"", callInst->getNextNode());
+//                CallInst* newCall = CallInst::Create(FuncType, newCallee, args ,"", callInst->getNextNode());
+
+          Value* DestRPCInst = dyn_cast<Value>(callInst);
+          for(auto U : DestRPCInst->users()){ 
+            for (auto op = U->op_begin(); op != U->op_end(); op++){
+              Value* op_value = dyn_cast<Value>(op);
+              if (op_value == DestRPCInst){
+                Value* DestNewCall = dyn_cast<Value>(newCall);
+                *op = DestNewCall;
+	      }
+            }
+          }
+          callInst->eraseFromParent();
+        }
       }
       return false;
     }
