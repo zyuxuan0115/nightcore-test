@@ -381,7 +381,16 @@ namespace {
 
       for (auto pair : callerCalleePair){
         Function* caller = pair.first;
- 	std::vector<CallInst*> callToBeChanged;
+        Function* oldCallee = pair.second;
+	std::string oldFuncName(oldCallee->getName());
+	std::string newFuncName = oldFuncName.substr(0, oldFuncName.size()-10);
+        Function* newCallee = M.getFunction(newFuncName.c_str());
+
+	errs()<<"###### "<<newCallee->getName()<<"\n";
+        errs()<<"###### "<<oldCallee->getName()<<"\n";
+
+	std::vector<CallInst*> callToBeChanged;
+	std::vector<InvokeInst*> invokeToBeChanged;
  	for (Function::iterator BBB = caller->begin(), BBE = caller->end(); BBB != BBE; ++BBB){
 	  for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
             Instruction* I = dyn_cast<Instruction>(IB);
@@ -392,17 +401,16 @@ namespace {
 		callToBeChanged.push_back(callInst);
 	      }
 	    }
+	    else if (isa<InvokeInst>(I)){
+              InvokeInst* invokeInst = dyn_cast<InvokeInst>(I);
+	      Function* invokedFunc = invokeInst->getCalledFunction();
+              if ((invokedFunc) && (invokedFunc==pair.second)){
+		invokeToBeChanged.push_back(invokeInst);
+	      }
+	    }
 	  }
 	}
 	for (auto callInst: callToBeChanged){
-          Function* oldCallee = pair.second;
-	  std::string oldFuncName(oldCallee->getName());
-	  std::string newFuncName = oldFuncName.substr(0, oldFuncName.size()-10);
-          Function* newCallee = M.getFunction(newFuncName.c_str());
-
-	  errs()<<"###### "<<newCallee->getName()<<"\n";
-          errs()<<"###### "<<oldCallee->getName()<<"\n";
-
 	  std::vector<Value*> arguments;
           std::vector<Type*> argumentTypes;
 
@@ -413,9 +421,7 @@ namespace {
 
           ArrayRef<Type*> argTypes(argumentTypes);
           ArrayRef<Value*> args(arguments);
-	  //FunctionType* FuncType = FunctionType::get(dyn_cast<Value>(callInst)->getType(), argTypes, true);
           CallInst* newCall = CallInst::Create(newCallee->getFunctionType(), newCallee, args ,"", callInst->getNextNode());
-//                CallInst* newCall = CallInst::Create(FuncType, newCallee, args ,"", callInst->getNextNode());
 
           Value* DestRPCInst = dyn_cast<Value>(callInst);
           for(auto U : DestRPCInst->users()){ 
@@ -429,6 +435,38 @@ namespace {
           }
           callInst->eraseFromParent();
         }
+
+	for (auto invokeInst: invokeToBeChanged){
+	  BasicBlock* normalDest = invokeInst->getNormalDest();
+          BasicBlock* unwindDest = invokeInst->getUnwindDest();
+
+      	  std::vector<Value*> arguments;
+          std::vector<Type*> argumentTypes;
+
+	  for (unsigned i=0; i<invokeInst->getNumOperands()-3; i++){
+            arguments.push_back(invokeInst->getOperand(i));
+	    argumentTypes.push_back(invokeInst->getOperand(i)->getType());
+          }
+
+	  errs()<<"@@@@@ "<<*invokeInst<<"\n";
+
+          ArrayRef<Type*> argTypes(argumentTypes);
+          ArrayRef<Value*> args(arguments);
+          InvokeInst* newInvoke = InvokeInst::Create(newCallee->getFunctionType(), newCallee, normalDest, unwindDest, args ,"", invokeInst);
+
+          Value* DestRPCInst = dyn_cast<Value>(invokeInst);
+          for(auto U : DestRPCInst->users()){ 
+            for (auto op = U->op_begin(); op != U->op_end(); op++){
+              Value* op_value = dyn_cast<Value>(op);
+              if (op_value == DestRPCInst){
+                Value* DestNewCall = dyn_cast<Value>(newInvoke);
+                *op = DestNewCall;
+	      }
+            }
+          }
+          invokeInst->eraseFromParent();
+        }
+
       }
       return false;
     }
