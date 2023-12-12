@@ -39,6 +39,7 @@
 #include "llvm/IR/DebugInfoMetadata.h"
 #include "llvm/Support/Path.h"
 #include "llvm/Support/FileSystem.h"
+#include "llvm/Analysis/CallGraph.h"
 #include <fstream>
 #include <unordered_set>
 using namespace llvm;
@@ -53,31 +54,29 @@ namespace {
     StringRef getRPCCalleeName(Instruction* Inst);
 
     bool runOnModule(Module &M) override {
-      //Function *CallerFunc = M.getFunction("faas_func_call");
-      //Function *CalleeFunc = M.getFunction("faas_func_callee"); 
-      for (auto F = M.begin();F!=M.end() ;F++){
+      Function *CallerFunc = M.getFunction("_ZN10FaasWorker15ClientTransport5flushEv");
+      Function *CalleeFunc = M.getFunction("faas_func_call_callee"); 
 
       // get the RPC invocation instruction (caller instruction)
-        CallInst* RPCInst;
-        BasicBlock* RPCBB;
-        bool hasRPCinvocation = false;
-        StringRef CalleeName = "";
-        for (Function::iterator BBB = F->begin(), BBE = F->end(); BBB != BBE; ++BBB){
-          for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
-            if (isRPC(dyn_cast<Instruction>(IB))){
-              Function* func = dyn_cast<Function>(F);
-              errs()<<*func<<"\n";
-              hasRPCinvocation = true;
+      CallInst* RPCInst;
+      BasicBlock* RPCBB;
+      bool hasRPCinvocation = false;
+      StringRef CalleeName = "";
+      for (Function::iterator BBB = CallerFunc->begin(), BBE = CallerFunc->end(); BBB != BBE; ++BBB){
+        for (BasicBlock::iterator IB = BBB->begin(), IE = BBB->end(); IB != IE; IB++){
+          if (isRPC(dyn_cast<Instruction>(IB))){
+            hasRPCinvocation = true;
         //      CalleeName = getRPCCalleeName(dyn_cast<Instruction>(IB));
-              RPCInst = dyn_cast<CallInst>(IB);
-              RPCBB = dyn_cast<BasicBlock>(BBB);
-            }
-          }  
-        }
+            RPCInst = dyn_cast<CallInst>(IB);
+            RPCBB = dyn_cast<BasicBlock>(BBB);
+          }
+        }  
       }
 
-/*
+
       if (!hasRPCinvocation) return false;
+
+      errs()<<"### "<<*RPCInst<<"\n";
 
       // based on the RPC call, create a normal function call
       // get the following arguments from the RPC Instruction
@@ -98,7 +97,7 @@ namespace {
       ArrayRef<Value*> args(arguments);
       FunctionType* FuncType = FunctionType::get(IntegerType::getInt32Ty(M.getContext()), argTypes, true);
 
-      Function * NewCalleeFunc = Function::Create(FuncType, CallerFunc->getLinkage(), CalleeName, &M);
+      Function * NewCalleeFunc = Function::Create(FuncType, CallerFunc->getLinkage(), "ComposePostService_new", &M);
       ValueToValueMapTy VMap;
       Function::arg_iterator DestI = NewCalleeFunc->arg_begin();
 
@@ -110,13 +109,14 @@ namespace {
       SmallVector<ReturnInst*, 8> Returns;
 
       CloneFunctionInto(NewCalleeFunc, CalleeFunc, VMap, llvm::CloneFunctionChangeType::LocalChangesOnly, Returns);
-      NewCalleeFunc->setName(CalleeName);
+      NewCalleeFunc->setName("ComposePostService_new");
 
       // create the normal function call of the RPC 
       // and then eliminate RPC call
       // before RPC call instruction is eliminated, 
       // need to change all user instructions' operands
       // that depend on the result of the RPC call 
+
       CallInst* newCall = CallInst::Create(FuncType, NewCalleeFunc, args ,"", RPCInst->getNextNode());
       Value* DestRPCInst = dyn_cast<Value>(RPCInst);
       for(auto U : DestRPCInst->users()){ 
@@ -127,7 +127,9 @@ namespace {
             *op = DestNewCall;
           }
         }
-      } 
+      }
+
+/*       
       RPCInst->eraseFromParent();
       // remove old callee function (RPC version)
       CalleeFunc->eraseFromParent();
@@ -215,7 +217,6 @@ namespace {
 //	  }
 //	}
 	errs()<<"@@@ find a virtual func call that has 7 args\n";
-        errs()<<"@@@ "<< *VirtualCall <<"\n";
         hasRPCinvocation = true;
       }
     }
@@ -251,13 +252,9 @@ namespace {
   static cl::opt<std::string> writeFuncSymbol("write-func-symbol", 
                                             cl::desc("write all function symbols of the current function (normally caller function) to a file"), 
                                             cl::value_desc("filename"));
-
   static cl::opt<std::string> readFuncSymbol("read-func-symbol", 
                                             cl::desc("read all function symbols from a file"), 
                                             cl::value_desc("filename"));
-
-
-
   struct ChangeFuncNames : public ModulePass {
     static char ID; 
     ChangeFuncNames() : ModulePass(ID) {}
@@ -303,8 +300,8 @@ namespace {
                      (std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/logger.h") ||
                      (std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/utils.h")) {
                     Function* func = dyn_cast<Function>(F);
-                    errs()<<"@@@ "<<func->getName().str()<<", filename = "<<AbsolutePath.str()<<"\n";//	          const char* new_name = name.c_str();
-                    std::string name = func->getName().str() + "_callee";
+                    errs()<<"@@@ "<<func->getName().str()<<", filename = "<<AbsolutePath.str()<<"\n";
+                    std::string name = func->getName().str() + "_redundant";
            	    func->setName(name);
                   }
                   findDebugInfo = true;
@@ -321,13 +318,15 @@ namespace {
 	      (F->getName()=="faas_destroy_func_worker") || 
  	      (F->getName()=="faas_create_func_worker") ||
               (F->getName()=="faas_func_call")){
-            errs()<<"@@@ find function "<<F->getName()<<"\n";
             Function* func = dyn_cast<Function>(F);
             std::string name = func->getName().str() + "_callee";
 	    const char* new_name = name.c_str();
       	    func->setName(new_name);
 	  }
-        } 
+        }
+      }
+      else {
+        errs()<<"need either write-func-symbol or read-func-symbol file\n";
       }
       return false;
     }
@@ -341,4 +340,62 @@ namespace {
 char ChangeFuncNames::ID = 0;
 static RegisterPass<ChangeFuncNames>
 Y("ChangeFuncNames", "Change the function name of faas_func_call in callee, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
+
+
+
+
+
+namespace {
+  struct RemoveRedundant : public ModulePass {
+    static char ID; 
+    RemoveRedundant() : ModulePass(ID) {}
+    bool checkFuncSuffix(std::string);
+
+    bool runOnModule(Module &M) override {
+      std::unordered_set<Function*> redundantFuncs;
+      for (auto F = M.begin(); F!=M.end(); F++){
+	std::string FuncName(F->getName());
+	if (checkFuncSuffix(FuncName)) redundantFuncs.insert(dyn_cast<Function>(F));
+      }
+
+      CallGraph cg = CallGraph(M);
+      std::vector<std::pair<Function*, Function*> > callerCalleePair;
+      for ( CallGraph::const_iterator itr = cg.begin(), ie = cg.end() ; itr != ie; itr++) {
+        if (itr->second != nullptr){
+	  CallGraphNode *callerNode = itr->second.get();
+	  if (Function* callerFunc = callerNode->getFunction()){
+            std::string callerName (callerFunc->getName());
+      	    for (auto it = callerNode->begin(); it != callerNode->end(); it++) {
+              if (CallGraphNode * calleeNode = it->second){
+	        if (Function* fptr = calleeNode->getFunction()){
+	          if (redundantFuncs.find(fptr) != redundantFuncs.end()){
+		    callerCalleePair.push_back(std::make_pair(callerFunc, fptr));
+		    errs()<<"caller: "<<callerFunc->getName()<<", callee: "<<fptr->getName()<<"\n";
+	          }
+		}
+	      }
+	    }
+	  }
+	} 
+      }
+      return false;
+    }
+
+    void getAnalysisUsage(AnalysisUsage &AU) const override {
+      AU.setPreservesAll();
+    }
+  };
+
+  bool RemoveRedundant::checkFuncSuffix(std::string FuncName) {
+    int len = FuncName.size();
+    if (len<=10) return false;
+    std::string suffix = FuncName.substr(len-10, 10);
+    if (suffix == "_redundant") return true;
+    else return false;
+  } 
+}
+
+char RemoveRedundant::ID = 0;
+static RegisterPass<RemoveRedundant>
+Z("RemoveRedundant", "Change the function name of faas_func_call in callee, otherwise the new function cannot be merged into the same address space due to duplicate of the function sympols");
 
