@@ -466,7 +466,9 @@ namespace {
           }
           invokeInst->eraseFromParent();
         }
-
+      }
+      for (const auto& func: redundantFuncs) {
+	func->eraseFromParent();
       }
       return false;
     }
