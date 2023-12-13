@@ -59,6 +59,40 @@ public:
         return std::make_shared<ClientType>(client_protocol_factory_->getProtocol(transport));
     }
 
+    void SetProcessor_1(std::shared_ptr<apache::thrift::TProcessor> processor) {
+        processor_1_ = processor;
+    }
+
+    bool Process_1(const char* input, size_t input_length) {
+        if (processor_1_ == nullptr) {
+            fprintf(stderr, "Processor is not set!\n");
+            return false;
+        }
+        in_transport_1_->resetBuffer(reinterpret_cast<uint8_t*>(const_cast<char*>(input)),
+                                   static_cast<uint32_t>(input_length));
+        try {
+            if (!processor_1_->process(in_protocol_factory_1_->getProtocol(in_transport_1_),
+                                     out_protocol_factory_1_->getProtocol(out_transport_1_),
+                                     nullptr)) {
+                return false;
+            }
+        } catch (const std::exception& x) {
+            fprintf(stderr, "Failed to process request: %s\n", x.what());
+            return false;
+        }
+        return true;
+    }
+
+    template<class ClientType>
+    std::shared_ptr<ClientType> CreateClient_1(const std::string& func_name) {
+        std::shared_ptr<apache::thrift::transport::TTransport> transport(
+            new ClientTransport(this, func_name));
+        return std::make_shared<ClientType>(client_protocol_factory_1_->getProtocol(transport));
+    }
+
+
+
+
 private:
     class WorkerOutputTransport : public apache::thrift::transport::TVirtualTransport<WorkerOutputTransport> {
     public:
@@ -126,6 +160,13 @@ private:
     std::shared_ptr<apache::thrift::protocol::TProtocolFactory> in_protocol_factory_;
     std::shared_ptr<apache::thrift::protocol::TProtocolFactory> out_protocol_factory_;
     std::shared_ptr<apache::thrift::protocol::TProtocolFactory> client_protocol_factory_;
+
+    std::shared_ptr<apache::thrift::TProcessor> processor_1_;
+    std::shared_ptr<apache::thrift::transport::TMemoryBuffer> in_transport_1_;
+    std::shared_ptr<apache::thrift::transport::TTransport> out_transport_1_;
+    std::shared_ptr<apache::thrift::protocol::TProtocolFactory> in_protocol_factory_1_;
+    std::shared_ptr<apache::thrift::protocol::TProtocolFactory> out_protocol_factory_1_;
+    std::shared_ptr<apache::thrift::protocol::TProtocolFactory> client_protocol_factory_1_;
 
     FaasWorker(const FaasWorker&) = delete;
     FaasWorker& operator=(const FaasWorker&) = delete;
