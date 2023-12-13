@@ -14,28 +14,52 @@
 #include "../utils.h"
 #include "../ThriftSeverEventHandler.h"
 #include "UniqueIdHandler.h"
+#include "../ComposePostService/ComposePostHandler.h"
 
 using namespace social_network;
 
 static json config_json;
 static std::string machine_id;
 static std::mutex* thread_lock;
+static ClientPool<RedisClient>* redis_client_pool;
+static ClientPool<RabbitmqClient>* rabbitmq_client_pool;
 
 int faas_init() {
     init_logger();
     SetUpTracer("config/jaeger-config.yml", "post-storage-service");
 
     if (load_config(&config_json) != 0) {
-        return -1;
+      return -1;
     }
 
-  if (GetMachineId(&machine_id) != 0) {
-    return -1;
-  }
+    if (GetMachineId(&machine_id) != 0) {
+      return -1;
+    }
 
-  thread_lock = new std::mutex;
+    thread_lock = new std::mutex;
 
     return 0;
+}
+
+int faas_init_compose_post(){
+  init_logger();
+  SetUpTracer("config/jaeger-config.yml", "post-storage-service");
+
+  if (load_config(&config_json) != 0) {
+    return -1;
+  }
+  
+  int redis_port = config_json["compose-post-redis"]["port"];
+  std::string redis_addr = config_json["compose-post-redis"]["addr"];
+  int rabbitmq_port = config_json["write-home-timeline-rabbitmq"]["port"];
+  std::string rabbitmq_addr = config_json["write-home-timeline-rabbitmq"]["addr"];
+
+  redis_client_pool = new ClientPool<RedisClient>("redis", redis_addr, redis_port,
+				                  0, config_json["compose-post-service"]["redis_client_pool_size"], 1000);
+  rabbitmq_client_pool = new ClientPool<RabbitmqClient>("rabbitmq", rabbitmq_addr,
+					          rabbitmq_port, 0, config_json["compose-post-service"]["rabbitmq_client_pool_size"],
+					          1000, "", nullptr, "ComposePostService", "WriteHomeTimelineRabbitMQ");
+  return 0;
 }
 
 int faas_create_func_worker(void* caller_context,
