@@ -29,7 +29,15 @@ public:
     }
 
     void SetProcessor(std::shared_ptr<apache::thrift::TProcessor> processor) {
-        processor_ = processor;
+      system("touch func_name.txt");
+
+      FILE* fp = fopen("func_name.txt", "a");
+      fprintf(fp, "@@@@@@@test\n");
+      fprintf(stderr, "@@@@@@@test\n");
+      fflush(fp);
+      fclose(fp);
+
+      processor_ = processor;
     }
 
     bool Process(const char* input, size_t input_length) {
