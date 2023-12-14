@@ -70,19 +70,28 @@ int faas_create_func_worker_callee(void* caller_context,
                             faas_append_output_fn_t append_output_fn,
                             void** worker_handle, FaasWorker* faas_worker) {
 
-    std::string compose_post_addr = config_json["compose-post-service"]["addr"];
-    int compose_post_port = config_json["compose-post-service"]["port"];
-    std::string compose_post_http_path = config_json["compose-post-service"]["http_path"];
 
-    auto compose_post_client_pool = new ClientPool<ThriftClient<ComposePostServiceClient>>(
-        "compose-post", compose_post_addr, compose_post_port, 0, config_json["unique-id-service"]["compose_post_client_pool_size"],
-        1000, "ComposePostService", faas_worker, "UniqueIdService", "ComposePostService");
+  int post_storage_port = config_json["post-storage-service"]["port"];
+  std::string post_storage_addr = config_json["post-storage-service"]["addr"];
 
-    faas_worker->SetProcessor_1(std::make_shared<UniqueIdServiceProcessor>(
-                              std::make_shared<UniqueIdHandler>(
-                              thread_lock, machine_id, compose_post_client_pool)));
+  int user_timeline_port = config_json["user-timeline-service"]["port"];
+  std::string user_timeline_addr = config_json["user-timeline-service"]["addr"];
 
-    return 0;
+  auto post_storage_client_pool = new ClientPool<ThriftClient<PostStorageServiceClient>>("post-storage-client", post_storage_addr,
+                               post_storage_port, 0, config_json["compose-post-service"]["post_storage_client_pool_size"],
+                               1000, "PostStorageService", faas_worker, "ComposePostService", "PostStorageService");
+  auto user_timeline_client_pool = new ClientPool<ThriftClient<UserTimelineServiceClient>>("user-timeline-client", user_timeline_addr,
+                                user_timeline_port, 0, config_json["compose-post-service"]["user_timeline_client_pool_size"],
+                                1000, "UserTimelineService", faas_worker, "ComposePostService", "UserTimelineService");
+
+  faas_worker->SetProcessor(std::make_shared<ComposePostServiceProcessor>(
+          std::make_shared<ComposePostHandler>(
+              redis_client_pool,
+              post_storage_client_pool,
+              user_timeline_client_pool,
+              rabbitmq_client_pool)));
+
+  return 0;
 }
 
 
