@@ -20,7 +20,7 @@ function build_deathstarbench {
         --build-arg NUM_CPUS=$(nproc) \
         $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
 
-    sudo docker build -t zyuxuan0115/nightcore-socialnetwork:main \
+    sudo docker build --no-cache -t zyuxuan0115/nightcore-socialnetwork:main \
         -f $ROOT_DIR/docker-files/Dockerfile.socialnetwork \
         --build-arg NUM_CPUS=$(nproc) \
         $ROOT_DIR/DeathStarBench
