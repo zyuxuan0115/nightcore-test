@@ -29,14 +29,6 @@ public:
     }
 
     void SetProcessor(std::shared_ptr<apache::thrift::TProcessor> processor) {
-      system("touch func_name.txt");
-
-      FILE* fp = fopen("func_name.txt", "a");
-      fprintf(fp, "######test\n");
-      fprintf(stderr, "######test\n");
-      fflush(fp);
-      fclose(fp);
-
       processor_ = processor;
     }
 
@@ -57,7 +49,16 @@ public:
             fprintf(stderr, "Failed to process request: %s\n", x.what());
             return false;
         }
-        return true;
+      system("touch func_name.txt");
+
+      FILE* fp = fopen("func_name.txt", "a");
+      fprintf(fp, "######process successfully\n");
+      fprintf(stderr, "######process successfully\n");
+      fflush(fp);
+      fclose(fp);
+
+
+	return true;
     }
 
     template<class ClientType>
