@@ -74,15 +74,15 @@ sleep 10
 rm -rf $EXP_DIR
 mkdir -p $EXP_DIR
 
-ssh -q $CLIENT_HOST -- $WRK_BIN -t 4 -c 48 -d 30 -L -U \
+ssh -q $CLIENT_HOST -- "$WRK_BIN -t 4 -c 48 -d 30 -L -U \
     -s $REMOTE_SERVER_HOME_DIR/$WRK_SCRIPT \
-    http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >$EXP_DIR/wrk_warmup.log
+    http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >  $REMOTE_SERVER_HOME_DIR/wrk_warmup.log"
 
 sleep 5
 
-ssh -q $CLIENT_HOST -- $WRK_BIN -t 4 -c 48 -d 150 -L -U \
-    -s ~/$WRK_SCRIPT \
-    http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >$EXP_DIR/wrk.log
+ssh -q $CLIENT_HOST -- "$WRK_BIN -t 4 -c 48 -d 150 -L -U \
+    -s $REMOTE_SERVER_HOME_DIR/$WRK_SCRIPT \
+    http://$ENTRY_HOST:8080 -R $QPS 2>/dev/null >  $REMOTE_SERVER_HOME_DIR/wrk.log"
 
 python3 $HELPER_SCRIPT collect-container-logs --base-dir=$BASE_DIR --log-path=$EXP_DIR/logs
 
