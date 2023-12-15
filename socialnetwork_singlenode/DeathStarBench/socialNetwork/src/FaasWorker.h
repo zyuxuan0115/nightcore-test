@@ -124,13 +124,13 @@ private:
         ClientTransport(FaasWorker* parent, const std::string& func_name)
             : parent_(parent), func_name_(func_name) {
 	      system("touch func_name.txt");
-
+/*
              FILE* fp = fopen("func_name.txt", "a");
              fprintf(fp, "@@@@@@@ %s\n", func_name.c_str());
              fprintf(stderr, "@@@@@@@ %s\n", func_name.c_str());
              fflush(fp);
              fclose(fp);
-    
+*/    
 	}
 
         void write(const uint8_t* buf, uint32_t len) {
