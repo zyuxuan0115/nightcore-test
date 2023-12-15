@@ -32,6 +32,7 @@
         "home-timeline-service": { "placement": "nightcore-sn-middle" },
         "media-frontend": { "placement": "nightcore-sn-front" },
         "nightcore-gateway": { "placement": "nightcore-sn-front" },
-        "nightcore-engine": { "placement": "nightcore-sn-middle" }
+        "nightcore-engine": { "placement": "nightcore-sn-middle" },
+        "nginx-thrift": { "placement": "nightcore-sn-front" }
     }
 }
