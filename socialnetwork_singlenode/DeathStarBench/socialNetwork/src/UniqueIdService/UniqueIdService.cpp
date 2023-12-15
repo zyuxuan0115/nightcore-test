@@ -84,7 +84,7 @@ int faas_create_func_worker_callee(void* caller_context,
                                 user_timeline_port, 0, config_json["compose-post-service"]["user_timeline_client_pool_size"],
                                 1000, "UserTimelineService", faas_worker, "ComposePostService", "UserTimelineService");
 
-  faas_worker->SetProcessor(std::make_shared<ComposePostServiceProcessor>(
+  faas_worker->SetProcessor_1(std::make_shared<ComposePostServiceProcessor>(
           std::make_shared<ComposePostHandler>(
               redis_client_pool,
               post_storage_client_pool,
