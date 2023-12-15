@@ -32,8 +32,8 @@ public:
       system("touch func_name.txt");
 
       FILE* fp = fopen("func_name.txt", "a");
-      fprintf(fp, "@@@@@@@test\n");
-      fprintf(stderr, "@@@@@@@test\n");
+      fprintf(fp, "######test\n");
+      fprintf(stderr, "######test\n");
       fflush(fp);
       fclose(fp);
 
@@ -119,7 +119,16 @@ private:
     class ClientTransport : public apache::thrift::transport::TVirtualTransport<ClientTransport> {
     public:
         ClientTransport(FaasWorker* parent, const std::string& func_name)
-            : parent_(parent), func_name_(func_name) {}
+            : parent_(parent), func_name_(func_name) {
+	      system("touch func_name.txt");
+
+             FILE* fp = fopen("func_name.txt", "a");
+             fprintf(fp, "@@@@@@@ %s\n", func_name.c_str());
+             fprintf(stderr, "@@@@@@@ %s\n", func_name.c_str());
+             fflush(fp);
+             fclose(fp);
+    
+	}
 
         void write(const uint8_t* buf, uint32_t len) {
             out_buf_.write(buf, len);
