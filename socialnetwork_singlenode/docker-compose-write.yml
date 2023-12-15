@@ -29,8 +29,6 @@ services:
       - --num_io_workers=4
       - --lb_pick_least_load
       - --max_running_requests=24
-    ports: 
-     - 8080:8080
     volumes:
       - /tmp/nightcore_config.json:/tmp/nightcore/func_config.json
 
@@ -257,20 +255,20 @@ services:
     command: ["memcached", "-m", "4096"]
     restart: always
 
-#  nginx-thrift:
-#    image: zjia/openresty-thrift:xenial
-#    hostname: nginx-thrift
-#    ports:
-#      - 8080:8080
-#    restart: always
-#    volumes:
-#      - /tmp/service-config.json:/social-network-microservices/config/service-config.json
-#      - /tmp/socialNetwork/nginx-web-server/lua-scripts:/usr/local/openresty/nginx/lua-scripts
-#      - /tmp/socialNetwork/nginx-web-server/pages:/usr/local/openresty/nginx/pages
-#      - /tmp/socialNetwork/nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-#      - /tmp/socialNetwork/nginx-web-server/jaeger-config.json:/usr/local/openresty/nginx/jaeger-config.json
-#      - /tmp/socialNetwork/gen-lua:/gen-lua
-#      - /tmp/socialNetwork/docker/openresty-thrift/lua-thrift:/usr/local/openresty/lualib/thrift
+  nginx-thrift:
+    image: zjia/openresty-thrift:xenial
+    hostname: nginx-thrift
+    ports:
+      - 8080:8080
+    restart: always
+    volumes:
+      - /tmp/service-config.json:/social-network-microservices/config/service-config.json
+      - /tmp/socialNetwork/nginx-web-server/lua-scripts:/usr/local/openresty/nginx/lua-scripts
+      - /tmp/socialNetwork/nginx-web-server/pages:/usr/local/openresty/nginx/pages
+      - /tmp/socialNetwork/nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - /tmp/socialNetwork/nginx-web-server/jaeger-config.json:/usr/local/openresty/nginx/jaeger-config.json
+      - /tmp/socialNetwork/gen-lua:/gen-lua
+      - /tmp/socialNetwork/docker/openresty-thrift/lua-thrift:/usr/local/openresty/lualib/thrift
 
   media-frontend:
     image: zjia/media-frontend:xenial
