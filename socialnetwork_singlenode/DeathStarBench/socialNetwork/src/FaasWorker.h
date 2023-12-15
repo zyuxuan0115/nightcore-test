@@ -49,17 +49,6 @@ public:
             fprintf(stderr, "Failed to process request: %s\n", x.what());
             return false;
         }
-
-	/*
-      system("touch func_name.txt");
-
-      FILE* fp = fopen("func_name.txt", "a");
-      fprintf(fp, "######process successfully\n");
-      fprintf(stderr, "######process successfully\n");
-      fflush(fp);
-      fclose(fp);
-*/
-
 	return true;
     }
 
