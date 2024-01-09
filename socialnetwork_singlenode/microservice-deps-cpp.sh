@@ -18,6 +18,7 @@ BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison f
 sudo apt-get update \
   && sudo apt-get install -y ${BUILD_DEPS} --no-install-recommends
 
+rm -rf $DIR
 mkdir $DIR
 
 # Install mongo-c-driver
@@ -92,7 +93,7 @@ cd $DIR \
   && tar -zxf cpp-jwt-${LIB_CPP_JWT_VERSION}.tar.gz \
   && cd cpp-jwt-${LIB_CPP_JWT_VERSION} \
   && sudo cp -R include/jwt /usr/local/include \
-  && rm -rf /usr/local/include/jwt/json \
+  && sudo rm -rf /usr/local/include/jwt/json \
   && sed 's/\#include \"jwt\/json\/json.hpp\"/\#include \<nlohmann\/json\.hpp\>/g'  /usr/local/include/jwt/jwt.hpp | sudo tee /usr/local/include/jwt/jwt.hpp
   #&& sed -i 's/\#include \"jwt\/json\/json.hpp\"/\#include \<nlohmann\/json\.hpp\>/g' /usr/local/include/jwt/jwt.hpp
 
