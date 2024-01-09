@@ -7,7 +7,13 @@
 
 # How to build the benchmark on your machine
 - install C++ dependency
+
+```bash
+./microservice-deps-cpp.sh
+```
+
 - build the workload
+
 ```bash
 > cd DeathStarBench/socialNetwork
 > mkdir build && cd build
