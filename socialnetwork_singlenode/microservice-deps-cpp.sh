@@ -13,7 +13,7 @@ LIB_SIMPLEAMQPCLIENT_VERSION="2.4.0"
 DIR="/proj/zyuxuanssf-PG0/tmp"
 
 NUM_CPUS=1
-BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
+BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev libhiredis-dev"
 
 sudo apt-get update \
   && sudo apt-get install -y ${BUILD_DEPS} --no-install-recommends
