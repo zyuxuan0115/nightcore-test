@@ -124,6 +124,13 @@ cd $DIR \
   && cmake .. -DCMAKE_BUILD_TYPE=Release \
   && make -j${NUM_CPUS} \
   && sudo make install 
+
+cd $DIR \
+  && git clone https://github.com/redis/hiredis.git \
+  && cd hiredis \
+  && make \
+  && sudo make install 
+  && sudo ldconfig
 #  && cd $ \
 #  && rm -rf \
 #    mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
