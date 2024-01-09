@@ -4,3 +4,13 @@
   + after running this script for the first time, you also need to ssh from all servers to all other servers, in order to add other server's to the ~/.ssh/known_hosts 
 - command to run the workload
   + `./run_once.sh qps1000 1000` or `./run_all`
+
+# How to build the benchmark on your machine
+- install C++ dependency
+- build the workload
+```bash
+> cd DeathStarBench/socialNetwork
+> mkdir build && cd build
+> cmake ..
+> make
+```
