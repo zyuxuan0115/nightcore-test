@@ -10,14 +10,18 @@ LIB_CPP_REDIS_VERSION="4.3.1"
 LIB_AMQP_CPP_VERSION="4.1.4"
 LIB_SIMPLEAMQPCLIENT_VERSION="2.4.0"
 
+DIR="/proj/zyuxuanssf-PG0/tmp"
+
 NUM_CPUS=1
 BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
 
 sudo apt-get update \
   && sudo apt-get install -y ${BUILD_DEPS} --no-install-recommends
 
+mkdir $DIR
+
 # Install mongo-c-driver
-cd /tmp \
+cd $DIR \
   && wget https://github.com/mongodb/mongo-c-driver/releases/download/${LIB_MONGOC_VERSION}/mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
   && tar -zxf mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
   && cd mongo-c-driver-${LIB_MONGOC_VERSION} \
@@ -28,7 +32,7 @@ cd /tmp \
   && sudo make install
 
 # Install lib-thrift
-cd /tmp \
+cd $DIR \
   && wget -O thrift-${LIB_THRIFT_VERSION}.tar.gz https://github.com/apache/thrift/archive/v${LIB_THRIFT_VERSION}.tar.gz \
   && tar -zxf thrift-${LIB_THRIFT_VERSION}.tar.gz \
   && cd thrift-${LIB_THRIFT_VERSION} \
@@ -39,7 +43,7 @@ cd /tmp \
   && sudo make install
 
 # Install /nlohmann/json
-cd /tmp \
+cd $DIR \
   && wget -O json-${LIB_JSON_VERSION}.tar.gz https://github.com/nlohmann/json/archive/v${LIB_JSON_VERSION}.tar.gz \
   && tar -zxf json-${LIB_JSON_VERSION}.tar.gz \
   && cd json-${LIB_JSON_VERSION} \
@@ -50,7 +54,7 @@ cd /tmp \
   && sudo make install
 
 # Install yaml-cpp
-cd /tmp \
+cd $DIR \
   && wget -O yaml-cpp-${LIB_YAML_VERSION}.tar.gz https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-${LIB_YAML_VERSION}.tar.gz \
   && tar -zxf yaml-cpp-${LIB_YAML_VERSION}.tar.gz \
   && cd yaml-cpp-yaml-cpp-${LIB_YAML_VERSION} \
@@ -61,7 +65,7 @@ cd /tmp \
   && sudo make install
 
 # Install opentracing-cpp
-cd /tmp \
+cd $DIR \
   && wget -O opentracing-cpp-${LIB_OPENTRACING_VERSION}.tar.gz https://github.com/opentracing/opentracing-cpp/archive/v${LIB_OPENTRACING_VERSION}.tar.gz \
   && tar -zxf opentracing-cpp-${LIB_OPENTRACING_VERSION}.tar.gz \
   && cd opentracing-cpp-${LIB_OPENTRACING_VERSION} \
@@ -72,7 +76,7 @@ cd /tmp \
   && sudo make install
 
 # Install jaeger-client-cpp
-cd /tmp \
+cd $DIR \
   && wget -O jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz https://github.com/jaegertracing/jaeger-client-cpp/archive/v${LIB_JAEGER_VERSION}.tar.gz \
   && tar -zxf jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz \
   && cd jaeger-client-cpp-${LIB_JAEGER_VERSION} \
@@ -83,7 +87,7 @@ cd /tmp \
   && sudo make install
 
 # Install jwt
-cd /tmp \
+cd $DIR \
   && wget -O cpp-jwt-${LIB_CPP_JWT_VERSION}.tar.gz https://github.com/arun11299/cpp-jwt/archive/v${LIB_CPP_JWT_VERSION}.tar.gz \
   && tar -zxf cpp-jwt-${LIB_CPP_JWT_VERSION}.tar.gz \
   && cd cpp-jwt-${LIB_CPP_JWT_VERSION} \
@@ -93,7 +97,7 @@ cd /tmp \
   #&& sed -i 's/\#include \"jwt\/json\/json.hpp\"/\#include \<nlohmann\/json\.hpp\>/g' /usr/local/include/jwt/jwt.hpp
 
 # Install cpp_redis
-cd /tmp \
+cd $DIR \
   && git clone https://github.com/cpp-redis/cpp_redis.git \
   && cd cpp_redis && git checkout ${LIB_CPP_REDIS_VERSION} \
   && git submodule init && git submodule update \
@@ -103,7 +107,7 @@ cd /tmp \
   && sudo make install
 
 # Install AMQP-CPP
-cd /tmp \
+cd $DIR \
   && git clone https://github.com/CopernicaMarketingSoftware/AMQP-CPP.git \
   && cd AMQP-CPP && git checkout v${LIB_AMQP_CPP_VERSION} \
   && mkdir cmake-build && cd cmake-build \
@@ -111,30 +115,30 @@ cd /tmp \
   && make -j${NUM_CPUS} && sudo make install
 
 # Install SimpleAmqpClient
-cd /tmp \
+cd $DIR \
   && git clone https://github.com/alanxz/SimpleAmqpClient.git \
   && cd SimpleAmqpClient \
   && git checkout v${LIB_SIMPLEAMQPCLIENT_VERSION} \
   && mkdir cmake-build && cd cmake-build \
   && cmake .. -DCMAKE_BUILD_TYPE=Release \
   && make -j${NUM_CPUS} \
-  && sudo make install \
-  && cd /tmp \
-  && rm -rf \
-    mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
-    mongo-c-driver-${LIB_MONGOC_VERSION} \
-    thrift-${LIB_THRIFT_VERSION}.tar.gz \
-    thrift-${LIB_THRIFT_VERSION} \
-    json-${LIB_JSON_VERSION}.tar.gz \
-    json-${LIB_JSON_VERSION} \
-    jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz \
-    jaeger-client-cpp-${LIB_JAEGER_VERSION} \
-    yaml-cpp-${LIB_YAML_VERSION}.tar.gz \
-    yaml-cpp-yaml-cpp-${LIB_YAML_VERSION} \
-    opentracing-cpp-${LIB_OPENTRACING_VERSION}.tar.gz \
-    opentracing-cpp-${LIB_OPENTRACING_VERSION} \
-    cpp-jwt-${LIB_CPP_JWT_VERSION}.tar.gz \
-    cpp-jwt-${LIB_CPP_JWT_VERSION} \
-    cpp_redis \
-    AMQP-CPP \
-    SimpleAmqpClient
+  && sudo make install 
+#  && cd $ \
+#  && rm -rf \
+#    mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
+#    mongo-c-driver-${LIB_MONGOC_VERSION} \
+#    thrift-${LIB_THRIFT_VERSION}.tar.gz \
+#    thrift-${LIB_THRIFT_VERSION} \
+#    json-${LIB_JSON_VERSION}.tar.gz \
+#    json-${LIB_JSON_VERSION} \
+#    jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz \
+#    jaeger-client-cpp-${LIB_JAEGER_VERSION} \
+#    yaml-cpp-${LIB_YAML_VERSION}.tar.gz \
+#    yaml-cpp-yaml-cpp-${LIB_YAML_VERSION} \
+#    opentracing-cpp-${LIB_OPENTRACING_VERSION}.tar.gz \
+#    opentracing-cpp-${LIB_OPENTRACING_VERSION} \
+#    cpp-jwt-${LIB_CPP_JWT_VERSION}.tar.gz \
+#    cpp-jwt-${LIB_CPP_JWT_VERSION} \
+#    cpp_redis \
+#    AMQP-CPP \
+#    SimpleAmqpClient
