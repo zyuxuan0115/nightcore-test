@@ -2,7 +2,7 @@
 - install C++ dependency
 
 ```bash
-./microservice-deps-cpp.sh
+> ./microservice-deps-cpp.sh
 ```
 
 - build the workload
