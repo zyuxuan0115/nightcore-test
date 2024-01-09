@@ -129,7 +129,7 @@ cd $DIR \
   && git clone https://github.com/redis/hiredis.git \
   && cd hiredis \
   && make \
-  && sudo make install 
+  && sudo make install \
   && sudo ldconfig
 #  && cd $ \
 #  && rm -rf \
