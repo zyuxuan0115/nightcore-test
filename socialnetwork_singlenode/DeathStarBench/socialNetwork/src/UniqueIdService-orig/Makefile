@@ -1,2 +1,2 @@
 all:
-	g++ UniqueIdService.cpp -c
+	g++ -shared -fPIC -O2 UniqueIdService.cpp -o UniqueIdService.so
