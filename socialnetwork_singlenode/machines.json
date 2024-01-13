@@ -1,25 +1,25 @@
 {
     "nightcore-sn-cache": {
-        "dns": "zyuxuan@clnode210.clemson.cloudlab.us",
-        "ip": "130.127.133.219",
+        "dns": "zyuxuan@ms1236.utah.cloudlab.us",
+        "ip": "128.110.217.241",
         "role": "worker",
         "type": "c5.xlarge"
     },
     "nightcore-sn-client": {
-        "dns": "zyuxuan@clnode208.clemson.cloudlab.us",
-        "ip": "130.127.133.217",
+        "dns": "zyuxuan@ms1224.utah.cloudlab.us",
+        "ip": "128.110.217.229",
         "role": "client",
         "type": "c5.xlarge"
     },
     "nightcore-sn-front": {
-        "dns": "zyuxuan@clnode185.clemson.cloudlab.us",
-        "ip": "130.127.133.194",
+        "dns": "zyuxuan@ms1217.utah.cloudlab.us",
+        "ip": "128.110.217.222",
         "role": "worker",
         "type": "c5.xlarge"
     },
     "nightcore-sn-middle": {
-        "dns": "zyuxuan@clnode199.clemson.cloudlab.us",
-        "ip": "130.127.133.208",
+        "dns": "zyuxuan@ms1220.utah.cloudlab.us",
+        "ip": "128.110.217.225",
         "labels": [
             "engine_node=true"
         ],
@@ -27,14 +27,14 @@
         "type": "c5.xlarge"
     },
     "nightcore-sn-mongodb": {
-        "dns": "zyuxuan@clnode193.clemson.cloudlab.us",
-        "ip": "130.127.133.202",
+        "dns": "zyuxuan@clnode092.clemson.cloudlab.us",
+        "ip": "130.127.133.101",
         "role": "worker",
         "type": "c5.xlarge"
     },
     "nightcore-sn-write-home-timeline": {
-        "dns": "zyuxuan@clnode202.clemson.cloudlab.us",
-        "ip": "130.127.133.211",
+        "dns": "zyuxuan@clnode091.clemson.cloudlab.us",
+        "ip": "130.127.133.100",
         "role": "worker",
         "type": "c5.xlarge"
     }
