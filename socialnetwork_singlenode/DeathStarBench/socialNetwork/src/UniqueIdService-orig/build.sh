@@ -1,3 +1,4 @@
+#!/bin/bash
 CUR_DIR=$(pwd)
 #ROOT_DIR="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork"
 ROOT_DIR=$CUR_DIR/../..
