@@ -12,9 +12,8 @@ RUN cd /DeathStarBench/socialNetwork \
     && mkdir -p build \
     && cd build \
     && cmake .. \
-    && make -j${NUM_CPUS}
-
-RUN cd /DeathStarBench/socialNetwork/src/UniqueIdService-orig \
+    && make -j${NUM_CPUS} \
+    && cd /DeathStarBench/socialNetwork/src/UniqueIdService-orig \
     && ./build.sh \
     && mv libUniqueIdService.so /DeathStarBench/socialNetwork/build/src/UniqueIdService
 
