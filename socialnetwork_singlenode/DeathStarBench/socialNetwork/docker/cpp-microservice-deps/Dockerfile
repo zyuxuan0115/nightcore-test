@@ -18,6 +18,13 @@ ARG BUILD_DEPS="ca-certificates g++ cmake wget git automake bison flex libboost-
 RUN apt-get update \
   && apt-get install -y ${BUILD_DEPS} --no-install-recommends
 
+RUN wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-13.0.1.tar.gz \
+  && tar -vxf llvmorg-13.0.1.tar.gz \
+  && mv llvm-project-llvmorg-13.0.1 llvm-project && cd llvm-project \
+  && mkdir build && cd build \
+  && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lldb;lld" DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" ../llvm \
+  && make -j${NUM_CPUS}
+
 # Install libzmq
 RUN cd /tmp \
   && git clone https://github.com/zeromq/libzmq.git \
