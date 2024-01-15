@@ -22,7 +22,7 @@ function build_deathstarbench {
         -f $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps/Dockerfile \
 	$ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
 
-    sudo docker build --no-cache -t zyuxuan0115/llvm:main \
+    sudo docker build -t zyuxuan0115/llvm:main \
         -f $ROOT_DIR/docker-files/Dockerfile.llvm \
         --build-arg NUM_CPUS=$(nproc) \
         $ROOT_DIR/DeathStarBench
