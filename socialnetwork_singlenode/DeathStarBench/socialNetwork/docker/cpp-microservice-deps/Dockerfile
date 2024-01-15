@@ -13,26 +13,26 @@ ARG LIB_SIMPLEAMQPCLIENT_VERSION=2.4.0
 ARG LIB_ZMQ_VERSION=4.2.5
 
 ARG NUM_CPUS=1
-ARG BUILD_DEPS="ca-certificates g++ wget cmake git automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
+ARG BUILD_DEPS="ca-certificates g++ wget git automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
 
 RUN apt-get update \
   && apt-get install -y ${BUILD_DEPS} --no-install-recommends
 
 # install newest version of cmake
-#RUN wget https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1.tar.gz \
-#  && tar -vxf cmake-3.28.1.tar.gz \
-#  && cd cmake-3.28.1 \
-#  && ./configure \
-#  && make -j${NUM_CPUS} \
-#  && make install
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1.tar.gz \
+  && tar -vxf cmake-3.28.1.tar.gz \
+  && cd cmake-3.28.1 \
+  && ./configure \
+  && make -j${NUM_CPUS} \
+  && make install
   
 
-#RUN wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-13.0.1.tar.gz \
-#  && tar -vxf llvmorg-13.0.1.tar.gz \
-#  && mv llvm-project-llvmorg-13.0.1 llvm-project && cd llvm-project \
-#  && mkdir build && cd build \
-#  && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lldb;lld" DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" ../llvm \
-#  && make -j${NUM_CPUS}
+RUN wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-13.0.1.tar.gz \
+  && tar -vxf llvmorg-13.0.1.tar.gz \
+  && mv llvm-project-llvmorg-13.0.1 llvm-project && cd llvm-project \
+  && mkdir build && cd build \
+  && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lldb;lld" DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" ../llvm \
+  && make -j${NUM_CPUS}
 
 # Install libzmq
 RUN cd /tmp \
