@@ -24,7 +24,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1
   && cd cmake-3.28.1 \
   && ./configure \
   && make -j${NUM_CPUS} \
-  && sudo make install
+  && make install
   
 
 RUN wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-13.0.1.tar.gz \
