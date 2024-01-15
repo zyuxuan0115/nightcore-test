@@ -17,7 +17,8 @@ function push_nightcore {
 
 function build_deathstarbench {
     sudo docker build -t zyuxuan0115/cpp-microservice-deps:main \
-        --build-arg NUM_CPUS=$(nproc) \
+        --no-cache \
+    	--build-arg NUM_CPUS=$(nproc) \
         $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
 
     sudo docker build --no-cache -t zyuxuan0115/nightcore-socialnetwork:main \
