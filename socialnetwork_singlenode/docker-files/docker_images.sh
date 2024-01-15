@@ -19,7 +19,8 @@ function build_deathstarbench {
     sudo docker build -t zyuxuan0115/cpp-microservice-deps:main \
         --no-cache \
     	--build-arg NUM_CPUS=$(nproc) \
-        $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
+        -f $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps/Dockerfile
+	$ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
 
     sudo docker build --no-cache -t zyuxuan0115/nightcore-socialnetwork:main \
         -f $ROOT_DIR/docker-files/Dockerfile.socialnetwork \
