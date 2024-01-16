@@ -19,6 +19,6 @@ RUN cd /DeathStarBench/socialNetwork \
     && make -j${NUM_CPUS} \
     && cd /DeathStarBench/socialNetwork/src/UniqueIdService-man-merge \
     && ./build.sh \
-    && mv libUniqueIdService.so /DeathStarBench/socialNetwork/build/src/UniqueIdService
+    && cp libUniqueIdService.so /DeathStarBench/socialNetwork/build/src/UniqueIdService
 
 WORKDIR /DeathStarBench/socialNetwork
