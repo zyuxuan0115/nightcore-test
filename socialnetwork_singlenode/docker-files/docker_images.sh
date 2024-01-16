@@ -17,7 +17,6 @@ function push_nightcore {
 
 function build_deathstarbench {
     sudo docker build -t zyuxuan0115/cpp-microservice-deps:main \
-        --no-cache \
     	--build-arg NUM_CPUS=$(nproc) \
         -f $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps/Dockerfile \
 	$ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
@@ -36,6 +35,7 @@ function build_deathstarbench {
 function push_deathstarbench {
     sudo docker push zyuxuan0115/cpp-microservice-deps:main
     sudo docker push zyuxuan0115/nightcore-socialnetwork:main
+    sudo docker push zyuxuan0115/llvm:main
 }
 
 HIPSTERSHOP_SERVICES="frontend-api \
