@@ -4,7 +4,9 @@ FROM zyuxuan0115/cpp-microservice-deps:main
 
 COPY --from=nightcore /nightcore/launcher       /nightcore/launcher
 COPY --from=nightcore /nightcore/func_worker_v1 /nightcore/func_worker_v1
-COPY --from=llvm /llvm-project /llvm-project
+COPY --from=llvm /llvm-project/build/bin/clang /llvm-project/build/bin/clang
+COPY --from=llvm /llvm-project/build/bin/clang++ /llvm-project/build/bin/clang++
+COPY --from=llvm /llvm-project/build/bin/llvm-link /llvm-project/build/bin/llvm-link
 
 ARG NUM_CPUS=1
 
