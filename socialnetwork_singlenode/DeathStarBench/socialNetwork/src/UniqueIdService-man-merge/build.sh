@@ -1,7 +1,7 @@
 #!/bin/bash
 CUR_DIR=$(pwd)
-#ROOT_DIR="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork"
-ROOT_DIR=$CUR_DIR/../../..
+ROOT_DIR="/DeathStarBench"
+#ROOT_DIR=$CUR_DIR/../../..
 echo $ROOT_DIR
 THRIFT_GEN_CPP_DIR="$ROOT_DIR/socialNetwork/gen-cpp"
 CPPFLAGS="-I/usr/local/include/jaegertracing -I$ROOT_DIR/thrift/lib/cpp/src -I$ROOT_DIR/socialNetwork/build/thrift -DBOOST_LOG_DYN_LINK"
