@@ -24,7 +24,7 @@ function build_deathstarbench {
     sudo docker build -t zyuxuan0115/llvm:main \
         -f $ROOT_DIR/docker-files/Dockerfile.llvm \
         --build-arg NUM_CPUS=$(nproc) \
-        $ROOT_DIR/DeathStarBench
+        $ROOT_DIR/DeathStarBench/MergeFunc
 
     sudo docker build --no-cache -t zyuxuan0115/nightcore-socialnetwork:main \
         -f $ROOT_DIR/docker-files/Dockerfile.socialnetwork \
