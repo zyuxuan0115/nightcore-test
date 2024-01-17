@@ -287,19 +287,20 @@ namespace {
                 Instruction* I = dyn_cast<Instruction>(IB);
                 if(DILocation *Loc = I->getDebugLoc()){
                   llvm::SmallString<128> relPath = Loc->getFilename();
-                  if ((!relPath.str().empty()) && (relPath.str()[0]!='/')){
-                    std::string tmp;
-                    relPath = "/proj/zyuxuanssf-PG0/nightcore-test/"+std::string(relPath);
-                  }
+		  llvm::SmallString<128> currentPath;
+		  llvm::sys::fs::current_path(currentPath);
                   llvm::SmallString<128> AbsolutePath;
-                  llvm::SmallString<128> currentPath;
-                  llvm::sys::fs::current_path(currentPath);
-                  llvm::sys::fs::real_path(relPath,AbsolutePath);
+		  if ((!relPath.str().empty()) && (relPath.str()[0]!='/')){
+                    std::string tmp;
+ 		    tmp = std::string(currentPath.str())+"/"+std::string(relPath.str());
+                    llvm::sys::fs::real_path(tmp,AbsolutePath);
+		  }
 
-                  if((std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/tracing.h") ||
-                     (std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/logger.h") ||
-                     (std::string(AbsolutePath)=="/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/utils.h")) {
+                  if((std::string(relPath)=="../ComposePostService/../tracing.h") ||
+                     (std::string(relPath)=="../ComposePostService/../logger.h") ||
+                     (std::string(relPath)=="../ComposePostService/../utils.h")) {
                     Function* func = dyn_cast<Function>(F);
+		    errs()<<"@@@ current path: "<<currentPath.str()<<"\n";
                     errs()<<"@@@ "<<func->getName().str()<<", filename = "<<AbsolutePath.str()<<"\n";
                     std::string name = func->getName().str() + "_redundant";
            	    func->setName(name);
@@ -319,7 +320,7 @@ namespace {
  	      (F->getName()=="faas_create_func_worker") ||
               (F->getName()=="faas_func_call")){
             Function* func = dyn_cast<Function>(F);
-            std::string name = func->getName().str() + "_callee";
+            std::string name = func->getName().str() + "_callee_";
 	    const char* new_name = name.c_str();
       	    func->setName(new_name);
 	  }
