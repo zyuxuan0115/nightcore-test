@@ -1,11 +1,16 @@
 #!/bin/bash
 CUR_DIR=$(pwd)
-ROOT_DIR="/DeathStarBench"
+
+#ROOT_DIR="/DeathStarBench"
+#LLVM_BUILD_PATH=/llvm-project/build
+
+ROOT_DIR=/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench
+LLVM_BUILD_PATH=/proj/zyuxuanssf-PG0/llvm-project/build
+
 #ROOT_DIR=$CUR_DIR/../../..
 THRIFT_GEN_CPP_DIR="$ROOT_DIR/socialNetwork/gen-cpp"
 CPPFLAGS="-I/usr/local/include/jaegertracing -I$ROOT_DIR/thrift/lib/cpp/src -I$ROOT_DIR/socialNetwork/build/thrift -DBOOST_LOG_DYN_LINK"
 LINKER_FLAGS="-L/usr/lib/x86_64-linux-gnu -lboost_log -lboost_log_setup -lboost_system -ljaegertracing -L$ROOT_DIR/socialNetwork/build/lib" 
-LLVM_BUILD_PATH=/llvm-project/build
 CC=$LLVM_BUILD_PATH/bin/clang++
 LLVM_LINK=$LLVM_BUILD_PATH/bin/llvm-link
 LLC=$LLVM_BUILD_PATH/bin/llc 
