@@ -23,6 +23,7 @@ $CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/UserTimelineService.cpp
 
 # get all functions in UniqueIdService
 $OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -write-func-symbol=func_sym.txt UniqueIdService.ll -S
+$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -read-func-symbol=func_sym.txt ComposePostService.ll -S
 
 $LLVM_LINK UniqueIdService.ll gen-ComposePostService.ll gen-social_network_types.ll gen-UniqueIdService.ll gen-PostStorageService.ll gen-UserTimelineService.ll -o merged.ll -S
 $LLC -filetype=obj -relocation-model=pic merged.ll -o merged.o
