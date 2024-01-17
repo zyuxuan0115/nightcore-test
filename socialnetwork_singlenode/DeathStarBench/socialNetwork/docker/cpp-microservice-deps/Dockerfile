@@ -13,7 +13,7 @@ ARG LIB_SIMPLEAMQPCLIENT_VERSION=2.4.0
 ARG LIB_ZMQ_VERSION=4.2.5
 
 ARG NUM_CPUS=1
-ARG BUILD_DEPS="ca-certificates g++ wget git automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
+ARG BUILD_DEPS="ca-certificates g++ wget git automake cmake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
 
 RUN apt-get update \
   && apt-get install -y ${BUILD_DEPS} --no-install-recommends
