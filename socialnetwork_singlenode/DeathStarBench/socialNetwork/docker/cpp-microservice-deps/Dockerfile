@@ -33,7 +33,7 @@ RUN cd /tmp \
   && wget https://github.com/mongodb/mongo-c-driver/releases/download/${LIB_MONGOC_VERSION}/mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
   && tar -zxf mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
   && cd mongo-c-driver-${LIB_MONGOC_VERSION} \
- # && mkdir -p cmake-build \
+  && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=0 -DENABLE_EXAMPLES=0 .. \
   && make -j${NUM_CPUS} \
