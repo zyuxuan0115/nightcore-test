@@ -38,7 +38,7 @@ function build_push_llvm {
     sudo docker build --no-cache -t zyuxuan0115/llvm:main \
         -f $ROOT_DIR/docker-files/Dockerfile.llvm \
         --build-arg NUM_CPUS=$(nproc) \
-        $ROOT_DIR/DeathStarBench/MergeFunc
+        $ROOT_DIR/MergeFunc
     sudo docker push zyuxuan0115/llvm:main
 }
 
