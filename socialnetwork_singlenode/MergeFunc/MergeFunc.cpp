@@ -44,12 +44,12 @@
 #include <unordered_set>
 using namespace llvm;
 
-#define DEBUG_TYPE "MergeFuncReal"
+#define DEBUG_TYPE "MergeFunc"
 
 namespace {
-  struct MergeFuncReal: public ModulePass {
+  struct MergeFunc: public ModulePass {
     static char ID; 
-    MergeFuncReal() : ModulePass(ID) {}
+    MergeFunc() : ModulePass(ID) {}
     bool isRPC(Instruction* Inst);
     StringRef getRPCCalleeName(Instruction* Inst);
 
@@ -195,7 +195,7 @@ namespace {
     }
   };
 
-  bool MergeFuncReal::isRPC(Instruction* Inst){
+  bool MergeFunc::isRPC(Instruction* Inst){
     // test if it's a virtual function call
     // if it is, test if it's a RPC invocation 
     // (7 arguments & the 2nd argument is const char*)
@@ -223,7 +223,7 @@ namespace {
     return hasRPCinvocation;
   }
 
-  StringRef MergeFuncReal::getRPCCalleeName(Instruction* Inst){
+  StringRef MergeFunc::getRPCCalleeName(Instruction* Inst){
     StringRef CalleeName = "";
     if ((isa<CallInst>(Inst)) && (dyn_cast<CallInst>(Inst)->isIndirectCall())){
       CallInst* VirtualCall = dyn_cast<CallInst>(Inst);
@@ -243,8 +243,8 @@ namespace {
   }
 }
 
-char MergeFuncReal::ID = 0;
-static RegisterPass<MergeFuncReal> X("MergeFuncReal", "Convert RPC to normal function call by changing the arguments of the function and the call instruction");
+char MergeFunc::ID = 0;
+static RegisterPass<MergeFunc> X("MergeFunc", "Convert RPC to normal function call by changing the arguments of the function and the call instruction");
 
 
 
