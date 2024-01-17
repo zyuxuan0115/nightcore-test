@@ -10,7 +10,7 @@ CC=$LLVM_BUILD_PATH/bin/clang++
 LLVM_LINK=$LLVM_BUILD_PATH/bin/llvm-link
 LLC=$LLVM_BUILD_PATH/bin/llc 
 OPT=$LLVM_BUILD_PATH/bin/opt
-MERGE_FUNC_LIB=$LLVM_BUILD_PATH/lib/LLVMMergeFuncReal.so
+MERGE_FUNC_LIB=$LLVM_BUILD_PATH/lib/LLVMMergeFunc.so
 
 # compile all source files into IR
 $CC -fPIC -emit-llvm -g -S $CPPFLAGS UniqueIdService.cpp -c -o UniqueIdService.ll
