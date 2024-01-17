@@ -16,16 +16,6 @@ function push_nightcore {
 }
 
 function build_deathstarbench {
-    sudo docker build --no-cache -t zyuxuan0115/cpp-microservice-deps:main \
-    	--build-arg NUM_CPUS=$(nproc) \
-        -f $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps/Dockerfile \
-	$ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
-
-    sudo docker build --no-cache -t zyuxuan0115/llvm:main \
-        -f $ROOT_DIR/docker-files/Dockerfile.llvm \
-        --build-arg NUM_CPUS=$(nproc) \
-        $ROOT_DIR/DeathStarBench/MergeFunc
-
     sudo docker build --no-cache -t zyuxuan0115/nightcore-socialnetwork:main \
         -f $ROOT_DIR/docker-files/Dockerfile.socialnetwork \
         --build-arg NUM_CPUS=$(nproc) \
@@ -33,9 +23,28 @@ function build_deathstarbench {
 }
 
 function push_deathstarbench {
-    sudo docker push zyuxuan0115/cpp-microservice-deps:main
     sudo docker push zyuxuan0115/nightcore-socialnetwork:main
+}
+
+function build_push_cpp_dep {
+    sudo docker build --no-cache -t zyuxuan0115/cpp-microservice-deps:main \
+    	--build-arg NUM_CPUS=$(nproc) \
+        -f $ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps/Dockerfile \
+	$ROOT_DIR/DeathStarBench/socialNetwork/docker/cpp-microservice-deps
+    sudo docker push zyuxuan0115/cpp-microservice-deps:main
+}
+
+function build_push_llvm {
+    sudo docker build --no-cache -t zyuxuan0115/llvm:main \
+        -f $ROOT_DIR/docker-files/Dockerfile.llvm \
+        --build-arg NUM_CPUS=$(nproc) \
+        $ROOT_DIR/DeathStarBench/MergeFunc
     sudo docker push zyuxuan0115/llvm:main
+}
+
+function build_prerequisite {
+    build_push_llvm
+    build_push_cpp_dep
 }
 
 HIPSTERSHOP_SERVICES="frontend-api \
@@ -64,5 +73,8 @@ build)
     ;;
 push)
     push
+    ;;
+pre)
+    build_prerequisite
     ;;
 esac
