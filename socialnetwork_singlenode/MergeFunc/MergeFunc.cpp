@@ -45,6 +45,10 @@
 using namespace llvm;
 
 #define DEBUG_TYPE "MergeFunc"
+#define TRACING_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/tracing.h"
+#define LOGGER_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/logger.h"
+#define UTILS_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/utils.h"
+#define REDISCLIENT_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/RedisClient.h"
 
 namespace {
   struct MergeFunc: public ModulePass {
@@ -295,13 +299,14 @@ namespace {
  		    tmp = std::string(currentPath.str())+"/"+std::string(relPath.str());
                     llvm::sys::fs::real_path(tmp,AbsolutePath);
 		  }
+                  Function* func = dyn_cast<Function>(F);
 
-                  if((std::string(relPath)=="../ComposePostService/../tracing.h") ||
-                     (std::string(relPath)=="../ComposePostService/../logger.h") ||
-                     (std::string(relPath)=="../ComposePostService/../utils.h")) {
-                    Function* func = dyn_cast<Function>(F);
-		    errs()<<"@@@ current path: "<<currentPath.str()<<"\n";
-                    errs()<<"@@@ "<<func->getName().str()<<", filename = "<<AbsolutePath.str()<<"\n";
+                  if((std::string(AbsolutePath)==TRACING_PATH) ||
+                     (std::string(AbsolutePath)==LOGGER_PATH) ||
+                     (std::string(AbsolutePath)==UTILS_PATH) || 
+		     (std::string(AbsolutePath)==REDISCLIENT_PATH)) {
+		    //errs()<<"@@@ current path: "<<currentPath.str()<<"\n";
+                    //errs()<<"@@@ "<<func->getName().str()<<", filename = "<<AbsolutePath.str()<<"\n";
                     std::string name = func->getName().str() + "_redundant";
            	    func->setName(name);
                   }
@@ -320,7 +325,7 @@ namespace {
  	      (F->getName()=="faas_create_func_worker") ||
               (F->getName()=="faas_func_call")){
             Function* func = dyn_cast<Function>(F);
-            std::string name = func->getName().str() + "_callee_";
+            std::string name = func->getName().str() + "_callee";
 	    const char* new_name = name.c_str();
       	    func->setName(new_name);
 	  }
@@ -353,12 +358,15 @@ namespace {
     bool checkFuncSuffix(std::string);
 
     bool runOnModule(Module &M) override {
+      // get all functions with the '_redundant' suffix
       std::unordered_set<Function*> redundantFuncs;
       for (auto F = M.begin(); F!=M.end(); F++){
 	std::string FuncName(F->getName());
 	if (checkFuncSuffix(FuncName)) redundantFuncs.insert(dyn_cast<Function>(F));
       }
 
+      // use the call graph provided by llvm to get all 
+      // caller and callee pairs, if callee is redundant function
       CallGraph cg = CallGraph(M);
       std::vector<std::pair<Function*, Function*> > callerCalleePair;
       for ( CallGraph::const_iterator itr = cg.begin(), ie = cg.end() ; itr != ie; itr++) {
@@ -387,8 +395,8 @@ namespace {
 	std::string newFuncName = oldFuncName.substr(0, oldFuncName.size()-10);
         Function* newCallee = M.getFunction(newFuncName.c_str());
 
-	errs()<<"###### "<<newCallee->getName()<<"\n";
-        errs()<<"###### "<<oldCallee->getName()<<"\n";
+//	errs()<<"###### "<<newCallee->getName()<<"\n";
+//      errs()<<"###### "<<oldCallee->getName()<<"\n";
 
 	std::vector<CallInst*> callToBeChanged;
 	std::vector<InvokeInst*> invokeToBeChanged;
@@ -449,7 +457,7 @@ namespace {
 	    argumentTypes.push_back(invokeInst->getOperand(i)->getType());
           }
 
-	  errs()<<"@@@@@ "<<*invokeInst<<"\n";
+//	  errs()<<"@@@@@ "<<*invokeInst<<"\n";
 
           ArrayRef<Type*> argTypes(argumentTypes);
           ArrayRef<Value*> args(arguments);

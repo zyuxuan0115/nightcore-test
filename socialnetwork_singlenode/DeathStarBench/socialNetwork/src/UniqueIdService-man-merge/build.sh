@@ -38,7 +38,7 @@ $OPT merged.ll -strip-debug -o merged-no-debuginfo.ll -S
 
 $OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -RemoveRedundant merged-no-debuginfo.ll -S -o merged-update.ll
 
-$LLC -filetype=obj -relocation-model=pic merged.ll -o merged.o
+$LLC -filetype=obj -relocation-model=pic merged-update.ll -o merged.o
 $CC -shared -fPIC -O2 $CPPFLAGS merged.o -o libUniqueIdService.so $LINKER_FLAGS
 
 
