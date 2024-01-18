@@ -17,6 +17,8 @@ LLC=$LLVM_BUILD_PATH/bin/llc
 OPT=$LLVM_BUILD_PATH/bin/opt
 MERGE_FUNC_LIB=$LLVM_BUILD_PATH/lib/LLVMMergeFunc.so
 
+rm -rf *.so *.ll *.o tmp
+
 # compile all source files into IR
 $CC -fPIC -emit-llvm -g -S $CPPFLAGS UniqueIdService.cpp -c -o UniqueIdService.ll
 $CC -fPIC -emit-llvm -g -S $CPPFLAGS $CUR_DIR/../ComposePostService/ComposePostService.cpp -c -o ComposePostService.ll
@@ -27,10 +29,15 @@ $CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/PostStorageService.cpp 
 $CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/UserTimelineService.cpp -c -o gen-UserTimelineService.ll
 
 # get all functions in UniqueIdService
-$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -write-func-symbol=func_sym.txt UniqueIdService.ll -S
-$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -read-func-symbol=func_sym.txt ComposePostService.ll -S
+$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -write-func-symbol=func_sym.txt UniqueIdService.ll -S -o tmp
+$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -read-func-symbol=func_sym.txt ComposePostService.ll -S -o ComposePostService-rename.ll
 
-$LLVM_LINK UniqueIdService.ll gen-ComposePostService.ll gen-social_network_types.ll gen-UniqueIdService.ll gen-PostStorageService.ll gen-UserTimelineService.ll -o merged.ll -S
+$LLVM_LINK UniqueIdService.ll gen-ComposePostService.ll gen-social_network_types.ll gen-UniqueIdService.ll gen-PostStorageService.ll gen-UserTimelineService.ll ComposePostService-rename.ll -o merged.ll -S
+
+$OPT merged.ll -strip-debug -o merged-no-debuginfo.ll -S
+
+$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -RemoveRedundant merged-no-debuginfo.ll -S -o merged-update.ll
+
 $LLC -filetype=obj -relocation-model=pic merged.ll -o merged.o
 $CC -shared -fPIC -O2 $CPPFLAGS merged.o -o libUniqueIdService.so $LINKER_FLAGS
 
