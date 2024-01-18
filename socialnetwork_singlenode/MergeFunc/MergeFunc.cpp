@@ -42,13 +42,21 @@
 #include "llvm/Analysis/CallGraph.h"
 #include <fstream>
 #include <unordered_set>
+
 using namespace llvm;
 
 #define DEBUG_TYPE "MergeFunc"
-#define TRACING_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/tracing.h"
-#define LOGGER_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/logger.h"
-#define UTILS_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/utils.h"
-#define REDISCLIENT_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/RedisClient.h"
+
+//#define TRACING_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/tracing.h"
+//#define LOGGER_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/logger.h"
+//#define UTILS_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/src/utils.h"
+//#define REDISCLIENT_PATH "/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench/socialNetwork/RedisClient.h"
+
+#define TRACING_PATH "/DeathStarBench/socialNetwork/src/tracing.h"
+#define LOGGER_PATH "/DeathStarBench/socialNetwork/src/logger.h"
+#define UTILS_PATH "/DeathStarBench/socialNetwork/src/utils.h"
+#define REDISCLIENT_PATH "/DeathStarBench/socialNetwork/RedisClient.h"
+
 
 namespace {
   struct MergeFunc: public ModulePass {
@@ -395,8 +403,8 @@ namespace {
 	std::string newFuncName = oldFuncName.substr(0, oldFuncName.size()-10);
         Function* newCallee = M.getFunction(newFuncName.c_str());
 
-//	errs()<<"###### "<<newCallee->getName()<<"\n";
-//      errs()<<"###### "<<oldCallee->getName()<<"\n";
+	// errs()<<"###### "<<newCallee->getName()<<"\n";
+        // errs()<<"###### "<<oldCallee->getName()<<"\n";
 
 	std::vector<CallInst*> callToBeChanged;
 	std::vector<InvokeInst*> invokeToBeChanged;
