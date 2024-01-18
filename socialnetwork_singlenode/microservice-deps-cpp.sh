@@ -131,22 +131,24 @@ cd $DIR \
   && make \
   && sudo make install \
   && sudo ldconfig
-#  && cd $ \
-#  && rm -rf \
-#    mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
-#    mongo-c-driver-${LIB_MONGOC_VERSION} \
-#    thrift-${LIB_THRIFT_VERSION}.tar.gz \
-#    thrift-${LIB_THRIFT_VERSION} \
-#    json-${LIB_JSON_VERSION}.tar.gz \
-#    json-${LIB_JSON_VERSION} \
-#    jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz \
-#    jaeger-client-cpp-${LIB_JAEGER_VERSION} \
-#    yaml-cpp-${LIB_YAML_VERSION}.tar.gz \
-#    yaml-cpp-yaml-cpp-${LIB_YAML_VERSION} \
-#    opentracing-cpp-${LIB_OPENTRACING_VERSION}.tar.gz \
-#    opentracing-cpp-${LIB_OPENTRACING_VERSION} \
-#    cpp-jwt-${LIB_CPP_JWT_VERSION}.tar.gz \
-#    cpp-jwt-${LIB_CPP_JWT_VERSION} \
-#    cpp_redis \
-#    AMQP-CPP \
-#    SimpleAmqpClient
+
+cd $DIR 
+  && rm -rf \
+    mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
+    mongo-c-driver-${LIB_MONGOC_VERSION} \
+    thrift-${LIB_THRIFT_VERSION}.tar.gz \
+    thrift-${LIB_THRIFT_VERSION} \
+    json-${LIB_JSON_VERSION}.tar.gz \
+    json-${LIB_JSON_VERSION} \
+    jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz \
+    jaeger-client-cpp-${LIB_JAEGER_VERSION} \
+    yaml-cpp-${LIB_YAML_VERSION}.tar.gz \
+    yaml-cpp-yaml-cpp-${LIB_YAML_VERSION} \
+    opentracing-cpp-${LIB_OPENTRACING_VERSION}.tar.gz \
+    opentracing-cpp-${LIB_OPENTRACING_VERSION} \
+    cpp-jwt-${LIB_CPP_JWT_VERSION}.tar.gz \
+    cpp-jwt-${LIB_CPP_JWT_VERSION} \
+    cpp_redis \
+    AMQP-CPP \
+    SimpleAmqpClient \
+    hiredis
