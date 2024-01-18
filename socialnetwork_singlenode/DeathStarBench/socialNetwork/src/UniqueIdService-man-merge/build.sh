@@ -1,11 +1,11 @@
 #!/bin/bash
 CUR_DIR=$(pwd)
 
-#ROOT_DIR="/DeathStarBench"
-#LLVM_BUILD_PATH=/llvm-project/build
+ROOT_DIR="/DeathStarBench"
+LLVM_BUILD_PATH=/llvm-project/build
 
-ROOT_DIR=/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench
-LLVM_BUILD_PATH=/proj/zyuxuanssf-PG0/llvm-project/build
+#ROOT_DIR=/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench
+#LLVM_BUILD_PATH=/proj/zyuxuanssf-PG0/llvm-project/build
 
 #ROOT_DIR=$CUR_DIR/../../..
 THRIFT_GEN_CPP_DIR="$ROOT_DIR/socialNetwork/gen-cpp"
