@@ -31,7 +31,7 @@ $LLVM_LINK UniqueIdService.ll gen-ComposePostService.ll gen-social_network_types
 
 # get all functions in UniqueIdService
 $OPT -load $SOFTBOUND_INIT_LIB -InitializeSoftBoundCETS merged.ll -S -o merged_init.ll
-$OPT -load $SOFTBOUND_INIT_LIB -SoftBoundCETSPass merged_init.ll -S -o merged_softbound.ll
+$OPT -load $SOFTBOUND_LIB -SoftBoundCETSPass merged_init.ll -S -o merged_softbound.ll
 
 
 $LLC -filetype=obj -relocation-model=pic merged_softbound.ll -o merged.o
