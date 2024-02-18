@@ -1,0 +1,560 @@
+I0118 04:19:34.994199 Main     thread.cpp:100] Register main thread: tid=27
+I0118 04:19:34.994298 Main     func_worker.cpp:51] My client_id is 55
+[2024-01-18 04:19:35.003915] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+I0118 04:19:35.008380 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:19:35.008412 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:19:35.008425 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:19:35.008437 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:19:35.008448 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:19:35.008459 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:19:35.008470 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:19:35.008487 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:19:35.008498 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:19:35.008509 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:19:35.008520 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:19:35.008557 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:19:35.008824 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:19:35.008850] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.044560] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.044603] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+I0118 04:19:35.045531 Main     buffer_pool.h:25] BufferPool[Pipes]: Allocate new buffer, current buffer count is 1
+[2024-01-18 04:19:35.045627] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.045661] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.045945] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.045972] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+I0118 04:19:35.047464 Main     buffer_pool.h:25] BufferPool[Pipes]: Allocate new buffer, current buffer count is 2
+[2024-01-18 04:19:35.047515] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.047544] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.048910] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.048949] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.049627] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.049666] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.050033] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.050074] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.051504] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.051543] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.108495] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.108536] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.211302] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.211337] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.272493] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.272544] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.273934] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.273965] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.333959] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.334011] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.335507] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.335552] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.395439] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.395492] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.397173] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.397212] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.419173] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.419211] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.420903] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.420940] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.456276] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.456338] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.458261] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.458298] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.481240] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.481288] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.482139] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.482173] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.517662] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.517701] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.518616] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.518661] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.580081] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.580120] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.581804] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.581839] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.603529] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.603567] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.605295] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.605329] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.640590] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.640629] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.641666] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.641701] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.641865] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.641891] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.643158] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.643201] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.664919] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.664957] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.666498] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.666543] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.702221] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.702259] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.705375] <info>: (ClientPool.h:233:Pop) New redis client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.827191] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.827224] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.887476] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.887518] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.888308] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.888340] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.888601] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.888630] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:35.889429] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.889458] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.911111] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.911150] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.912560] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.912594] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.948519] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.948563] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:35.949831] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.949863] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.010233] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.010272] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.012024] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.012079] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.034146] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.034182] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.034926] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.034961] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.071870] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.071918] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.073397] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.073435] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.134077] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.134112] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.135625] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.135667] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.156941] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.156980] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.158611] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.158642] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.194726] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.194764] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.195701] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.195751] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.195949] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.195981] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.197405] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.197436] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.218316] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.218354] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.220056] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.220087] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.256011] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.256064] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.257666] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.257697] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.280203] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.280242] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.281226] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.281263] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.318182] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.318227] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.319717] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.319746] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.342050] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.342088] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.343441] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.343471] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.378111] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.378149] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.378828] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.378872] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.379078] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.379107] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.380610] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.380643] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.441607] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.441647] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.442344] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.442392] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.464913] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.464963] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.465727] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.465764] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.502559] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.502597] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.504016] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.504046] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.504292] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.504338] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.505073] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.505109] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.525730] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.525768] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.526731] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.526779] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.527012] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.527048] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.528399] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.528434] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.562396] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.562444] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.563200] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.563237] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.563667] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.563714] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.564444] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.564483] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.564761] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.564795] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.566084] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.566123] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.587829] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.587867] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.589424] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.589459] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.625238] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.625276] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.625951] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.625991] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.626241] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.626285] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.627541] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.627571] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.649263] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.649302] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.650012] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.650049] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.650298] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.650324] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.651066] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.651116] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.686212] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.686264] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.687741] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.687787] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.748548] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.748584] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.749892] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.749925] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.772965] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.773004] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.774571] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.774610] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.808930] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.808968] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.809739] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.809778] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.809913] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.809939] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.811339] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.811369] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.834607] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.834654] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.836126] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.836164] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.869358] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.869397] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.870301] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.870338] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.871136] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.871176] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.872574] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.872607] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.896205] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.896243] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.897212] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.897252] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.931440] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.931478] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:36.933287] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.933321] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:36.994356] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:36.994399] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:36.995159] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:36.995194] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.055571] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.055607] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:37.057158] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.057202] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.080135] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.080173] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:37.081799] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.081833] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.116215] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.116247] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:37.117772] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.117808] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.178249] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.178286] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:37.179850] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.179880] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.203424] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.203463] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:37.205177] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.205221] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.239134] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.239170] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+[2024-01-18 04:19:37.240883] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.240930] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.301232] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.301272] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.301963] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.301998] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.362235] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.362275] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.363041] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.363078] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.423342] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.423385] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.424481] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.424521] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.484966] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.484997] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.486122] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.486161] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.510129] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.510177] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.511122] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.511153] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.546279] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.546326] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.547370] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.547414] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.607931] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.607978] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.608923] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.608957] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.669283] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.669319] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.670212] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.670251] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.731414] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.731447] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.732225] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.732255] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.756078] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.756118] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.757120] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.757155] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.792461] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.792500] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.793397] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.793432] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.854126] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.854166] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.855191] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.855226] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.879120] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.879159] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.880110] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.880149] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.915631] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.915670] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.916584] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.916637] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:37.977446] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:37.977479] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:37.978353] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:37.978390] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.002348] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.002392] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.003550] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.003589] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.038350] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.038390] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.039376] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.039413] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.100286] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.100354] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.101258] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.101304] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.125366] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.125419] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.126542] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.126591] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.161640] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.161690] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.162723] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.162772] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.223796] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.223832] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.224703] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.224733] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.248347] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.248386] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.249554] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.249593] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.284747] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.284788] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.285766] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.285795] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.346757] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.346790] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.347621] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.347651] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.371399] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.371449] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.372541] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.372590] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.407501] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.407549] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.408857] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.408901] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.433037] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.433081] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.434095] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.434132] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.469051] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.469094] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.470099] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.470144] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.530747] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.530786] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.531807] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.531838] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.592334] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.592376] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.593392] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.593428] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.617874] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.617913] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.618905] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.618935] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.653667] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.653706] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.654545] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.654575] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+F0118 04:19:38.737886 Main     func_worker.cpp:100] Check failed: io_utils::RecvMessage(input_pipe_fd_, &message, nullptr) Failed to receive message from engine
+*** SIGABRT received at time=1705551578 ***

@@ -1,0 +1,19 @@
+I0118 04:22:22.423671 Main     thread.cpp:100] Register main thread: tid=7
+I0118 04:22:22.424067 Launcher thread.cpp:40] Start thread: Launcher/EL
+I0118 04:22:22.424132 Launcher thread.cpp:64] Does not find cpuset setting for IO threads (can be set by FAAS_IO_THREAD_CPUSET)
+I0118 04:22:22.424155 Launcher thread.cpp:82] Does not find nice setting for IO threads (can be set by FAAS_IO_THREAD_NICE)
+I0118 04:22:22.424163 Launcher launcher.cpp:96] Launcher: Event loop starts
+I0118 04:22:22.424187 Launcher engine_connection.cpp:93] EngineConnection: Connected to engine, start writing handshake message
+I0118 04:22:22.424570 Launcher buffer_pool.h:25] BufferPool[Launcher]: Allocate new buffer, current buffer count is 1
+I0118 04:22:22.424667 Launcher func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:22:22.424695 Launcher func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:22:22.424708 Launcher func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:22:22.424718 Launcher func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:22:22.424730 Launcher func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:22:22.424739 Launcher func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:22:22.424750 Launcher func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:22:22.424759 Launcher func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:22:22.424771 Launcher func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:22:22.424780 Launcher func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:22:22.424788 Launcher func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:22:22.424807 Launcher engine_connection.cpp:65] EngineConnection: Handshake done

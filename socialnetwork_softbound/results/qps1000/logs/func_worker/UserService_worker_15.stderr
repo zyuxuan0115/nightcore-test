@@ -1,0 +1,60 @@
+I0118 04:19:35.116479 Main     thread.cpp:100] Register main thread: tid=34
+I0118 04:19:35.116593 Main     func_worker.cpp:51] My client_id is 72
+[2024-01-18 04:19:35.124892] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.125192] <info>: (UserHandler.h:998:GetMachineId) mac_hash=950
+I0118 04:19:35.129827 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:19:35.129865 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:19:35.129878 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:19:35.129890 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:19:35.129908 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:19:35.129920 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:19:35.129931 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:19:35.129943 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:19:35.129954 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:19:35.129965 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:19:35.129976 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:19:35.130019 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:19:35.130178 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:19:35.130214] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.130252] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.130271] <info>: (UserHandler.h:137:UserHandler) machine_id=950
+[2024-01-18 04:19:35.273197] <warning>: (UserHandler.h:910:GetUserId) User: username_529 doesn't exist in MongoDB
+[2024-01-18 04:19:37.424487] <warning>: (UserHandler.h:910:GetUserId) User: username_17 doesn't exist in MongoDB
+[2024-01-18 04:19:37.449613] <warning>: (UserHandler.h:910:GetUserId) User: username_17 doesn't exist in MongoDB
+[2024-01-18 04:19:37.485906] <warning>: (UserHandler.h:910:GetUserId) User: username_147 doesn't exist in MongoDB
+[2024-01-18 04:19:37.511056] <warning>: (UserHandler.h:910:GetUserId) User: username_18 doesn't exist in MongoDB
+[2024-01-18 04:19:37.547216] <warning>: (UserHandler.h:910:GetUserId) User: username_276 doesn't exist in MongoDB
+[2024-01-18 04:19:37.608751] <warning>: (UserHandler.h:910:GetUserId) User: username_632 doesn't exist in MongoDB
+[2024-01-18 04:19:37.633929] <warning>: (UserHandler.h:910:GetUserId) User: username_798 doesn't exist in MongoDB
+[2024-01-18 04:19:37.670022] <warning>: (UserHandler.h:910:GetUserId) User: username_18 doesn't exist in MongoDB
+[2024-01-18 04:19:37.732128] <warning>: (UserHandler.h:910:GetUserId) User: username_190 doesn't exist in MongoDB
+[2024-01-18 04:19:37.756979] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.793164] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.855020] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.880001] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.916440] <warning>: (UserHandler.h:910:GetUserId) User: username_540 doesn't exist in MongoDB
+[2024-01-18 04:19:37.978032] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.003290] <warning>: (UserHandler.h:910:GetUserId) User: username_738 doesn't exist in MongoDB
+[2024-01-18 04:19:38.039321] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.064975] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.101169] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.102450] <warning>: (UserHandler.h:910:GetUserId) User: username_20 doesn't exist in MongoDB
+[2024-01-18 04:19:38.126403] <warning>: (UserHandler.h:910:GetUserId) User: username_20 doesn't exist in MongoDB
+[2024-01-18 04:19:38.162619] <warning>: (UserHandler.h:910:GetUserId) User: username_21 doesn't exist in MongoDB
+[2024-01-18 04:19:38.224407] <warning>: (UserHandler.h:910:GetUserId) User: username_363 doesn't exist in MongoDB
+[2024-01-18 04:19:38.285744] <warning>: (UserHandler.h:910:GetUserId) User: username_22 doesn't exist in MongoDB
+[2024-01-18 04:19:38.347271] <warning>: (UserHandler.h:910:GetUserId) User: username_869 doesn't exist in MongoDB
+[2024-01-18 04:19:38.372389] <warning>: (UserHandler.h:910:GetUserId) User: username_23 doesn't exist in MongoDB
+[2024-01-18 04:19:38.408321] <warning>: (UserHandler.h:910:GetUserId) User: username_23 doesn't exist in MongoDB
+[2024-01-18 04:19:38.470335] <warning>: (UserHandler.h:910:GetUserId) User: username_25 doesn't exist in MongoDB
+[2024-01-18 04:19:38.495422] <warning>: (UserHandler.h:910:GetUserId) User: username_214 doesn't exist in MongoDB
+[2024-01-18 04:19:38.531642] <warning>: (UserHandler.h:910:GetUserId) User: username_265 doesn't exist in MongoDB
+[2024-01-18 04:19:38.557182] <warning>: (UserHandler.h:910:GetUserId) User: username_25 doesn't exist in MongoDB
+[2024-01-18 04:19:38.592842] <warning>: (UserHandler.h:910:GetUserId) User: username_25 doesn't exist in MongoDB
+[2024-01-18 04:19:38.654799] <warning>: (UserHandler.h:910:GetUserId) User: username_204 doesn't exist in MongoDB
+[2024-01-18 04:19:38.680290] <warning>: (UserHandler.h:910:GetUserId) User: username_204 doesn't exist in MongoDB
+[2024-01-18 04:19:38.681122] <warning>: (UserHandler.h:910:GetUserId) User: username_143 doesn't exist in MongoDB
+F0118 04:19:38.737029 Main     func_worker.cpp:100] Check failed: io_utils::RecvMessage(input_pipe_fd_, &message, nullptr) Failed to receive message from engine
+*** SIGABRT received at time=1705551578 ***
+PC: @     0x7fb956948817  (unknown)  raise
+    @ ... and at least 1 more frames

@@ -1,0 +1,61 @@
+I0118 04:19:35.051681 Main     thread.cpp:100] Register main thread: tid=20
+I0118 04:19:35.051790 Main     func_worker.cpp:51] My client_id is 64
+[2024-01-18 04:19:35.060491] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.060795] <info>: (UserHandler.h:998:GetMachineId) mac_hash=871
+I0118 04:19:35.065163 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:19:35.065202 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:19:35.065216 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:19:35.065228 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:19:35.065246 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:19:35.065258 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:19:35.065269 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:19:35.065281 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:19:35.065292 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:19:35.065303 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:19:35.065314 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:19:35.065370 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:19:35.108646 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:19:35.108691] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.108730] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.108748] <info>: (UserHandler.h:137:UserHandler) machine_id=871
+[2024-01-18 04:19:35.211068] <warning>: (UserHandler.h:910:GetUserId) User: username_290 doesn't exist in MongoDB
+[2024-01-18 04:19:35.273134] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_2 to Memcached
+[2024-01-18 04:19:35.273811] <warning>: (UserHandler.h:910:GetUserId) User: username_830 doesn't exist in MongoDB
+[2024-01-18 04:19:35.334493] <warning>: (UserHandler.h:910:GetUserId) User: username_21 doesn't exist in MongoDB
+[2024-01-18 04:19:37.424361] <warning>: (UserHandler.h:910:GetUserId) User: username_722 doesn't exist in MongoDB
+[2024-01-18 04:19:37.449700] <warning>: (UserHandler.h:910:GetUserId) User: username_17 doesn't exist in MongoDB
+[2024-01-18 04:19:37.485533] <warning>: (UserHandler.h:910:GetUserId) User: username_17 doesn't exist in MongoDB
+[2024-01-18 04:19:37.547225] <warning>: (UserHandler.h:910:GetUserId) User: username_343 doesn't exist in MongoDB
+[2024-01-18 04:19:37.608744] <warning>: (UserHandler.h:910:GetUserId) User: username_18 doesn't exist in MongoDB
+[2024-01-18 04:19:37.633824] <warning>: (UserHandler.h:910:GetUserId) User: username_708 doesn't exist in MongoDB
+[2024-01-18 04:19:37.670092] <warning>: (UserHandler.h:910:GetUserId) User: username_18 doesn't exist in MongoDB
+[2024-01-18 04:19:37.731756] <warning>: (UserHandler.h:910:GetUserId) User: username_232 doesn't exist in MongoDB
+[2024-01-18 04:19:37.756979] <warning>: (UserHandler.h:910:GetUserId) User: username_186 doesn't exist in MongoDB
+[2024-01-18 04:19:37.793240] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.855057] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.880001] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:19:37.916402] <warning>: (UserHandler.h:910:GetUserId) User: username_555 doesn't exist in MongoDB
+[2024-01-18 04:19:37.978123] <warning>: (UserHandler.h:910:GetUserId) User: username_754 doesn't exist in MongoDB
+[2024-01-18 04:19:38.003378] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.039109] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.101190] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_44 to Memcached
+[2024-01-18 04:19:38.126336] <warning>: (UserHandler.h:910:GetUserId) User: username_337 doesn't exist in MongoDB
+[2024-01-18 04:19:38.162755] <warning>: (UserHandler.h:910:GetUserId) User: username_21 doesn't exist in MongoDB
+[2024-01-18 04:19:38.187823] <warning>: (UserHandler.h:910:GetUserId) User: username_846 doesn't exist in MongoDB
+[2024-01-18 04:19:38.224194] <warning>: (UserHandler.h:910:GetUserId) User: username_52 doesn't exist in MongoDB
+[2024-01-18 04:19:38.286063] <warning>: (UserHandler.h:910:GetUserId) User: username_22 doesn't exist in MongoDB
+[2024-01-18 04:19:38.310656] <warning>: (UserHandler.h:910:GetUserId) User: username_733 doesn't exist in MongoDB
+[2024-01-18 04:19:38.347137] <warning>: (UserHandler.h:910:GetUserId) User: username_873 doesn't exist in MongoDB
+[2024-01-18 04:19:38.408646] <warning>: (UserHandler.h:910:GetUserId) User: username_708 doesn't exist in MongoDB
+[2024-01-18 04:19:38.433997] <warning>: (UserHandler.h:910:GetUserId) User: username_145 doesn't exist in MongoDB
+[2024-01-18 04:19:38.469850] <warning>: (UserHandler.h:910:GetUserId) User: username_98 doesn't exist in MongoDB
+[2024-01-18 04:19:38.531695] <warning>: (UserHandler.h:910:GetUserId) User: username_25 doesn't exist in MongoDB
+[2024-01-18 04:19:38.532519] <warning>: (UserHandler.h:910:GetUserId) User: username_373 doesn't exist in MongoDB
+[2024-01-18 04:19:38.557153] <warning>: (UserHandler.h:910:GetUserId) User: username_396 doesn't exist in MongoDB
+[2024-01-18 04:19:38.592918] <warning>: (UserHandler.h:910:GetUserId) User: username_579 doesn't exist in MongoDB
+[2024-01-18 04:19:38.654632] <warning>: (UserHandler.h:910:GetUserId) User: username_204 doesn't exist in MongoDB
+[2024-01-18 04:19:38.680284] <warning>: (UserHandler.h:910:GetUserId) User: username_204 doesn't exist in MongoDB
+F0118 04:19:38.737125 Main     func_worker.cpp:100] Check failed: io_utils::RecvMessage(input_pipe_fd_, &message, nullptr) Failed to receive message from engine
+*** SIGABRT received at time=1705551578 ***
+PC: @     0x7f4e6a2da817  (unknown)  raise
+    @ ... and at least 1 more frames

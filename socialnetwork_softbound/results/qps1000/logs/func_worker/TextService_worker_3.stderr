@@ -1,0 +1,18 @@
+I0118 04:22:22.002443 Main     thread.cpp:100] Register main thread: tid=12
+I0118 04:22:22.002548 Main     func_worker.cpp:51] My client_id is 36
+I0118 04:22:22.007703 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:22:22.007731 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:22:22.007744 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:22:22.007756 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:22:22.007767 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:22:22.007778 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:22:22.007789 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:22:22.007805 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:22:22.007816 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:22:22.007827 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:22:22.007838 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:22:22.007870 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:22:22.008167 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:22:22.008226] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:22:22.008352] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:22:22.008380] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128

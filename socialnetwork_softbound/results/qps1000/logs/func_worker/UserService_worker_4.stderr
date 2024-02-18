@@ -1,0 +1,164 @@
+I0118 04:19:35.050451 Main     thread.cpp:100] Register main thread: tid=17
+I0118 04:19:35.050576 Main     func_worker.cpp:51] My client_id is 61
+[2024-01-18 04:19:35.059468] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.059761] <info>: (UserHandler.h:998:GetMachineId) mac_hash=c49
+I0118 04:19:35.065056 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:19:35.065090 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:19:35.065103 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:19:35.065115 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:19:35.065133 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:19:35.065145 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:19:35.065156 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:19:35.065167 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:19:35.065178 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:19:35.065189 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:19:35.065200 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:19:35.065255 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:19:35.108397 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:19:35.108439] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.108473] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.108491] <info>: (UserHandler.h:137:UserHandler) machine_id=c49
+[2024-01-18 04:19:35.211212] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_2 to Memcached
+[2024-01-18 04:19:35.212018] <warning>: (UserHandler.h:910:GetUserId) User: username_324 doesn't exist in MongoDB
+[2024-01-18 04:19:35.234380] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_2 to Memcached
+[2024-01-18 04:19:35.235001] <warning>: (UserHandler.h:910:GetUserId) User: username_806 doesn't exist in MongoDB
+[2024-01-18 04:19:35.273442] <warning>: (UserHandler.h:910:GetUserId) User: username_898 doesn't exist in MongoDB
+[2024-01-18 04:19:35.274167] <warning>: (UserHandler.h:910:GetUserId) User: username_575 doesn't exist in MongoDB
+[2024-01-18 04:19:35.296173] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_2 to Memcached
+[2024-01-18 04:19:35.297158] <warning>: (UserHandler.h:910:GetUserId) User: username_958 doesn't exist in MongoDB
+[2024-01-18 04:19:35.334473] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_3 to Memcached
+[2024-01-18 04:19:35.335094] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_4 to Memcached
+[2024-01-18 04:19:35.335697] <warning>: (UserHandler.h:910:GetUserId) User: username_271 doesn't exist in MongoDB
+[2024-01-18 04:19:35.358266] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_5 to Memcached
+[2024-01-18 04:19:35.358928] <warning>: (UserHandler.h:910:GetUserId) User: username_846 doesn't exist in MongoDB
+[2024-01-18 04:19:35.395550] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_4 to Memcached
+[2024-01-18 04:19:35.396122] <warning>: (UserHandler.h:910:GetUserId) User: username_846 doesn't exist in MongoDB
+[2024-01-18 04:19:35.396835] <warning>: (UserHandler.h:910:GetUserId) User: username_122 doesn't exist in MongoDB
+[2024-01-18 04:19:35.420098] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_5 to Memcached
+[2024-01-18 04:19:35.420716] <warning>: (UserHandler.h:910:GetUserId) User: username_273 doesn't exist in MongoDB
+[2024-01-18 04:19:35.457207] <warning>: (UserHandler.h:910:GetUserId) User: username_273 doesn't exist in MongoDB
+[2024-01-18 04:19:35.457950] <warning>: (UserHandler.h:910:GetUserId) User: username_367 doesn't exist in MongoDB
+[2024-01-18 04:19:35.458583] <warning>: (UserHandler.h:910:GetUserId) User: username_428 doesn't exist in MongoDB
+[2024-01-18 04:19:35.480926] <warning>: (UserHandler.h:910:GetUserId) User: username_521 doesn't exist in MongoDB
+[2024-01-18 04:19:35.481965] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_5 to Memcached
+[2024-01-18 04:19:35.518449] <warning>: (UserHandler.h:910:GetUserId) User: username_549 doesn't exist in MongoDB
+[2024-01-18 04:19:35.519542] <warning>: (UserHandler.h:910:GetUserId) User: username_710 doesn't exist in MongoDB
+[2024-01-18 04:19:35.543172] <warning>: (UserHandler.h:910:GetUserId) User: username_884 doesn't exist in MongoDB
+[2024-01-18 04:19:35.543850] <warning>: (UserHandler.h:910:GetUserId) User: username_760 doesn't exist in MongoDB
+[2024-01-18 04:19:35.579969] <warning>: (UserHandler.h:910:GetUserId) User: username_914 doesn't exist in MongoDB
+[2024-01-18 04:19:35.580627] <warning>: (UserHandler.h:910:GetUserId) User: username_855 doesn't exist in MongoDB
+[2024-01-18 04:19:35.642113] <warning>: (UserHandler.h:910:GetUserId) User: username_813 doesn't exist in MongoDB
+[2024-01-18 04:19:35.666269] <warning>: (UserHandler.h:910:GetUserId) User: username_944 doesn't exist in MongoDB
+[2024-01-18 04:19:35.703388] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_7 to Memcached
+[2024-01-18 04:19:35.703944] <warning>: (UserHandler.h:910:GetUserId) User: username_171 doesn't exist in MongoDB
+[2024-01-18 04:19:35.704553] <warning>: (UserHandler.h:910:GetUserId) User: username_97 doesn't exist in MongoDB
+[2024-01-18 04:19:35.705148] <warning>: (UserHandler.h:910:GetUserId) User: username_78 doesn't exist in MongoDB
+[2024-01-18 04:19:35.727643] <warning>: (UserHandler.h:910:GetUserId) User: username_174 doesn't exist in MongoDB
+[2024-01-18 04:19:35.766066] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_7 to Memcached
+[2024-01-18 04:19:35.766658] <warning>: (UserHandler.h:910:GetUserId) User: username_472 doesn't exist in MongoDB
+[2024-01-18 04:19:35.788988] <warning>: (UserHandler.h:910:GetUserId) User: username_532 doesn't exist in MongoDB
+[2024-01-18 04:19:35.826849] <warning>: (UserHandler.h:910:GetUserId) User: username_569 doesn't exist in MongoDB
+[2024-01-18 04:19:35.827559] <warning>: (UserHandler.h:910:GetUserId) User: username_608 doesn't exist in MongoDB
+[2024-01-18 04:19:35.850327] <warning>: (UserHandler.h:910:GetUserId) User: username_771 doesn't exist in MongoDB
+[2024-01-18 04:19:35.851099] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_7 to Memcached
+[2024-01-18 04:19:35.851806] <warning>: (UserHandler.h:910:GetUserId) User: username_828 doesn't exist in MongoDB
+[2024-01-18 04:19:35.887389] <warning>: (UserHandler.h:910:GetUserId) User: username_828 doesn't exist in MongoDB
+[2024-01-18 04:19:35.888043] <warning>: (UserHandler.h:910:GetUserId) User: username_808 doesn't exist in MongoDB
+[2024-01-18 04:19:35.888746] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_8 to Memcached
+[2024-01-18 04:19:35.889327] <warning>: (UserHandler.h:910:GetUserId) User: username_116 doesn't exist in MongoDB
+[2024-01-18 04:19:35.911753] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_8 to Memcached
+[2024-01-18 04:19:35.912580] <warning>: (UserHandler.h:910:GetUserId) User: username_339 doesn't exist in MongoDB
+[2024-01-18 04:19:35.913244] <warning>: (UserHandler.h:910:GetUserId) User: username_132 doesn't exist in MongoDB
+[2024-01-18 04:19:35.948825] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_8 to Memcached
+[2024-01-18 04:19:35.949557] <warning>: (UserHandler.h:910:GetUserId) User: username_153 doesn't exist in MongoDB
+[2024-01-18 04:19:35.950238] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_8 to Memcached
+[2024-01-18 04:19:35.950752] <warning>: (UserHandler.h:910:GetUserId) User: username_728 doesn't exist in MongoDB
+[2024-01-18 04:19:35.973351] <warning>: (UserHandler.h:910:GetUserId) User: username_852 doesn't exist in MongoDB
+[2024-01-18 04:19:36.010719] <warning>: (UserHandler.h:910:GetUserId) User: username_77 doesn't exist in MongoDB
+[2024-01-18 04:19:36.011447] <warning>: (UserHandler.h:910:GetUserId) User: username_150 doesn't exist in MongoDB
+[2024-01-18 04:19:36.035425] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_9 to Memcached
+[2024-01-18 04:19:36.072164] <warning>: (UserHandler.h:910:GetUserId) User: username_302 doesn't exist in MongoDB
+[2024-01-18 04:19:36.072877] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_9 to Memcached
+[2024-01-18 04:19:36.134836] <warning>: (UserHandler.h:910:GetUserId) User: username_582 doesn't exist in MongoDB
+[2024-01-18 04:19:36.157976] <warning>: (UserHandler.h:910:GetUserId) User: username_704 doesn't exist in MongoDB
+[2024-01-18 04:19:36.158711] <warning>: (UserHandler.h:910:GetUserId) User: username_704 doesn't exist in MongoDB
+[2024-01-18 04:19:36.195019] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_9 to Memcached
+[2024-01-18 04:19:36.195756] <warning>: (UserHandler.h:910:GetUserId) User: username_791 doesn't exist in MongoDB
+[2024-01-18 04:19:36.196539] <warning>: (UserHandler.h:910:GetUserId) User: username_790 doesn't exist in MongoDB
+[2024-01-18 04:19:36.219685] <warning>: (UserHandler.h:910:GetUserId) User: username_880 doesn't exist in MongoDB
+[2024-01-18 04:19:36.257013] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_10 to Memcached
+[2024-01-18 04:19:36.257720] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:36.380840] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_10 to Memcached
+[2024-01-18 04:19:36.381572] <warning>: (UserHandler.h:910:GetUserId) User: username_246 doesn't exist in MongoDB
+[2024-01-18 04:19:36.403790] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_10 to Memcached
+[2024-01-18 04:19:36.404499] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_10 to Memcached
+[2024-01-18 04:19:36.441547] <warning>: (UserHandler.h:910:GetUserId) User: username_373 doesn't exist in MongoDB
+[2024-01-18 04:19:36.442110] <warning>: (UserHandler.h:910:GetUserId) User: username_371 doesn't exist in MongoDB
+[2024-01-18 04:19:36.442643] <warning>: (UserHandler.h:910:GetUserId) User: username_408 doesn't exist in MongoDB
+[2024-01-18 04:19:36.465559] <warning>: (UserHandler.h:910:GetUserId) User: username_416 doesn't exist in MongoDB
+[2024-01-18 04:19:36.466160] <warning>: (UserHandler.h:910:GetUserId) User: username_416 doesn't exist in MongoDB
+[2024-01-18 04:19:36.502581] <warning>: (UserHandler.h:910:GetUserId) User: username_489 doesn't exist in MongoDB
+[2024-01-18 04:19:36.503193] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_10 to Memcached
+[2024-01-18 04:19:36.503888] <warning>: (UserHandler.h:910:GetUserId) User: username_525 doesn't exist in MongoDB
+[2024-01-18 04:19:36.527621] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_10 to Memcached
+[2024-01-18 04:19:36.528182] <warning>: (UserHandler.h:910:GetUserId) User: username_580 doesn't exist in MongoDB
+[2024-01-18 04:19:36.563667] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_10 to Memcached
+[2024-01-18 04:19:36.564276] <warning>: (UserHandler.h:910:GetUserId) User: username_627 doesn't exist in MongoDB
+[2024-01-18 04:19:36.565355] <warning>: (UserHandler.h:910:GetUserId) User: username_679 doesn't exist in MongoDB
+[2024-01-18 04:19:36.565930] <warning>: (UserHandler.h:910:GetUserId) User: username_697 doesn't exist in MongoDB
+[2024-01-18 04:19:36.566629] <warning>: (UserHandler.h:910:GetUserId) User: username_691 doesn't exist in MongoDB
+[2024-01-18 04:19:36.588215] <warning>: (UserHandler.h:910:GetUserId) User: username_773 doesn't exist in MongoDB
+[2024-01-18 04:19:36.589302] <warning>: (UserHandler.h:910:GetUserId) User: username_710 doesn't exist in MongoDB
+[2024-01-18 04:19:36.625859] <warning>: (UserHandler.h:910:GetUserId) User: username_812 doesn't exist in MongoDB
+[2024-01-18 04:19:36.687577] <warning>: (UserHandler.h:910:GetUserId) User: username_954 doesn't exist in MongoDB
+[2024-01-18 04:19:37.056369] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_15 to Memcached
+[2024-01-18 04:19:37.057045] <warning>: (UserHandler.h:910:GetUserId) User: username_889 doesn't exist in MongoDB
+[2024-01-18 04:19:37.080881] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_16 to Memcached
+[2024-01-18 04:19:37.081492] <warning>: (UserHandler.h:910:GetUserId) User: username_232 doesn't exist in MongoDB
+[2024-01-18 04:19:37.117058] <warning>: (UserHandler.h:910:GetUserId) User: username_287 doesn't exist in MongoDB
+[2024-01-18 04:19:37.118166] <warning>: (UserHandler.h:910:GetUserId) User: username_326 doesn't exist in MongoDB
+[2024-01-18 04:19:37.142625] <warning>: (UserHandler.h:910:GetUserId) User: username_373 doesn't exist in MongoDB
+[2024-01-18 04:19:37.178943] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_16 to Memcached
+[2024-01-18 04:19:37.240337] <warning>: (UserHandler.h:910:GetUserId) User: username_830 doesn't exist in MongoDB
+[2024-01-18 04:19:37.241313] <warning>: (UserHandler.h:910:GetUserId) User: username_72 doesn't exist in MongoDB
+[2024-01-18 04:19:37.266185] <warning>: (UserHandler.h:910:GetUserId) User: username_873 doesn't exist in MongoDB
+[2024-01-18 04:19:37.266790] <warning>: (UserHandler.h:910:GetUserId) User: username_847 doesn't exist in MongoDB
+[2024-01-18 04:19:37.301070] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_16 to Memcached
+[2024-01-18 04:19:37.301988] <warning>: (UserHandler.h:910:GetUserId) User: username_17 doesn't exist in MongoDB
+[2024-01-18 04:19:37.327515] <warning>: (UserHandler.h:910:GetUserId) User: username_275 doesn't exist in MongoDB
+[2024-01-18 04:19:37.362552] <warning>: (UserHandler.h:910:GetUserId) User: username_287 doesn't exist in MongoDB
+[2024-01-18 04:19:37.424243] <warning>: (UserHandler.h:910:GetUserId) User: username_697 doesn't exist in MongoDB
+[2024-01-18 04:19:37.485761] <warning>: (UserHandler.h:910:GetUserId) User: username_18 doesn't exist in MongoDB
+[2024-01-18 04:19:37.511100] <warning>: (UserHandler.h:910:GetUserId) User: username_18 doesn't exist in MongoDB
+[2024-01-18 04:19:37.547332] <warning>: (UserHandler.h:910:GetUserId) User: username_282 doesn't exist in MongoDB
+[2024-01-18 04:19:37.572355] <warning>: (UserHandler.h:910:GetUserId) User: username_18 doesn't exist in MongoDB
+[2024-01-18 04:19:37.608437] <warning>: (UserHandler.h:910:GetUserId) User: username_493 doesn't exist in MongoDB
+[2024-01-18 04:19:37.670423] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_64 to Memcached
+[2024-01-18 04:19:37.695407] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.731577] <warning>: (UserHandler.h:910:GetUserId) User: username_163 doesn't exist in MongoDB
+[2024-01-18 04:19:37.793280] <warning>: (UserHandler.h:910:GetUserId) User: username_309 doesn't exist in MongoDB
+[2024-01-18 04:19:37.854881] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.916584] <warning>: (UserHandler.h:910:GetUserId) User: username_558 doesn't exist in MongoDB
+[2024-01-18 04:19:37.941614] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:37.977833] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.039604] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.064782] <warning>: (UserHandler.h:910:GetUserId) User: username_19 doesn't exist in MongoDB
+[2024-01-18 04:19:38.100963] <warning>: (UserHandler.h:910:GetUserId) User: username_20 doesn't exist in MongoDB
+[2024-01-18 04:19:38.162824] <warning>: (UserHandler.h:910:GetUserId) User: username_20 doesn't exist in MongoDB
+[2024-01-18 04:19:38.187719] <warning>: (UserHandler.h:910:GetUserId) User: username_801 doesn't exist in MongoDB
+[2024-01-18 04:19:38.224102] <warning>: (UserHandler.h:910:GetUserId) User: username_101 doesn't exist in MongoDB
+[2024-01-18 04:19:38.286106] <warning>: (UserHandler.h:910:GetUserId) User: username_685 doesn't exist in MongoDB
+[2024-01-18 04:19:38.310652] <warning>: (UserHandler.h:910:GetUserId) User: username_22 doesn't exist in MongoDB
+[2024-01-18 04:19:38.347062] <warning>: (UserHandler.h:910:GetUserId) User: username_832 doesn't exist in MongoDB
+[2024-01-18 04:19:38.408819] <warning>: (UserHandler.h:910:GetUserId) User: username_23 doesn't exist in MongoDB
+[2024-01-18 04:19:38.433919] <warning>: (UserHandler.h:910:GetUserId) User: username_24 doesn't exist in MongoDB
+[2024-01-18 04:19:38.469801] <warning>: (UserHandler.h:910:GetUserId) User: username_146 doesn't exist in MongoDB
+[2024-01-18 04:19:38.531934] <warning>: (UserHandler.h:910:GetUserId) User: username_275 doesn't exist in MongoDB
+[2024-01-18 04:19:38.557136] <warning>: (UserHandler.h:910:GetUserId) User: username_332 doesn't exist in MongoDB
+[2024-01-18 04:19:38.592744] <warning>: (UserHandler.h:910:GetUserId) User: username_25 doesn't exist in MongoDB
+[2024-01-18 04:19:38.654847] <warning>: (UserHandler.h:910:GetUserId) User: username_204 doesn't exist in MongoDB
+[2024-01-18 04:19:38.680330] <warning>: (UserHandler.h:956:GetUserId) Failed to set the login info of user username_1 to Memcached
+F0118 04:19:38.737116 Main     func_worker.cpp:100] Check failed: io_utils::RecvMessage(input_pipe_fd_, &message, nullptr) Failed to receive message from engine
+*** SIGABRT received at time=1705551578 ***
+PC: @     0x7fed2ad39817  (unknown)  raise
+    @ ... and at least 1 more frames

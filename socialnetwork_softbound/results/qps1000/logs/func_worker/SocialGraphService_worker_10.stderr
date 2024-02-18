@@ -1,0 +1,39 @@
+I0118 04:19:34.991183 Main     thread.cpp:100] Register main thread: tid=23
+I0118 04:19:34.991286 Main     func_worker.cpp:51] My client_id is 51
+[2024-01-18 04:19:34.999660] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+I0118 04:19:35.004625 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:19:35.004665 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:19:35.004681 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:19:35.004693 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:19:35.004704 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:19:35.004715 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:19:35.004726 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:19:35.004743 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:19:35.004755 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:19:35.004765 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:19:35.004776 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:19:35.004828 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:19:35.005081 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:19:35.005117] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:19:35.108679] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.108739] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+I0118 04:19:35.109890 Main     buffer_pool.h:25] BufferPool[Pipes]: Allocate new buffer, current buffer count is 1
+[2024-01-18 04:19:35.110020] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.110067] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:35.172110] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:35.172148] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+@@@ UserService
+I0118 04:19:35.173618 Main     buffer_pool.h:25] BufferPool[Pipes]: Allocate new buffer, current buffer count is 2
+[2024-01-18 04:19:35.173669] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:35.173698] <error>: (SocialGraphHandler.h:849:FollowWithUsername) Failed to get user_id from user-service
+[2024-01-18 04:19:38.679491] <info>: (ThriftClient.h:84:ThriftClient) Use FaaSWorker for thrift calls
+[2024-01-18 04:19:38.679542] <info>: (ClientPool.h:233:Pop) New social-graph client, total_client=1
+@@@ UserService
+[2024-01-18 04:19:38.680527] <info>: (ClientPool.h:294:Remove) Remove social-graph client, total_client=0
+[2024-01-18 04:19:38.680577] <error>: (SocialGraphHandler.h:820:FollowWithUsername) Failed to get user_id from user-service
+F0118 04:19:38.737309 Main     func_worker.cpp:100] Check failed: io_utils::RecvMessage(input_pipe_fd_, &message, nullptr) Failed to receive message from engine
+*** SIGABRT received at time=1705551578 ***
+PC: @     0x7fc376aea817  (unknown)  raise
+    @ ... and at least 1 more frames

@@ -1,0 +1,30 @@
+I1215 01:25:56.044762 Main     thread.cpp:100] Register main thread: tid=11
+I1215 01:25:56.044938 Main     func_worker.cpp:51] My client_id is 23
+[2023-12-15 01:25:56.053841] <info>: (UniqueIdHandler.h:180:GetMachineId) mac_hash=ea5
+[2023-12-15 01:25:56.054123] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.054123] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.054143] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.054143] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+I1215 01:25:56.054187 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I1215 01:25:56.054197 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I1215 01:25:56.054202 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I1215 01:25:56.054208 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I1215 01:25:56.054213 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I1215 01:25:56.054219 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I1215 01:25:56.054224 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I1215 01:25:56.054229 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I1215 01:25:56.054234 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I1215 01:25:56.054240 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I1215 01:25:56.054245 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I1215 01:25:56.054268 Main     func_worker.cpp:118] Use extra pipes for messages
+I1215 01:25:56.083398 Main     func_worker.cpp:137] Handshake done
+[2023-12-15 01:25:56.083461] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.083461] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.083516] <info>: (UniqueIdHandler.h:71:UniqueIdHandler) machine_id=ea5
+[2023-12-15 01:25:56.083516] <info>: (UniqueIdHandler.h:71:UniqueIdHandler) machine_id=ea5
+######test
+[2023-12-15 01:25:56.088004] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.088004] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.088087] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:56.088087] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+######test

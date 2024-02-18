@@ -1,0 +1,19 @@
+I0118 04:22:16.991799 Main     thread.cpp:100] Register main thread: tid=11
+I0118 04:22:16.991899 Main     func_worker.cpp:51] My client_id is 23
+[2024-01-18 04:22:17.000751] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:22:17.301133] <error>: (utils_mongodb.h:70:CreateIndex) Error in createIndexes: No suitable servers found: `serverSelectionTimeoutMS` expired: [Failed to resolve 'socialnetwork-mongodb']
+[2024-01-18 04:22:17.301233] <error>: (UserTimelineService.cpp:50:faas_init) Failed to create mongodb index, try again
+I0118 04:22:18.305870 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:22:18.305929 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:22:18.305944 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:22:18.305956 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:22:18.305967 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:22:18.305986 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:22:18.305998 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:22:18.306011 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:22:18.306021 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:22:18.306032 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:22:18.306043 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:22:18.306104 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:22:18.306531 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:22:18.306611] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128

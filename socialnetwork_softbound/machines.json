@@ -1,0 +1,41 @@
+{
+    "nightcore-sn-cache": {
+        "dns": "zyuxuan@clnode230.clemson.cloudlab.us",
+        "ip": "130.127.133.239",
+        "role": "worker",
+        "type": "c5.xlarge"
+    },
+    "nightcore-sn-client": {
+        "dns": "zyuxuan@clnode232.clemson.cloudlab.us",
+        "ip": "130.127.133.241",
+        "role": "client",
+        "type": "c5.xlarge"
+    },
+    "nightcore-sn-front": {
+        "dns": "zyuxuan@clnode240.clemson.cloudlab.us",
+        "ip": "130.127.134.4",
+        "role": "worker",
+        "type": "c5.xlarge"
+    },
+    "nightcore-sn-middle": {
+        "dns": "zyuxuan@clnode238.clemson.cloudlab.us",
+        "ip": "130.127.134.2",
+        "labels": [
+            "engine_node=true"
+        ],
+        "role": "manager",
+        "type": "c5.xlarge"
+    },
+    "nightcore-sn-mongodb": {
+        "dns": "zyuxuan@clnode069.clemson.cloudlab.us",
+        "ip": "130.127.133.78",
+        "role": "worker",
+        "type": "c5.xlarge"
+    },
+    "nightcore-sn-write-home-timeline": {
+			 "dns": "zyuxuan@clnode064.clemson.cloudlab.us",
+       "ip": "130.127.133.73",
+       "role": "worker",
+       "type":"c5.xlarge"
+    }
+}

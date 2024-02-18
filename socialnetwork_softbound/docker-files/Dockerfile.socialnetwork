@@ -1,0 +1,22 @@
+FROM zyuxuan0115/nightcore:main as nightcore
+FROM zyuxuan0115/llvm:main as llvm
+FROM zyuxuan0115/cpp-microservice-deps:main 
+
+COPY --from=nightcore /nightcore/launcher       /nightcore/launcher
+COPY --from=nightcore /nightcore/func_worker_v1 /nightcore/func_worker_v1
+COPY --from=llvm /llvm-project /llvm-project
+
+ARG NUM_CPUS=1
+
+COPY . /DeathStarBench
+
+RUN cd /DeathStarBench/socialNetwork \
+    && mkdir -p build \
+    && cd build \
+    && cmake .. \
+    && make -j${NUM_CPUS} \
+    && cd /DeathStarBench/socialNetwork/src/UniqueIdService-man-merge \
+    && ./build.sh \
+    && cp libUniqueIdService.so /DeathStarBench/socialNetwork/build/src/UniqueIdService
+
+WORKDIR /DeathStarBench/socialNetwork

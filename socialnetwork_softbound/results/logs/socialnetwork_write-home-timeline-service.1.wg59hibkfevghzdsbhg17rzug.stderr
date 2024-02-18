@@ -1,0 +1,3 @@
+[2023-12-15 01:25:39.744129] <info>: (WriteHomeTimelineService.cpp:170:main) MAX_FOLLOWERS_TO_UPDATE=2
+[2023-12-15 01:25:39.744792] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2023-12-15 01:25:39.744814] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128

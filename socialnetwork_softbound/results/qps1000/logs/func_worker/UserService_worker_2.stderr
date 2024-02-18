@@ -1,0 +1,53 @@
+I0118 04:22:22.429987 Main     thread.cpp:100] Register main thread: tid=11
+I0118 04:22:22.430084 Main     func_worker.cpp:51] My client_id is 43
+[2024-01-18 04:22:22.439352] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:22:22.439642] <info>: (UserHandler.h:998:GetMachineId) mac_hash=947
+I0118 04:22:22.445384 Main     func_config.cpp:135] Load configuration for function SocialGraphService[1]
+I0118 04:22:22.445419 Main     func_config.cpp:135] Load configuration for function ComposePostService[2]
+I0118 04:22:22.445433 Main     func_config.cpp:135] Load configuration for function PostStorageService[3]
+I0118 04:22:22.445444 Main     func_config.cpp:135] Load configuration for function UserTimelineService[4]
+I0118 04:22:22.445461 Main     func_config.cpp:135] Load configuration for function UrlShortenService[5]
+I0118 04:22:22.445472 Main     func_config.cpp:135] Load configuration for function UserService[6]
+I0118 04:22:22.445483 Main     func_config.cpp:135] Load configuration for function MediaService[7]
+I0118 04:22:22.445494 Main     func_config.cpp:135] Load configuration for function TextService[8]
+I0118 04:22:22.445505 Main     func_config.cpp:135] Load configuration for function UniqueIdService[9]
+I0118 04:22:22.445516 Main     func_config.cpp:135] Load configuration for function UserMentionService[10]
+I0118 04:22:22.445527 Main     func_config.cpp:135] Load configuration for function HomeTimelineService[11]
+I0118 04:22:22.445580 Main     func_worker.cpp:118] Use extra pipes for messages
+I0118 04:22:22.445813 Main     func_worker.cpp:137] Handshake done
+[2024-01-18 04:22:22.445849] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:22:22.445887] <info>: (ClientPool.h:195:ClientPool) Max pool size: 128
+[2024-01-18 04:22:22.445906] <info>: (UserHandler.h:137:UserHandler) machine_id=947
+[2024-01-18 04:22:22.548368] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.550028] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.551135] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.551936] <warning>: (UserHandler.h:910:GetUserId) User: username_650 doesn't exist in MongoDB
+[2024-01-18 04:22:22.553098] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.554146] <warning>: (UserHandler.h:910:GetUserId) User: username_722 doesn't exist in MongoDB
+[2024-01-18 04:22:22.555299] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.556322] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.557335] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.558355] <warning>: (UserHandler.h:910:GetUserId) User: username_916 doesn't exist in MongoDB
+[2024-01-18 04:22:22.559303] <warning>: (UserHandler.h:910:GetUserId) User: username_439 doesn't exist in MongoDB
+[2024-01-18 04:22:22.560341] <warning>: (UserHandler.h:910:GetUserId) User: username_440 doesn't exist in MongoDB
+[2024-01-18 04:22:22.561362] <warning>: (UserHandler.h:910:GetUserId) User: username_440 doesn't exist in MongoDB
+[2024-01-18 04:22:22.562309] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.563139] <warning>: (UserHandler.h:910:GetUserId) User: username_440 doesn't exist in MongoDB
+[2024-01-18 04:22:22.564169] <warning>: (UserHandler.h:910:GetUserId) User: username_440 doesn't exist in MongoDB
+[2024-01-18 04:22:22.564883] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.565984] <warning>: (UserHandler.h:910:GetUserId) User: username_578 doesn't exist in MongoDB
+[2024-01-18 04:22:22.566661] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.568810] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.569542] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.570213] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.571419] <warning>: (UserHandler.h:910:GetUserId) User: username_775 doesn't exist in MongoDB
+[2024-01-18 04:22:22.572062] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.572710] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.573913] <warning>: (UserHandler.h:910:GetUserId) User: username_908 doesn't exist in MongoDB
+[2024-01-18 04:22:22.574695] <warning>: (UserHandler.h:910:GetUserId) User: username_888 doesn't exist in MongoDB
+[2024-01-18 04:22:22.575549] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.576394] <warning>: (UserHandler.h:910:GetUserId) User: username_953 doesn't exist in MongoDB
+[2024-01-18 04:22:22.577327] <warning>: (UserHandler.h:910:GetUserId) User: username_441 doesn't exist in MongoDB
+[2024-01-18 04:22:22.578124] <warning>: (UserHandler.h:910:GetUserId) User: username_959 doesn't exist in MongoDB
+[2024-01-18 04:22:22.579180] <warning>: (UserHandler.h:910:GetUserId) User: username_524 doesn't exist in MongoDB
+[2024-01-18 04:22:22.579841] <warning>: (UserHandler.h:910:GetUserId) User: username_471 doesn't exist in MongoDB
