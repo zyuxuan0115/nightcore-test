@@ -2,7 +2,7 @@
 CUR_DIR=$(pwd)
 
 ROOT_DIR="/DeathStarBench"
-LLVM_BUILD_PATH=/llvm-project/build
+LLVM_BUILD_PATH=/llvm-project-10/build
 
 #ROOT_DIR=/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench
 #LLVM_BUILD_PATH=/proj/zyuxuanssf-PG0/llvm-project/build
@@ -15,7 +15,8 @@ CC=$LLVM_BUILD_PATH/bin/clang++
 LLVM_LINK=$LLVM_BUILD_PATH/bin/llvm-link
 LLC=$LLVM_BUILD_PATH/bin/llc 
 OPT=$LLVM_BUILD_PATH/bin/opt
-MERGE_FUNC_LIB=$LLVM_BUILD_PATH/lib/LLVMMergeFunc.so
+SOFTBOUND_INIT_LIB=$LLVM_BUILD_PATH/lib/InitializeSoftBoundCETS.so
+SOFTBOUND_LIB=$LLVM_BUILD_PATH/lib/LLVMSoftBoundCETS.so
 
 rm -rf *.so *.ll *.o tmp
 
@@ -29,9 +30,8 @@ $CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/PostStorageService.cpp 
 $CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/UserTimelineService.cpp -c -o gen-UserTimelineService.ll
 
 # get all functions in UniqueIdService
-$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -write-func-symbol=func_sym.txt UniqueIdService.ll -S -o tmp
-$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -ChangeFuncNames -read-func-symbol=func_sym.txt ComposePostService.ll -S -o ComposePostService-rename.ll
-
+$OPT -load $SOFTBOUND_INIT_LIB -InitializeSoftBoundCETS UniqueIdService.ll -S -o UniqueIdService_softbound_init.ll
+$OPT -load $SOFTBOUND_INIT_LIB -SoftBoundCETSPass UniqueIdService_softbound_init.ll -S -o UniqueIdService_softbound.ll
 $LLVM_LINK UniqueIdService.ll gen-ComposePostService.ll gen-social_network_types.ll gen-UniqueIdService.ll gen-PostStorageService.ll gen-UserTimelineService.ll ComposePostService-rename.ll -o merged.ll -S
 
 $OPT merged.ll -strip-debug -o merged-no-debuginfo.ll -S
