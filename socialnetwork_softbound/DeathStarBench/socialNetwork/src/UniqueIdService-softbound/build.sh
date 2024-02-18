@@ -1,11 +1,11 @@
 #!/bin/bash
 CUR_DIR=$(pwd)
 
-ROOT_DIR="/DeathStarBench"
-LLVM_BUILD_PATH=/llvm-project-10/build
+#ROOT_DIR="/DeathStarBench"
+#LLVM_BUILD_PATH=/llvm-project-10/build
 
-#ROOT_DIR=/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_singlenode/DeathStarBench
-#LLVM_BUILD_PATH=/proj/zyuxuanssf-PG0/llvm-project/build
+ROOT_DIR=/proj/zyuxuanssf-PG0/nightcore-test/socialnetwork_softbound/DeathStarBench
+LLVM_BUILD_PATH=/proj/zyuxuanssf-PG0/llvm-project-10/build
 
 #ROOT_DIR=$CUR_DIR/../../..
 THRIFT_GEN_CPP_DIR="$ROOT_DIR/socialNetwork/gen-cpp"
@@ -21,25 +21,21 @@ SOFTBOUND_LIB=$LLVM_BUILD_PATH/lib/LLVMSoftBoundCETS.so
 rm -rf *.so *.ll *.o tmp
 
 # compile all source files into IR
-$CC -fPIC -emit-llvm -g -S $CPPFLAGS UniqueIdService.cpp -c -o UniqueIdService.ll
-$CC -fPIC -emit-llvm -g -S $CPPFLAGS $CUR_DIR/../ComposePostService/ComposePostService.cpp -c -o ComposePostService.ll
-$CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/ComposePostService.cpp -c -o gen-ComposePostService.ll
-$CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/social_network_types.cpp -c -o gen-social_network_types.ll
-$CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/UniqueIdService.cpp -c -o gen-UniqueIdService.ll
-$CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/PostStorageService.cpp -c -o gen-PostStorageService.ll
-$CC -fPIC -emit-llvm -g -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/UserTimelineService.cpp -c -o gen-UserTimelineService.ll
+$CC -fPIC -emit-llvm -S $CPPFLAGS UniqueIdService.cpp -c -o UniqueIdService.ll
+$CC -fPIC -emit-llvm -S $CPPFLAGS $CUR_DIR/../ComposePostService/ComposePostService.cpp -c -o ComposePostService.ll
+$CC -fPIC -emit-llvm -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/ComposePostService.cpp -c -o gen-ComposePostService.ll
+$CC -fPIC -emit-llvm -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/social_network_types.cpp -c -o gen-social_network_types.ll
+$CC -fPIC -emit-llvm -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/UniqueIdService.cpp -c -o gen-UniqueIdService.ll
+
+$LLVM_LINK UniqueIdService.ll gen-ComposePostService.ll gen-social_network_types.ll gen-UniqueIdService.ll -o merged.ll -S
 
 # get all functions in UniqueIdService
-$OPT -load $SOFTBOUND_INIT_LIB -InitializeSoftBoundCETS UniqueIdService.ll -S -o UniqueIdService_softbound_init.ll
-$OPT -load $SOFTBOUND_INIT_LIB -SoftBoundCETSPass UniqueIdService_softbound_init.ll -S -o UniqueIdService_softbound.ll
-$LLVM_LINK UniqueIdService.ll gen-ComposePostService.ll gen-social_network_types.ll gen-UniqueIdService.ll gen-PostStorageService.ll gen-UserTimelineService.ll ComposePostService-rename.ll -o merged.ll -S
+$OPT -load $SOFTBOUND_INIT_LIB -InitializeSoftBoundCETS merged.ll -S -o merged_init.ll
+$OPT -load $SOFTBOUND_INIT_LIB -SoftBoundCETSPass merged_init.ll -S -o merged_softbound.ll
 
-$OPT merged.ll -strip-debug -o merged-no-debuginfo.ll -S
 
-$OPT -load $MERGE_FUNC_LIB -enable-new-pm=0 -RemoveRedundant merged-no-debuginfo.ll -S -o merged-update.ll
-
-$LLC -filetype=obj -relocation-model=pic merged-update.ll -o merged.o
-$CC -shared -fPIC -O2 $CPPFLAGS merged.o -o libUniqueIdService.so $LINKER_FLAGS
+$LLC -filetype=obj -relocation-model=pic merged_softbound.ll -o merged.o
+#$CC -shared -fPIC -O2 $CPPFLAGS merged.o -o libUniqueIdService.so $LINKER_FLAGS
 
 
 #$CC -shared -fPIC -O2 $CPPFLAGS  UniqueIdService.cpp $THRIFT_GEN_CPP_DIR/ComposePostService.cpp $THRIFT_GEN_CPP_DIR/social_network_types.cpp $THRIFT_GEN_CPP_DIR/UniqueIdService.cpp $THRIFT_GEN_CPP_DIR/PostStorageService.cpp $THRIFT_GEN_CPP_DIR/UserTimelineService.cpp  -o libUniqueIdService.so $LINKER_FLAGS
