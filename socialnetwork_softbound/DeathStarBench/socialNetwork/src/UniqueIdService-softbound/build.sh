@@ -22,7 +22,6 @@ rm -rf *.so *.ll *.o tmp
 
 # compile all source files into IR
 $CC -fPIC -emit-llvm -S $CPPFLAGS UniqueIdService.cpp -c -o UniqueIdService.ll
-$CC -fPIC -emit-llvm -S $CPPFLAGS $CUR_DIR/../ComposePostService/ComposePostService.cpp -c -o ComposePostService.ll
 $CC -fPIC -emit-llvm -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/ComposePostService.cpp -c -o gen-ComposePostService.ll
 $CC -fPIC -emit-llvm -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/social_network_types.cpp -c -o gen-social_network_types.ll
 $CC -fPIC -emit-llvm -S $CPPFLAGS $THRIFT_GEN_CPP_DIR/UniqueIdService.cpp -c -o gen-UniqueIdService.ll
